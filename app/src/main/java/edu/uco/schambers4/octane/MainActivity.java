@@ -18,7 +18,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener
 {
 
 
@@ -46,8 +45,15 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setNavigationItemSelectedListener(menuItem -> onNavigationItemSelected(menuItem));
+
+
         ButterKnife.bind(this);
+
+        testTv.setOnClickListener((view) -> {
+            TextView tv = (TextView) view;
+            tv.setText("");
+        }  );
     }
 
     @Override
@@ -88,8 +94,6 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
     public boolean onNavigationItemSelected(MenuItem item)
     {
         // Handle navigation view item clicks here.
