@@ -3,6 +3,8 @@ package edu.uco.schambers4.octane.DataAccessObjects;
 import android.content.Context;
 import android.util.Log;
 
+import com.annimon.stream.Stream;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,6 +50,12 @@ public class IngredientDatabase implements IIngredientDatabase
     public List<IIngredient> getCollectionAsList()
     {
         return ingredients;
+    }
+
+    @Override
+    public Stream<IIngredient> getCollectionAsStream()
+    {
+        return Stream.of(ingredients);
     }
 
     @Override
