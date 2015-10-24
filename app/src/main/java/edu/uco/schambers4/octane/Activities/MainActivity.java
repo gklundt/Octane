@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import butterknife.Bind;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity
                 .setAction("Action", null).show());
 
         fab.setOnClickListener(view -> Snackbar.make(view, "Replaced!", Snackbar.LENGTH_LONG).setAction("Action", null).show());
+        fab.setVisibility(View.INVISIBLE);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
