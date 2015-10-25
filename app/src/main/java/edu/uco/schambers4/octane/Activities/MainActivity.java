@@ -22,8 +22,6 @@ public class MainActivity extends AppCompatActivity
 {
 
 
-    @Bind(R.id.test_tv)
-    TextView testTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -36,7 +34,6 @@ public class MainActivity extends AppCompatActivity
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show());
-
         fab.setOnClickListener(view -> Snackbar.make(view, "Replaced!", Snackbar.LENGTH_LONG).setAction("Action", null).show());
         fab.setVisibility(View.INVISIBLE);
 
@@ -49,13 +46,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(menuItem -> onNavigationItemSelected(menuItem));
 
-
+        //all calls to bound views must be after this call
         ButterKnife.bind(this);
-
-        testTv.setOnClickListener((view) -> {
-            TextView tv = (TextView) view;
-            tv.setText("");
-        });
     }
 
     @Override
@@ -104,22 +96,16 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_camara)
         {
             // Handle the camera action
-            testTv.setText("Camera");
         } else if (id == R.id.nav_gallery)
         {
-            testTv.setText("Gallery");
         } else if (id == R.id.nav_slideshow)
         {
-            testTv.setText("Slideshow");
         } else if (id == R.id.nav_manage)
         {
-            testTv.setText("Manage");
         } else if (id == R.id.nav_share)
         {
-            testTv.setText("Share");
         } else if (id == R.id.nav_send)
         {
-            testTv.setText("Send");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
