@@ -1,5 +1,7 @@
 package edu.uco.schambers4.octane.Activities;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import edu.uco.schambers4.octane.Fragments.IngredientsFragment;
 import edu.uco.schambers4.octane.R;
 
 public class MainActivity extends AppCompatActivity
@@ -95,7 +98,8 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_ingredients)
         {
-            // Handle the camera action
+            Fragment ingredientsFragment = new IngredientsFragment();
+            launchFragment(ingredientsFragment);
         } else if (id == R.id.nav_gallery)
         {
         } else if (id == R.id.nav_slideshow)
@@ -111,5 +115,11 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void launchFragment(Fragment fragment)
+    {
+        FragmentTransaction trans = getFragmentManager().beginTransaction();
+        trans.replace(R.id.fragment_container, fragment ).addToBackStack(null).commit();
     }
 }
