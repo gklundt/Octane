@@ -42,6 +42,6 @@ public class Ingredient implements IIngredient
     @Override
     public String toString()
     {
-        return String.format("%s , %.2f %s", this.name, this.amount, this.unitOfMeasure);
+        return String.format("%s, %.2f %s", this.name, this.amount, this.unitOfMeasure);
     }
 }
