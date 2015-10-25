@@ -69,7 +69,12 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START))
         {
             drawer.closeDrawer(GravityCompat.START);
-        } else
+        }
+        else if(getFragmentManager().getBackStackEntryCount() > 0)
+        {
+            getFragmentManager().popBackStack();
+        }
+        else
         {
             super.onBackPressed();
         }
@@ -131,7 +136,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private void launchFragment(Fragment fragment)
+    public void launchFragment(Fragment fragment)
     {
         FragmentTransaction trans = getFragmentManager().beginTransaction();
         trans.replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
