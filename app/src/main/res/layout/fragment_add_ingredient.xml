@@ -1,13 +1,90 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="edu.uco.schambers4.octane.Fragments.AddIngredientFragment">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="edu.uco.schambers4.octane.Fragments.AddIngredientFragment"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"/>
+        android:id="@+id/ingredient_name_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/name_et"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:text="@string/name_lbl"
+        />
 
-</FrameLayout>
+    <EditText
+        android:id="@id/name_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@id/ingredient_name_lbl"
+        android:gravity="end"
+        />
+
+    <TextView
+        android:id="@+id/ingredient_quantity_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/quantity_et"
+        android:layout_below="@id/ingredient_name_lbl"
+        android:gravity="center"
+        android:text="@string/quantity_lbl"
+        />
+
+    <EditText
+        android:id="@id/quantity_et"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name_et"
+        android:layout_toEndOf="@id/ingredient_quantity_lbl"
+
+        android:gravity="end"
+        android:inputType="numberDecimal"
+        />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/quantity_et"
+        android:layout_below="@id/name_et"
+        android:layout_toEndOf="@id/quantity_et"
+        android:entries="@array/units_of_measurement"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/calories_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_alignBottom="@+id/calories_et"
+        android:layout_below="@id/ingredient_quantity_lbl"
+        android:text="@string/calories_lbl"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:layout_below="@id/quantity_et"
+        android:layout_toEndOf="@id/calories_lbl"
+        android:inputType="number"
+        android:id="@id/calories_et"
+        />
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/add_ingredients_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_check"
+        />
+</RelativeLayout>
