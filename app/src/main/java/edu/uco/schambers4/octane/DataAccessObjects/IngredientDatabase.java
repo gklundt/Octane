@@ -23,15 +23,7 @@ public class IngredientDatabase implements IIngredientDatabase
     public IngredientDatabase(Context context)
     {
         this.context = context;
-
-        try
-        {
-            ingredients = (ArrayList<IIngredient>)InternalStorage.readObject(context, InternalStorage.STORAGE_KEY_INGREDIENTS);
-        }catch (Exception e)
-        {
-            Log.d("IngredientDatabase", "Ingredient list not found on disk. Replacing with empty list");
-            ingredients = new ArrayList<>();
-        }
+        refreshData();
     }
 
     @Override
@@ -67,6 +59,19 @@ public class IngredientDatabase implements IIngredientDatabase
         }catch (Exception e)
         {
             Log.d("IngredientDatabase", String.format("Unable to write ingredient list to disk. \n Exception: \n %s",e.toString()));
+        }
+    }
+
+    @Override
+    public void refreshData()
+    {
+        try
+        {
+            ingredients = (ArrayList<IIngredient>)InternalStorage.readObject(context, InternalStorage.STORAGE_KEY_INGREDIENTS);
+        }catch (Exception e)
+        {
+            Log.d("IngredientDatabase", "Ingredient list not found on disk. Replacing with empty list");
+            ingredients = new ArrayList<>();
         }
     }
 }
