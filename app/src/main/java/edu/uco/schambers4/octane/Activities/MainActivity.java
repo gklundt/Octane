@@ -14,7 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.FrameLayout;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -24,7 +24,16 @@ import edu.uco.schambers4.octane.R;
 public class MainActivity extends AppCompatActivity
 {
 
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+    @Bind(R.id.fragment_container)
+    FrameLayout fragmentContainer;
+    @Bind(R.id.fab)
+    FloatingActionButton fab;
+    @Bind(R.id.nav_view)
+    NavigationView navView;
 
+    private MenuItem previousItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -96,19 +105,24 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        if (previousItem != null && item.isCheckable())
+        {
+            previousItem.setChecked(false);
+            navView.invalidate();
+        }
+        item.setChecked(true);
         if (id == R.id.nav_ingredients)
         {
             Fragment ingredientsFragment = new IngredientsFragment();
             launchFragment(ingredientsFragment);
-        } else if (id == R.id.nav_gallery)
+        }
+        else if (id == R.id.nav_gallery)
         {
-        } else if (id == R.id.nav_slideshow)
+        }
+        else if (id == R.id.nav_slideshow)
         {
-        } else if (id == R.id.nav_manage)
-        {
-        } else if (id == R.id.nav_share)
-        {
-        } else if (id == R.id.nav_send)
+        }
+        else if (id == R.id.nav_manage)
         {
         }
 
@@ -120,6 +134,6 @@ public class MainActivity extends AppCompatActivity
     private void launchFragment(Fragment fragment)
     {
         FragmentTransaction trans = getFragmentManager().beginTransaction();
-        trans.replace(R.id.fragment_container, fragment ).addToBackStack(null).commit();
+        trans.replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
     }
 }
