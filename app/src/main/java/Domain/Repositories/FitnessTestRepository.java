@@ -1,11 +1,9 @@
-package WorkoutRepository;
+package Domain.Repositories;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-import Domain.Exercise;
-import Domain.ExerciseMeasure;
-import Domain.FitnessTest;
+import Domain.Data.FitnessTest;
 
 /**
  * Created by gordon on 10/25/15.

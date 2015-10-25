@@ -1,8 +1,8 @@
-package WorkoutRepository;
+package Domain.Repositories;
 
 import java.util.ArrayList;
 
-import Domain.Workout;
+import Domain.Data.Workout;
 
 /**
  * Created by gordon on 10/25/15.

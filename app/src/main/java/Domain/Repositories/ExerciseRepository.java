@@ -1,8 +1,8 @@
-package WorkoutRepository;
+package Domain.Repositories;
 
 import java.util.ArrayList;
-import Domain.Exercise;
-import Domain.Workout;
+import Domain.Data.Exercise;
+import Domain.Data.Workout;
 
 public interface ExerciseRepository {
 

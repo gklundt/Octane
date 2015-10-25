@@ -1,4 +1,4 @@
-package Domain;
+package Domain.Data;
 
 public class ExerciseMeasure {
 
