@@ -38,4 +38,10 @@ public class Ingredient implements IIngredient
     {
         return String.format("$.2f %s", amount, unitOfMeasure);
     }
+
+    @Override
+    public String toString()
+    {
+        return String.format("%s , %.2f %s", this.name, this.amount, this.unitOfMeasure);
+    }
 }
