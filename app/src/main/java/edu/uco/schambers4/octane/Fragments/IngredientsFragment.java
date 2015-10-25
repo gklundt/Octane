@@ -2,6 +2,7 @@ package edu.uco.schambers4.octane.Fragments;
 
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.ListView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import edu.uco.schambers4.octane.Activities.MainActivity;
 import edu.uco.schambers4.octane.DataAccessObjects.IIngredientDatabase;
 import edu.uco.schambers4.octane.DataAccessObjects.MockIngredientDatabase;
 import edu.uco.schambers4.octane.Models.IIngredient;
@@ -55,9 +57,21 @@ public class IngredientsFragment extends Fragment
                 ingredientDatabase.getCollectionAsList());
         ingredientsListview.setAdapter(ingredientArrayAdapter);
 
+        ingredientsFab.setOnClickListener(v -> launchAddIngredientFragment());
+
         return view;
     }
 
+    void launchAddIngredientFragment()
+    {
+        Fragment addFragment = new AddIngredientFragment();
+        launchFragment(addFragment);
+    }
+
+    private void launchFragment(Fragment fragment)
+    {
+        ((MainActivity)getActivity()).launchFragment(fragment);
+    }
 
     @Override
     public void onDestroyView()
