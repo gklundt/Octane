@@ -1,5 +1,7 @@
 package edu.uco.schambers4.octane.Activities;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -12,18 +14,26 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.FrameLayout;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import edu.uco.schambers4.octane.Fragments.IngredientsFragment;
 import edu.uco.schambers4.octane.R;
 
 public class MainActivity extends AppCompatActivity
 {
 
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+    @Bind(R.id.fragment_container)
+    FrameLayout fragmentContainer;
+    @Bind(R.id.fab)
+    FloatingActionButton fab;
+    @Bind(R.id.nav_view)
+    NavigationView navView;
 
-    @Bind(R.id.test_tv)
-    TextView testTv;
+    private MenuItem previousItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -36,7 +46,6 @@ public class MainActivity extends AppCompatActivity
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show());
-
         fab.setOnClickListener(view -> Snackbar.make(view, "Replaced!", Snackbar.LENGTH_LONG).setAction("Action", null).show());
         fab.setVisibility(View.INVISIBLE);
 
@@ -49,13 +58,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(menuItem -> onNavigationItemSelected(menuItem));
 
-
+        //all calls to bound views must be after this call
         ButterKnife.bind(this);
-
-        testTv.setOnClickListener((view) -> {
-            TextView tv = (TextView) view;
-            tv.setText("");
-        });
     }
 
     @Override
@@ -65,7 +69,12 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START))
         {
             drawer.closeDrawer(GravityCompat.START);
-        } else
+        }
+        else if(getFragmentManager().getBackStackEntryCount() > 0)
+        {
+            getFragmentManager().popBackStack();
+        }
+        else
         {
             super.onBackPressed();
         }
@@ -101,29 +110,35 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camara)
+        if (previousItem != null && item.isCheckable())
         {
-            // Handle the camera action
-            testTv.setText("Camera");
-        } else if (id == R.id.nav_gallery)
+            previousItem.setChecked(false);
+            navView.invalidate();
+        }
+        item.setChecked(true);
+        if (id == R.id.nav_ingredients)
         {
-            testTv.setText("Gallery");
-        } else if (id == R.id.nav_slideshow)
+            Fragment ingredientsFragment = new IngredientsFragment();
+            launchFragment(ingredientsFragment);
+        }
+        else if (id == R.id.nav_gallery)
         {
-            testTv.setText("Slideshow");
-        } else if (id == R.id.nav_manage)
+        }
+        else if (id == R.id.nav_slideshow)
         {
-            testTv.setText("Manage");
-        } else if (id == R.id.nav_share)
+        }
+        else if (id == R.id.nav_manage)
         {
-            testTv.setText("Share");
-        } else if (id == R.id.nav_send)
-        {
-            testTv.setText("Send");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void launchFragment(Fragment fragment)
+    {
+        FragmentTransaction trans = getFragmentManager().beginTransaction();
+        trans.replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
     }
 }
