@@ -2,7 +2,6 @@ package edu.uco.schambers4.octane.Fragments;
 
 
 import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
@@ -16,7 +15,6 @@ import butterknife.ButterKnife;
 import edu.uco.schambers4.octane.Activities.MainActivity;
 import edu.uco.schambers4.octane.DataAccessObjects.IIngredientDatabase;
 import edu.uco.schambers4.octane.DataAccessObjects.IngredientDatabase;
-import edu.uco.schambers4.octane.DataAccessObjects.MockIngredientDatabase;
 import edu.uco.schambers4.octane.Models.IIngredient;
 import edu.uco.schambers4.octane.R;
 
@@ -66,7 +64,21 @@ public class IngredientsFragment extends Fragment
                 android.R.layout.simple_list_item_1,
                 ingredientDatabase.getCollectionAsList());
         ingredientsListview.setAdapter(ingredientArrayAdapter);
+
+        ingredientsListview.setOnItemClickListener((parent, view, position, id) -> {
+            IIngredient clickedIngredient = (IIngredient) parent.getItemAtPosition(position);
+            int positionInDBList = ingredientDatabase.getCollectionAsList().indexOf(clickedIngredient);
+            launchEditIngredientFragment(positionInDBList);
+        });
+
     }
+
+    private void launchEditIngredientFragment(int clickedIngredient)
+    {
+        Fragment editFragment = AddIngredientFragment.newInstance(clickedIngredient);
+        launchFragment(editFragment);
+    }
+
 
     @Override
     public void onResume()

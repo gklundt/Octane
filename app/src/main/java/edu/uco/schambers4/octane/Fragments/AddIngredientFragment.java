@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -25,6 +26,7 @@ import edu.uco.schambers4.octane.R;
 public class AddIngredientFragment extends Fragment
 {
 
+    private static final String ARG_INGREDIENT_POSITION = "ingredient";
 
     @Bind(R.id.name_et)
     EditText nameEt;
@@ -42,6 +44,26 @@ public class AddIngredientFragment extends Fragment
     @Bind(R.id.unit_of_measure_spinner)
     Spinner unitOfMeasureSpinner;
 
+    private Ingredient existingIngredient;
+
+
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @return A new instance of fragment EditIngredientFragment.
+     */
+    // TODO: Rename and change types and number of parameters
+    public static AddIngredientFragment newInstance(int param1)
+    {
+        AddIngredientFragment fragment = new AddIngredientFragment();
+        Bundle args = new Bundle();
+        args.putInt(ARG_INGREDIENT_POSITION, param1);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     public AddIngredientFragment()
     {
         // Required empty public constructor
@@ -52,6 +74,12 @@ public class AddIngredientFragment extends Fragment
     {
         super.onCreate(savedInstanceState);
         ingredientDatabase = new IngredientDatabase(getActivity());
+        if (getArguments() != null)
+        {
+            int position= getArguments().getInt(ARG_INGREDIENT_POSITION);
+            existingIngredient = (Ingredient) ingredientDatabase.getCollectionAsList().get(position);
+
+        }
     }
 
     @Override
@@ -64,7 +92,22 @@ public class AddIngredientFragment extends Fragment
 
         addIngredientsFab.setOnClickListener(v -> saveIngredientAndReturn());
 
+        if(existingIngredient != null)
+        {
+            populateFieldsFromExistingIngredient();
+        }
+
         return view;
+    }
+
+    private void populateFieldsFromExistingIngredient()
+    {
+        nameEt.setText(existingIngredient.getName());
+        //set spinner to show the name of the existing ingredient's unit of measure
+        unitOfMeasureSpinner.setSelection(((ArrayAdapter)unitOfMeasureSpinner.getAdapter())
+                .getPosition(existingIngredient.getUnitOfMeasure()));
+        caloriesEt.setText(String.valueOf(existingIngredient.getCalories()));
+        quantityEt.setText(String.valueOf(existingIngredient.getAmount()));
     }
 
     private void saveIngredientAndReturn()
@@ -73,8 +116,19 @@ public class AddIngredientFragment extends Fragment
         {
             String ingredientName = nameEt.getText().toString();
             String unitOfMeasure = unitOfMeasureSpinner.getSelectedItem().toString();
-            IIngredient newIngredient = new Ingredient(ingredientName, quantity, unitOfMeasure, calories);
-            ingredientDatabase.addIngredientToCollection(newIngredient);
+
+            if (existingIngredient == null)
+            {
+                IIngredient newIngredient = new Ingredient(ingredientName, quantity, unitOfMeasure, calories);
+                ingredientDatabase.addIngredientToCollection(newIngredient);
+            } else
+            {
+                existingIngredient.setName(ingredientName);
+                existingIngredient.setAmount(quantity);
+                existingIngredient.setCalories(calories);
+                existingIngredient.setUnitOfMeasure(unitOfMeasure);
+            }
+
             ingredientDatabase.saveChanges();
             getActivity().onBackPressed();
         }
