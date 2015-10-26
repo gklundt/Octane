@@ -1,10 +1,10 @@
-package WorkoutModel.InternalStorageRepostiories;
+package edu.uco.schambers4.octane.Models.WorkoutModel.InternalStorageRepostiories;
 
 import java.util.ArrayList;
 
-import Domain.Data.Exercise;
-import Domain.Data.Workout;
-import Domain.Repositories.ExerciseRepository;
+import edu.uco.schambers4.octane.Domain.Data.Exercise;
+import edu.uco.schambers4.octane.Domain.Data.Workout;
+import edu.uco.schambers4.octane.Domain.Repositories.ExerciseRepository;
 
 public class InternalStorageExerciseRepository implements ExerciseRepository {
     @Override

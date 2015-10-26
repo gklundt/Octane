@@ -1,4 +1,4 @@
-package Domain.Data;
+package edu.uco.schambers4.octane.Domain.Data;
 
 import java.util.Date;
 

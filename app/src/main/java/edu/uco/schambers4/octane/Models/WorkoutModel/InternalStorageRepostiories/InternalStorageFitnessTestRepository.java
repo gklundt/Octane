@@ -1,10 +1,10 @@
-package WorkoutModel.InternalStorageRepostiories;
+package edu.uco.schambers4.octane.Models.WorkoutModel.InternalStorageRepostiories;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-import Domain.Data.FitnessTest;
-import Domain.Repositories.FitnessTestRepository;
+import edu.uco.schambers4.octane.Domain.Data.FitnessTest;
+import edu.uco.schambers4.octane.Domain.Repositories.FitnessTestRepository;
 
 public class InternalStorageFitnessTestRepository implements FitnessTestRepository {
     @Override

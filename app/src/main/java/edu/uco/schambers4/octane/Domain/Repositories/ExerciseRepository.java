@@ -1,8 +1,8 @@
-package Domain.Repositories;
+package edu.uco.schambers4.octane.Domain.Repositories;
 
 import java.util.ArrayList;
-import Domain.Data.Exercise;
-import Domain.Data.Workout;
+import edu.uco.schambers4.octane.Domain.Data.Exercise;
+import edu.uco.schambers4.octane.Domain.Data.Workout;
 
 public interface ExerciseRepository {
 

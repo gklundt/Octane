@@ -1,9 +1,9 @@
-package WorkoutModel.InternalStorageRepostiories;
+package edu.uco.schambers4.octane.Models.WorkoutModel.InternalStorageRepostiories;
 
 import java.util.ArrayList;
 
-import Domain.Data.Workout;
-import Domain.Repositories.WorkoutRepository;
+import edu.uco.schambers4.octane.Domain.Data.Workout;
+import edu.uco.schambers4.octane.Domain.Repositories.WorkoutRepository;
 
 /**
  * Created by gordon on 10/25/15.

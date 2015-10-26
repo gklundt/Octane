@@ -1,9 +1,9 @@
-package WorkoutModel;
+package edu.uco.schambers4.octane.Models.WorkoutModel;
 
 import java.util.ArrayList;
 
-import Domain.Data.Exercise;
-import Domain.Repositories.ExerciseRepository;
+import edu.uco.schambers4.octane.Domain.Data.Exercise;
+import edu.uco.schambers4.octane.Domain.Repositories.ExerciseRepository;
 
 public class ExerciseContainer {
     private static ExerciseContainer ourInstance;
