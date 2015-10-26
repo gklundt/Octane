@@ -1,4 +1,4 @@
-package edu.uco.schambers4.octane.Models.WorkoutModel;
+package edu.uco.schambers4.octane.Models.WorkoutModel.DataContainers;
 
 import java.util.ArrayList;
 

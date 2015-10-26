@@ -9,6 +9,11 @@
                     android:checkable="true"
                     android:icon="@drawable/ic_local_pizza"
                     android:title="@string/ingredients_list"/>
+                <item
+                    android:id="@+id/nav_exercises"
+                    android:checkable="true"
+                    android:icon="@drawable/ic_directions_bike_24dp"
+                    android:title="@string/exercise_list"/>
             </menu>
         </item>
         <item

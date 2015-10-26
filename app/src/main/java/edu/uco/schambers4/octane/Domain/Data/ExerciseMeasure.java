@@ -6,6 +6,30 @@ public class ExerciseMeasure {
     private Integer mMeasure;
     private Units mUnits;
 
+    public Integer getForce() {
+        return mForce;
+    }
+
+    public void setForce(Integer force) {
+        mForce = force;
+    }
+
+    public Integer getMeasure() {
+        return mMeasure;
+    }
+
+    public void setMeasure(Integer measure) {
+        mMeasure = measure;
+    }
+
+    public Units getUnits() {
+        return mUnits;
+    }
+
+    public void setUnits(Units units) {
+        mUnits = units;
+    }
+
     public enum UnitKind {WEIGHT, REPS, DISTANCE, TIME}
 
     public enum UnitSystem {IMPERIAL, METRIC, UNIVERSAL}
@@ -36,6 +60,11 @@ public class ExerciseMeasure {
         private UnitSystem UnitSystem() {
             return mUnitSystem;
         }
+
+        private UnitKind UnitKind() {
+            return mUnitKind;
+        }
+
     }
 
 }

@@ -1,8 +1,9 @@
 package edu.uco.schambers4.octane.Domain.Data;
 
+import java.io.Serializable;
 import java.util.Map;
 
-public class Workout {
+public class Workout implements Serializable {
     private String mName;
     private Map<String, Integer> mExerciseSets;
 
@@ -24,16 +25,20 @@ public class Workout {
     }
 
     public void addExerciseSet(String exerciseName, Integer sets) {
-        mExerciseSets.put(exerciseName, sets);
+        if (!mExerciseSets.containsKey(exerciseName)) {
+            mExerciseSets.put(exerciseName, sets);
+        }
     }
 
     public void updateExerciseSet(String exerciseName, Integer sets) {
+        mExerciseSets.remove(exerciseName);
         mExerciseSets.put(exerciseName, sets);
     }
 
     public void removeExerciseSet(String exerciseName) {
-        mExerciseSets.remove(exerciseName);
+        if (mExerciseSets.containsKey(exerciseName)) {
+            mExerciseSets.remove(exerciseName);
+        }
     }
-
 
 }

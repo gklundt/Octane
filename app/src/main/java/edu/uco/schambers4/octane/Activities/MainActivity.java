@@ -18,6 +18,7 @@ import android.widget.FrameLayout;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import edu.uco.schambers4.octane.Fragments.ExerciseFragment;
 import edu.uco.schambers4.octane.Fragments.IngredientsFragment;
 import edu.uco.schambers4.octane.R;
 
@@ -120,6 +121,11 @@ public class MainActivity extends AppCompatActivity
         {
             Fragment ingredientsFragment = new IngredientsFragment();
             launchFragment(ingredientsFragment);
+        }
+        if (id == R.id.nav_exercises)
+        {
+            Fragment exercisesFragment = new ExerciseFragment();
+            launchFragment(exercisesFragment);
         }
         else if (id == R.id.nav_gallery)
         {
