@@ -2,7 +2,6 @@ package edu.uco.schambers4.octane.Fragments;
 
 
 import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
@@ -15,7 +14,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.uco.schambers4.octane.Activities.MainActivity;
 import edu.uco.schambers4.octane.DataAccessObjects.IIngredientDatabase;
-import edu.uco.schambers4.octane.DataAccessObjects.MockIngredientDatabase;
+import edu.uco.schambers4.octane.DataAccessObjects.IngredientDatabase;
 import edu.uco.schambers4.octane.Models.IIngredient;
 import edu.uco.schambers4.octane.R;
 
@@ -40,7 +39,7 @@ public class IngredientsFragment extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        ingredientDatabase = new MockIngredientDatabase();
+        ingredientDatabase = new IngredientDatabase(getActivity());
     }
 
     @Override
@@ -51,15 +50,42 @@ public class IngredientsFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_ingredients, container, false);
         ButterKnife.bind(this, view);
 
+        bindIngredientsToListView();
+
+        ingredientsFab.setOnClickListener(v -> launchAddIngredientFragment());
+
+        return view;
+    }
+
+    private void bindIngredientsToListView()
+    {
         ArrayAdapter<IIngredient> ingredientArrayAdapter = new ArrayAdapter<>(
                 getActivity(),
                 android.R.layout.simple_list_item_1,
                 ingredientDatabase.getCollectionAsList());
         ingredientsListview.setAdapter(ingredientArrayAdapter);
 
-        ingredientsFab.setOnClickListener(v -> launchAddIngredientFragment());
+        ingredientsListview.setOnItemClickListener((parent, view, position, id) -> {
+            IIngredient clickedIngredient = (IIngredient) parent.getItemAtPosition(position);
+            int positionInDBList = ingredientDatabase.getCollectionAsList().indexOf(clickedIngredient);
+            launchEditIngredientFragment(positionInDBList);
+        });
 
-        return view;
+    }
+
+    private void launchEditIngredientFragment(int clickedIngredient)
+    {
+        Fragment editFragment = AddIngredientFragment.newInstance(clickedIngredient);
+        launchFragment(editFragment);
+    }
+
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        ingredientDatabase.refreshData();
+        bindIngredientsToListView();
     }
 
     void launchAddIngredientFragment()
@@ -70,7 +96,7 @@ public class IngredientsFragment extends Fragment
 
     private void launchFragment(Fragment fragment)
     {
-        ((MainActivity)getActivity()).launchFragment(fragment);
+        ((MainActivity) getActivity()).launchFragment(fragment);
     }
 
     @Override

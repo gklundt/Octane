@@ -10,11 +10,12 @@ public class Ingredient implements IIngredient
     private double amount;
     private String unitOfMeasure;
 
-    public Ingredient(String name, double amount, String unitOfMeasure)
+    public Ingredient(String name, double amount, String unitOfMeasure, int calories)
     {
         this.name = name;
         this.amount = amount;
         this.unitOfMeasure = unitOfMeasure;
+        this.calories = calories;
     }
 
     @Override
@@ -37,6 +38,31 @@ public class Ingredient implements IIngredient
     public String getQuantity()
     {
         return String.format("$.2f %s", amount, unitOfMeasure);
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public double getAmount()
+    {
+        return amount;
+    }
+
+    public void setAmount(double amount)
+    {
+        this.amount = amount;
+    }
+
+    public String getUnitOfMeasure()
+    {
+        return unitOfMeasure;
+    }
+
+    public void setUnitOfMeasure(String unitOfMeasure)
+    {
+        this.unitOfMeasure = unitOfMeasure;
     }
 
     @Override

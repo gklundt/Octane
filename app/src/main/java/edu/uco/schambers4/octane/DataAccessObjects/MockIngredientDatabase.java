@@ -18,9 +18,9 @@ public class MockIngredientDatabase implements IIngredientDatabase
     public MockIngredientDatabase()
     {
         ingredients = new ArrayList<>();
-        ingredients.add(new Ingredient("Steak", 8, "ounces"));
-        ingredients.add(new Ingredient("Cheese", 2 , "cups"));
-        ingredients.add(new Ingredient("Bacon", 1 , "rasher"));
+        ingredients.add(new Ingredient("Steak", 8, "ounces", 0));
+        ingredients.add(new Ingredient("Cheese", 2 , "cups", 0));
+        ingredients.add(new Ingredient("Bacon", 1 , "rasher", 0));
     }
 
     @Override
@@ -49,6 +49,12 @@ public class MockIngredientDatabase implements IIngredientDatabase
 
     @Override
     public void saveChanges()
+    {
+
+    }
+
+    @Override
+    public void refreshData()
     {
 
     }

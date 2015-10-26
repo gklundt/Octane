@@ -55,6 +55,7 @@
         android:layout_toEndOf="@id/quantity_et"
         android:entries="@array/units_of_measurement"
         android:gravity="center"
+        android:id="@+id/unit_of_measure_spinner"
         />
 
     <TextView

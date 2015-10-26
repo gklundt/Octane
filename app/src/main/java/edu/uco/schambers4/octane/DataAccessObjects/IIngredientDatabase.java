@@ -16,4 +16,5 @@ public interface IIngredientDatabase
     List<IIngredient> getCollectionAsList();
     Stream<IIngredient> getCollectionAsStream();
     void saveChanges();
+    void refreshData();
 }
