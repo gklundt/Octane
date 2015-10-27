@@ -18,8 +18,9 @@ import android.widget.FrameLayout;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import edu.uco.schambers4.octane.Fragments.ExerciseFragment;
+import edu.uco.schambers4.octane.Fragments.ExerciseListFragment;
 import edu.uco.schambers4.octane.Fragments.IngredientsFragment;
+import edu.uco.schambers4.octane.Fragments.WorkoutListFragment;
 import edu.uco.schambers4.octane.R;
 
 public class MainActivity extends AppCompatActivity
@@ -122,20 +123,25 @@ public class MainActivity extends AppCompatActivity
             Fragment ingredientsFragment = new IngredientsFragment();
             launchFragment(ingredientsFragment);
         }
-        if (id == R.id.nav_exercises)
+        else if (id == R.id.nav_exercises)
         {
-            Fragment exercisesFragment = new ExerciseFragment();
+            Fragment exercisesFragment = new ExerciseListFragment();
             launchFragment(exercisesFragment);
         }
-        else if (id == R.id.nav_gallery)
+        else if (id == R.id.nav_workouts)
         {
+            Fragment workoutFragment = new WorkoutListFragment();
+            launchFragment(workoutFragment);
         }
-        else if (id == R.id.nav_slideshow)
-        {
-        }
-        else if (id == R.id.nav_manage)
-        {
-        }
+//        else if (id == R.id.nav_gallery)
+//        {
+//        }
+//        else if (id == R.id.nav_slideshow)
+//        {
+//        }
+//        else if (id == R.id.nav_manage)
+//        {
+//        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

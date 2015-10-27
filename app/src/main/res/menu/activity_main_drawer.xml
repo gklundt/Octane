@@ -9,13 +9,23 @@
                     android:checkable="true"
                     android:icon="@drawable/ic_local_pizza"
                     android:title="@string/ingredients_list"/>
+            </menu>
+        </item>
+        <item android:title="@string/workout_config">
+            <menu>
                 <item
                     android:id="@+id/nav_exercises"
                     android:checkable="true"
                     android:icon="@drawable/ic_directions_bike_24dp"
                     android:title="@string/exercise_list"/>
+                <item
+                    android:id="@+id/nav_workouts"
+                    android:checkable="true"
+                    android:icon="@drawable/ic_directions_bike_24dp"
+                    android:title="@string/workout_list"/>
             </menu>
         </item>
+<!--
         <item
             android:id="@+id/nav_gallery"
             android:checkable="true"
@@ -31,5 +41,6 @@
             android:checkable="true"
             android:icon="@android:drawable/ic_menu_manage"
             android:title="Tools"/>
+            -->
     </group>
 </menu>
