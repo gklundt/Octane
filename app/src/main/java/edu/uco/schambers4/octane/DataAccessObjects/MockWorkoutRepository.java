@@ -1,8 +1,11 @@
 package edu.uco.schambers4.octane.DataAccessObjects;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Map;
 
 import edu.uco.schambers4.octane.DataAccessObjects.WorkoutRepository;
+import edu.uco.schambers4.octane.Models.Ingredient;
 import edu.uco.schambers4.octane.Models.Workout;
 
 /**
@@ -16,8 +19,36 @@ public class MockWorkoutRepository implements WorkoutRepository {
 
     @Override
     public ArrayList<Workout> getAllWorkouts() {
-        return null;
+
+        ArrayList<Workout> w = new ArrayList<>();
+
+        Map<String,Integer> easyMap = new Hashtable<>();
+        easyMap.put("Situps",1);
+        easyMap.put("Pushups",1);
+        easyMap.put("Jumping Jacks",1);
+        Workout easy = new Workout("Easy",easyMap);
+
+        Map<String,Integer> mediumMap = new Hashtable<>();
+        easyMap.put("Situps",10);
+        easyMap.put("Pushups",10);
+        easyMap.put("Jumping Jacks",10);
+        Workout medium = new Workout("Medium",easyMap);
+
+        Map<String,Integer> highMap = new Hashtable<>();
+        easyMap.put("Situps",100);
+        easyMap.put("Pushups",100);
+        easyMap.put("Jumping Jacks",100);
+        Workout high = new Workout("Hard",easyMap);
+
+        w.add(easy);
+        w.add(medium);
+        w.add(high);
+
+        return w;
     }
+
+
+
 
     @Override
     public void saveWorkout(Workout workout) {

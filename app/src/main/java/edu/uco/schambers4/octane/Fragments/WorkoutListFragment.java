@@ -1,15 +1,15 @@
 package edu.uco.schambers4.octane.Fragments;
 
 import android.app.FragmentTransaction;
+import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.ListFragment;
 import android.view.View;
 import android.widget.ListView;
 
-import edu.uco.schambers4.octane.Activities.ExerciseDetailActivity;
-import edu.uco.schambers4.octane.Models.ExerciseAdapter;
-import edu.uco.schambers4.octane.Models.ExerciseContainer;
+import edu.uco.schambers4.octane.Activities.WorkoutDetailActivity;
+import edu.uco.schambers4.octane.Models.WorkoutAdapter;
+import edu.uco.schambers4.octane.Models.WorkoutContainer;
 import edu.uco.schambers4.octane.R;
 //import edu.uco.schambers4.octane.Fragments.dummy.xxDummyContent;
 
@@ -32,7 +32,7 @@ public class WorkoutListFragment extends ListFragment {
 //    private String mParam1;
 //    private String mParam2;
 
-    private ExerciseContainer mExerciseContainer;
+    private WorkoutContainer mWorkoutContainer;
     private boolean mDualPane;
     private int mCurCheckPosition = 0;
 
@@ -41,11 +41,11 @@ public class WorkoutListFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mExerciseContainer = ExerciseContainer.getInstance();
-        ExerciseAdapter adapter = new ExerciseAdapter(getActivity(), mExerciseContainer.getExercises());
+        mWorkoutContainer = WorkoutContainer.getInstance();
+        WorkoutAdapter adapter = new WorkoutAdapter(getActivity(), mWorkoutContainer.getWorkouts());
         setListAdapter(adapter);
 
-        View detailsFrame = getActivity().findViewById(R.id.exercise_item_details);
+        View detailsFrame = getActivity().findViewById(R.id.workout_item_details);
         mDualPane = detailsFrame != null && detailsFrame.getVisibility() == View.VISIBLE;
 
 
@@ -82,15 +82,15 @@ public class WorkoutListFragment extends ListFragment {
 
         if(mDualPane){
             getListView().setItemChecked(index,true);
-            ExerciseDetailFragment details = (ExerciseDetailFragment) getFragmentManager().findFragmentById(R.id.exercise_item_details);
+            WorkoutDetailFragment details = (WorkoutDetailFragment) getFragmentManager().findFragmentById(R.id.workout_item_details);
             if(details==null || details.getShownIndex() != index){
 
-                details = ExerciseDetailFragment.newInstance(index);
+                details = WorkoutDetailFragment.newInstance(index);
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 if(index == 0){
-                    ft.replace(R.id.exercise_item_details, details);
+                    ft.replace(R.id.workout_item_details, details);
                 } else {
-                    ft.replace(R.id.exercise_item_details, details);
+                    ft.replace(R.id.workout_item_details, details);
                 }
 
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
@@ -99,7 +99,7 @@ public class WorkoutListFragment extends ListFragment {
         } else {
 
             Intent intent = new Intent();
-            intent.setClass(getActivity(), ExerciseDetailActivity.class);
+            intent.setClass(getActivity(), WorkoutDetailActivity.class);
             intent.putExtra("index", index);
             startActivity(intent);
         }
@@ -109,8 +109,8 @@ public class WorkoutListFragment extends ListFragment {
 //    private OnFragmentInteractionListener mListener;
 //
 //    // TO DO: Rename and change types of parameters
-//    public static ExerciseListFragment newInstance(String param1, String param2) {
-//        ExerciseListFragment fragment = new ExerciseListFragment();
+//    public static WorkoutListFragment newInstance(String param1, String param2) {
+//        WorkoutListFragment fragment = new WorkoutListFragment();
 //        Bundle args = new Bundle();
 ////        args.putString(ARG_PARAM1, param1);
 ////        args.putString(ARG_PARAM2, param2);
@@ -122,7 +122,7 @@ public class WorkoutListFragment extends ListFragment {
 //     * Mandatory empty constructor for the fragment manager to instantiate the
 //     * fragment (e.g. upon screen orientation changes).
 //     */
-//    public ExerciseLFragment() {
+//    public WorkoutLFragment() {
 //    }
 //
 //    @Override
