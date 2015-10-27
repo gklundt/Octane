@@ -2,6 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group>
+        <item
+            android:id="@+id/nav_dashboard"
+            android:title="@string/dashboard"
+            android:checkable="true" />
         <item android:title="@string/meal_planner">
             <menu>
                 <item
@@ -25,22 +29,5 @@
                     android:title="@string/workout_list"/>
             </menu>
         </item>
-<!--
-        <item
-            android:id="@+id/nav_gallery"
-            android:checkable="true"
-            android:icon="@android:drawable/ic_menu_gallery"
-            android:title="Gallery"/>
-        <item
-            android:id="@+id/nav_slideshow"
-            android:checkable="true"
-            android:icon="@android:drawable/ic_menu_slideshow"
-            android:title="Slideshow"/>
-        <item
-            android:id="@+id/nav_manage"
-            android:checkable="true"
-            android:icon="@android:drawable/ic_menu_manage"
-            android:title="Tools"/>
-            -->
     </group>
 </menu>

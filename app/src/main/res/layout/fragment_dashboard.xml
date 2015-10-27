@@ -1,0 +1,42 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="edu.uco.schambers4.octane.Fragments.DashboardFragment">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <CalendarView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:id="@+id/calendarView"
+            android:layout_gravity="center_horizontal" />
+
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/add_workout_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_action_add"
+            android:layout_marginLeft="@dimen/fab_margin"
+            android:layout_marginRight="@dimen/fab_margin"
+            android:layout_below="@+id/calendarView"
+            android:layout_toStartOf="@+id/add_meal_fab" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/add_meal_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_local_pizza"
+            android:layout_marginLeft="@dimen/fab_margin"
+            android:layout_marginRight="@dimen/fab_margin"
+            android:layout_below="@id/calendarView"
+            android:layout_alignParentEnd="true" />
+
+
+    </RelativeLayout>
+</FrameLayout>

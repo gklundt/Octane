@@ -19,6 +19,7 @@ import android.widget.FrameLayout;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.uco.schambers4.octane.Fragments.ExerciseListFragment;
+import edu.uco.schambers4.octane.Fragments.DashboardFragment;
 import edu.uco.schambers4.octane.Fragments.IngredientsFragment;
 import edu.uco.schambers4.octane.Fragments.WorkoutListFragment;
 import edu.uco.schambers4.octane.R;
@@ -62,6 +63,8 @@ public class MainActivity extends AppCompatActivity
 
         //all calls to bound views must be after this call
         ButterKnife.bind(this);
+
+        launchFragment(new DashboardFragment());
     }
 
     @Override
@@ -118,30 +121,21 @@ public class MainActivity extends AppCompatActivity
             navView.invalidate();
         }
         item.setChecked(true);
-        if (id == R.id.nav_ingredients)
-        {
-            Fragment ingredientsFragment = new IngredientsFragment();
-            launchFragment(ingredientsFragment);
+
+        switch(id){
+            case R.id.nav_dashboard:
+                launchFragment(new DashboardFragment());
+                break;
+            case R.id.nav_ingredients:
+                launchFragment(new IngredientsFragment());
+                break;
+            case R.id.nav_exercises:
+                launchFragment(new ExerciseListFragment());
+                break;
+            case R.id.nav_workouts:
+                launchFragment(new WorkoutListFragment());
+                break;
         }
-        else if (id == R.id.nav_exercises)
-        {
-            Fragment exercisesFragment = new ExerciseListFragment();
-            launchFragment(exercisesFragment);
-        }
-        else if (id == R.id.nav_workouts)
-        {
-            Fragment workoutFragment = new WorkoutListFragment();
-            launchFragment(workoutFragment);
-        }
-//        else if (id == R.id.nav_gallery)
-//        {
-//        }
-//        else if (id == R.id.nav_slideshow)
-//        {
-//        }
-//        else if (id == R.id.nav_manage)
-//        {
-//        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
