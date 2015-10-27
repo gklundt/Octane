@@ -9,6 +9,7 @@
     <string name="exercise_list">Exercise List</string>
     <string name="workout_list">Workout List</string>
     <string name="meal_planner">Meal Planner</string>
+    <string name="workout_config">Workouts</string>
 
     <string name="ingredients">Ingredients</string>
     <string name="name_lbl">Name:</string>
