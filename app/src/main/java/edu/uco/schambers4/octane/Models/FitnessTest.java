@@ -1,4 +1,4 @@
-package edu.uco.schambers4.octane.Domain.Data;
+package edu.uco.schambers4.octane.Models;
 
 import java.io.Serializable;
 import java.util.Date;

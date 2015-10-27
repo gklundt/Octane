@@ -1,14 +1,14 @@
-package edu.uco.schambers4.octane.Models.WorkoutModel.InternalStorageRepostiories;
+package edu.uco.schambers4.octane.DataAccessObjects;
 
 import java.util.ArrayList;
 
-import edu.uco.schambers4.octane.Domain.Data.Workout;
-import edu.uco.schambers4.octane.Domain.Repositories.WorkoutRepository;
+import edu.uco.schambers4.octane.DataAccessObjects.WorkoutRepository;
+import edu.uco.schambers4.octane.Models.Workout;
 
 /**
- * Created by gordon on 10/25/15.
+ * Created by gordon on 10/26/15.
  */
-public class InternalStorageWorkoutRepository implements WorkoutRepository{
+public class MockWorkoutRepository implements WorkoutRepository {
     @Override
     public Workout getWorkout(String name) {
         return null;

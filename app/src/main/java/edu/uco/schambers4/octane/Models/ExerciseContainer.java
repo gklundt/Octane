@@ -1,9 +1,9 @@
-package edu.uco.schambers4.octane.Models.WorkoutModel.DataContainers;
+package edu.uco.schambers4.octane.Models;
 
 import java.util.ArrayList;
 
-import edu.uco.schambers4.octane.Domain.Data.Exercise;
-import edu.uco.schambers4.octane.Domain.Repositories.ExerciseRepository;
+import edu.uco.schambers4.octane.DataAccessObjects.ExerciseRepository;
+import edu.uco.schambers4.octane.DataAccessObjects.MockExerciseRepository;
 
 public class ExerciseContainer {
     private static ExerciseContainer ourInstance;
@@ -11,8 +11,9 @@ public class ExerciseContainer {
     private ArrayList<Exercise> mExercises;
     private ExerciseRepository mExerciseRepository;
 
-    public static ExerciseContainer getInstance(ExerciseRepository repo) {
+    public static ExerciseContainer getInstance() {
         if (ourInstance == null){
+            ExerciseRepository repo = new MockExerciseRepository();
             ourInstance = new ExerciseContainer(repo);
         }
         return ourInstance;
@@ -24,7 +25,8 @@ public class ExerciseContainer {
     }
 
     public ArrayList<Exercise> getExercises() {
-        return mExercises;
+        return mExerciseRepository.getAllExercises();
+        //return mExercises;
     }
 
     public void save(){

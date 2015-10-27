@@ -1,9 +1,9 @@
-package edu.uco.schambers4.octane.Domain.Repositories;
+package edu.uco.schambers4.octane.DataAccessObjects;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-import edu.uco.schambers4.octane.Domain.Data.FitnessTest;
+import edu.uco.schambers4.octane.Models.FitnessTest;
 
 /**
  * Created by gordon on 10/25/15.
