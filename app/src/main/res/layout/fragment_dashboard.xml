@@ -15,14 +15,15 @@
             android:layout_centerHorizontal="true"
             style="@style/Base.TextAppearance.AppCompat.Large"
             android:text="@string/app_name"
-            android:id="@+id/ingredients_lbl" />
+            android:id="@+id/dashboard_lbl" />
 
         <CalendarView
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:id="@+id/calendarView"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/dashboard_lbl"/>
 
 
 
