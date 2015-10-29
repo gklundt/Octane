@@ -15,6 +15,7 @@ import java.io.*;
 public final class InternalStorage
 {
     public static final String STORAGE_KEY_INGREDIENTS = "edu.uco.schambers4.octane.InternalStorageSerialization.InternalStorage.Ingredients";
+    public static final String STORAGE_KEY_RECIPES = "edu.uco.schambers4.octane.InternalStorageSerialization.InternalStorage.Recipes";
 
     private InternalStorage()
     {
