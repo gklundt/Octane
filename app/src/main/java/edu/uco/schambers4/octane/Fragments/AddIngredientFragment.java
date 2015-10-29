@@ -30,9 +30,7 @@ public class AddIngredientFragment extends Fragment
 
     @Bind(R.id.name_et)
     EditText nameEt;
-    @Bind(R.id.quantity_et)
-    EditText quantityEt;
-    @Bind(R.id.calories_et)
+    @Bind(R.id.calorie_et)
     EditText caloriesEt;
     @Bind(R.id.add_ingredients_fab)
     FloatingActionButton addIngredientsFab;
@@ -104,7 +102,7 @@ public class AddIngredientFragment extends Fragment
     {
         nameEt.setText(existingIngredient.getName());
         //set spinner to show the name of the existing ingredient's unit of measure
-        unitOfMeasureSpinner.setSelection(((ArrayAdapter)unitOfMeasureSpinner.getAdapter())
+        unitOfMeasureSpinner.setSelection(((ArrayAdapter) unitOfMeasureSpinner.getAdapter())
                 .getPosition(existingIngredient.getUnitOfMeasure()));
         caloriesEt.setText(String.valueOf(existingIngredient.getCalories()));
     }
@@ -136,18 +134,16 @@ public class AddIngredientFragment extends Fragment
     {
 
         return !nameEt.getText().toString().equals("")
-                && !quantityEt.getText().toString().equals("")
-                && quantityIsValidDouble()
                 && !caloriesEt.getText().toString().equals("")
                 && caloriesIsValidInteger();
     }
 
 
-    private boolean quantityIsValidDouble()
+    private boolean quantityIsValidDouble(EditText textInput)
     {
         try
         {
-            quantity = Double.parseDouble(quantityEt.getText().toString());
+            quantity = Double.parseDouble(textInput.getText().toString());
             return true;
         } catch (NumberFormatException e)
         {

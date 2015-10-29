@@ -34,4 +34,5 @@
     <string name="title_activity_exercise_detail">ExerciseDetailActivity</string>
     <string name="title_activity_workout_detail">WorkoutDetailActivity</string>
     <string name="slogan_text">Change the way you thrive!</string>
+    <string name="per">per</string>
 </resources>
