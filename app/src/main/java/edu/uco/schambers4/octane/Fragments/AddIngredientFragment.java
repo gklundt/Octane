@@ -107,7 +107,6 @@ public class AddIngredientFragment extends Fragment
         unitOfMeasureSpinner.setSelection(((ArrayAdapter)unitOfMeasureSpinner.getAdapter())
                 .getPosition(existingIngredient.getUnitOfMeasure()));
         caloriesEt.setText(String.valueOf(existingIngredient.getCalories()));
-        quantityEt.setText(String.valueOf(existingIngredient.getAmount()));
     }
 
     private void saveIngredientAndReturn()
@@ -119,12 +118,11 @@ public class AddIngredientFragment extends Fragment
 
             if (existingIngredient == null)
             {
-                IIngredient newIngredient = new Ingredient(ingredientName, quantity, unitOfMeasure, calories);
+                IIngredient newIngredient = new Ingredient(ingredientName, unitOfMeasure, calories);
                 ingredientDatabase.addIngredientToCollection(newIngredient);
             } else
             {
                 existingIngredient.setName(ingredientName);
-                existingIngredient.setAmount(quantity);
                 existingIngredient.setCalories(calories);
                 existingIngredient.setUnitOfMeasure(unitOfMeasure);
             }

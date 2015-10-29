@@ -20,12 +20,13 @@
 
     <!--units of measurement -->
     <string-array name="units_of_measurement">
-        <item>Cups</item>
-        <item>Ounces</item>
-        <item>Grams</item>
+        <item>Cup</item>
+        <item>Ounce</item>
+        <item>Gram</item>
         <item>Tbsp</item>
         <item>Tsp</item>
-        <item>Rashers</item>
+        <item>Rasher</item>
+        <item>Slice</item>
     </string-array>
 
 <!-- TO DO: Remove or change this placeholder text -->
