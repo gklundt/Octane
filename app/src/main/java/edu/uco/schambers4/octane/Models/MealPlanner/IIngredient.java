@@ -1,4 +1,4 @@
-package edu.uco.schambers4.octane.Models;
+package edu.uco.schambers4.octane.Models.MealPlanner;
 
 import java.io.Serializable;
 

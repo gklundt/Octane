@@ -1,12 +1,13 @@
-package edu.uco.schambers4.octane.DataAccessObjects;
+package edu.uco.schambers4.octane.DataAccessObjects.Recipes;
 
 import com.annimon.stream.Stream;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.uco.schambers4.octane.Models.IIngredient;
-import edu.uco.schambers4.octane.Models.Recipe;
+import edu.uco.schambers4.octane.DataAccessObjects.Ingredients.MockIngredientRepository;
+import edu.uco.schambers4.octane.Models.MealPlanner.IIngredient;
+import edu.uco.schambers4.octane.Models.MealPlanner.Recipe;
 
 /**
  * Created by Steven Chambers on 10/29/2015.

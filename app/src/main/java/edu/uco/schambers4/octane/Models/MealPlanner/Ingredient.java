@@ -1,4 +1,4 @@
-package edu.uco.schambers4.octane.Models;
+package edu.uco.schambers4.octane.Models.MealPlanner;
 
 /**
  * Created by Steven Chambers on 10/24/2015.

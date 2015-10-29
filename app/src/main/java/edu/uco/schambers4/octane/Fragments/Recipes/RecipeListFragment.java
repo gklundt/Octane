@@ -1,4 +1,4 @@
-package edu.uco.schambers4.octane.Fragments;
+package edu.uco.schambers4.octane.Fragments.Recipes;
 
 
 import android.app.Fragment;
@@ -12,9 +12,9 @@ import android.widget.ListView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import edu.uco.schambers4.octane.DataAccessObjects.MockRecipeRepository;
-import edu.uco.schambers4.octane.DataAccessObjects.RecipeRespository;
-import edu.uco.schambers4.octane.Models.IIngredient;
+import edu.uco.schambers4.octane.DataAccessObjects.Recipes.MockRecipeRepository;
+import edu.uco.schambers4.octane.DataAccessObjects.Recipes.RecipeRespository;
+import edu.uco.schambers4.octane.Models.MealPlanner.IIngredient;
 import edu.uco.schambers4.octane.R;
 
 /**

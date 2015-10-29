@@ -1,4 +1,4 @@
-package edu.uco.schambers4.octane.DataAccessObjects;
+package edu.uco.schambers4.octane.DataAccessObjects.Recipes;
 
 import android.content.Context;
 import android.util.Log;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.uco.schambers4.octane.InternalStorageSerialization.InternalStorage;
-import edu.uco.schambers4.octane.Models.IIngredient;
+import edu.uco.schambers4.octane.Models.MealPlanner.IIngredient;
 
 /**
  * Created by Steven Chambers on 10/29/2015.

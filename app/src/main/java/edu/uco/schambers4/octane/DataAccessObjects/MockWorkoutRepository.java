@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
 
-import edu.uco.schambers4.octane.DataAccessObjects.WorkoutRepository;
-import edu.uco.schambers4.octane.Models.Ingredient;
 import edu.uco.schambers4.octane.Models.Workout;
 
 /**

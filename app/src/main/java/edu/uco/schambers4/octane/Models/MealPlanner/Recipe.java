@@ -1,8 +1,6 @@
-package edu.uco.schambers4.octane.Models;
+package edu.uco.schambers4.octane.Models.MealPlanner;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**

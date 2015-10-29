@@ -1,19 +1,14 @@
 package edu.uco.schambers4.octane.Fragments;
 
-import android.app.Activity;
 import android.app.FragmentTransaction;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
 import android.widget.FrameLayout;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -21,7 +16,6 @@ import java.util.Date;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.uco.schambers4.octane.Activities.MainActivity;
-import edu.uco.schambers4.octane.Models.IIngredient;
 import edu.uco.schambers4.octane.R;
 
 

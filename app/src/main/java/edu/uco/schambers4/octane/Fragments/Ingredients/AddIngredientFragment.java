@@ -1,4 +1,4 @@
-package edu.uco.schambers4.octane.Fragments;
+package edu.uco.schambers4.octane.Fragments.Ingredients;
 
 
 import android.app.Fragment;
@@ -14,10 +14,10 @@ import android.widget.Toast;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import edu.uco.schambers4.octane.DataAccessObjects.IngredientRepository;
-import edu.uco.schambers4.octane.DataAccessObjects.InternalStorageIngredientRepository;
-import edu.uco.schambers4.octane.Models.IIngredient;
-import edu.uco.schambers4.octane.Models.Ingredient;
+import edu.uco.schambers4.octane.DataAccessObjects.Ingredients.IngredientRepository;
+import edu.uco.schambers4.octane.DataAccessObjects.Ingredients.InternalStorageIngredientRepository;
+import edu.uco.schambers4.octane.Models.MealPlanner.IIngredient;
+import edu.uco.schambers4.octane.Models.MealPlanner.Ingredient;
 import edu.uco.schambers4.octane.R;
 
 /**
