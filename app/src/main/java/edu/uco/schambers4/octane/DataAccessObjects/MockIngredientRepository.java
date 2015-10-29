@@ -18,9 +18,9 @@ public class MockIngredientRepository implements IngredientRepository
     public MockIngredientRepository()
     {
         ingredients = new ArrayList<>();
-        ingredients.add(new Ingredient("Steak", "ounces", 0));
-        ingredients.add(new Ingredient("Cheese", "cups", 0));
-        ingredients.add(new Ingredient("Bacon", "rasher", 0));
+        ingredients.add(new Ingredient("Steak", "Ounce", 100));
+        ingredients.add(new Ingredient("Cheese", "Cup", 100));
+        ingredients.add(new Ingredient("Bacon", "Rasher", 100));
     }
 
     @Override

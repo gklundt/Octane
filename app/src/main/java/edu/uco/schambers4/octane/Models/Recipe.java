@@ -54,6 +54,6 @@ public class Recipe implements IIngredient
     @Override
     public String toString()
     {
-        return name;
+        return String.format("%s, %d calories", name,getCalories());
     }
 }
