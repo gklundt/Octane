@@ -1,12 +1,22 @@
 package edu.uco.schambers4.octane.Fragments.Recipes;
 
 
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import edu.uco.schambers4.octane.DataAccessObjects.Recipes.MockRecipeRepository;
+import edu.uco.schambers4.octane.DataAccessObjects.Recipes.RecipeRespository;
+import edu.uco.schambers4.octane.Models.MealPlanner.IIngredient;
+import edu.uco.schambers4.octane.Models.MealPlanner.Recipe;
+import edu.uco.schambers4.octane.Models.MealPlanner.RecipeIngredientListAdapter;
 import edu.uco.schambers4.octane.R;
 
 /**
@@ -18,29 +28,25 @@ public class RecipeAddEditFragment extends Fragment
 {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_RECIPE_POSITION = "arg_recipe_position";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    RecipeRespository recipeRespository;
+    Recipe existingRecipe;
+    @Bind(R.id.name_et)
+    EditText nameEt;
+    @Bind(R.id.recipe_ingredients_list_view)
+    ListView recipeIngredientsListView;
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment RecipeAddEditFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static RecipeAddEditFragment newInstance(String param1, String param2)
+    public static RecipeAddEditFragment newInstance(int param1)
     {
         RecipeAddEditFragment fragment = new RecipeAddEditFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putInt(ARG_RECIPE_POSITION, param1);
         fragment.setArguments(args);
         return fragment;
     }
@@ -54,20 +60,43 @@ public class RecipeAddEditFragment extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+        recipeRespository = new MockRecipeRepository();
+
         if (getArguments() != null)
         {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            int position = getArguments().getInt(ARG_RECIPE_POSITION);
+            existingRecipe = (Recipe) recipeRespository.getCollectionAsList().get(position);
         }
+
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_recipe_add_edit, container, false);
+        View view = inflater.inflate(R.layout.fragment_recipe_add_edit, container, false);
+        ButterKnife.bind(this, view);
+        if(existingRecipe != null)
+        {
+            loadExistingRecipie();
+        }
+        return view;
+    }
+    private void loadExistingRecipie()
+    {
+        nameEt.setText(existingRecipe.getName());
+        ArrayAdapter<IIngredient> adapter = new RecipeIngredientListAdapter(getActivity(),existingRecipe.getIngredientQuantityMap());
+        recipeIngredientsListView.setAdapter(adapter);
     }
 
-
+    @Override
+    public void onDestroyView()
+    {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
 }

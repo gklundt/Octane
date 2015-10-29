@@ -7,11 +7,13 @@ import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import edu.uco.schambers4.octane.Activities.MainActivity;
 import edu.uco.schambers4.octane.DataAccessObjects.Recipes.MockRecipeRepository;
 import edu.uco.schambers4.octane.DataAccessObjects.Recipes.RecipeRespository;
 import edu.uco.schambers4.octane.Models.MealPlanner.IIngredient;
@@ -53,9 +55,24 @@ public class RecipeListFragment extends Fragment
 
         bindRecipesToListView();
 
+        recipeAddFab.setOnClickListener(v ->
+        {
+            launchFragmentToAddRecipe();
+        });
+
         return view;
     }
 
+    private void launchFragmentToAddRecipe()
+    {
+        Fragment frag = new RecipeAddEditFragment();
+        launchFragment(frag);
+    }
+
+    private void launchFragment(Fragment fragment)
+    {
+        ((MainActivity) getActivity()).launchFragment(fragment);
+    }
     private void bindRecipesToListView()
     {
         ArrayAdapter<IIngredient> adapter = new ArrayAdapter<IIngredient>(
@@ -64,6 +81,15 @@ public class RecipeListFragment extends Fragment
                 recipeRespository.getCollectionAsList()
                 );
         recipeListView.setAdapter(adapter);
+        recipeListView.setOnItemClickListener((parent, view, position, id) -> {
+            launchFragmentToEditRecipe(position);
+        });
+    }
+
+    private void launchFragmentToEditRecipe(int position)
+    {
+        Fragment frag = RecipeAddEditFragment.newInstance(position);
+        launchFragment(frag);
     }
 
 
