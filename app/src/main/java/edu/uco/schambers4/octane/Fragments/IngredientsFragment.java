@@ -13,8 +13,8 @@ import android.widget.ListView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.uco.schambers4.octane.Activities.MainActivity;
-import edu.uco.schambers4.octane.DataAccessObjects.IIngredientDatabase;
-import edu.uco.schambers4.octane.DataAccessObjects.IngredientDatabase;
+import edu.uco.schambers4.octane.DataAccessObjects.IngredientRepository;
+import edu.uco.schambers4.octane.DataAccessObjects.InternalStorageIngredientRepository;
 import edu.uco.schambers4.octane.Models.IIngredient;
 import edu.uco.schambers4.octane.R;
 
@@ -28,7 +28,7 @@ public class IngredientsFragment extends Fragment
     @Bind(R.id.ingredients_fab)
     FloatingActionButton ingredientsFab;
 
-    private IIngredientDatabase ingredientDatabase;
+    private IngredientRepository ingredientDatabase;
 
     public IngredientsFragment()
     {
@@ -39,7 +39,7 @@ public class IngredientsFragment extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        ingredientDatabase = new IngredientDatabase(getActivity());
+        ingredientDatabase = new InternalStorageIngredientRepository(getActivity());
     }
 
     @Override

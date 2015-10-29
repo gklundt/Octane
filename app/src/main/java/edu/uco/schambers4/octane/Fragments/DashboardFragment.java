@@ -21,7 +21,6 @@ import java.util.Date;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.uco.schambers4.octane.Activities.MainActivity;
-import edu.uco.schambers4.octane.DataAccessObjects.IngredientDatabase;
 import edu.uco.schambers4.octane.Models.IIngredient;
 import edu.uco.schambers4.octane.R;
 

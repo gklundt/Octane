@@ -11,11 +11,11 @@ import edu.uco.schambers4.octane.Models.Ingredient;
 /**
  * Created by Steven Chambers on 10/25/2015.
  */
-public class MockIngredientDatabase implements IIngredientDatabase
+public class MockIngredientRepository implements IngredientRepository
 {
     List<IIngredient> ingredients;
 
-    public MockIngredientDatabase()
+    public MockIngredientRepository()
     {
         ingredients = new ArrayList<>();
         ingredients.add(new Ingredient("Steak", "ounces", 0));

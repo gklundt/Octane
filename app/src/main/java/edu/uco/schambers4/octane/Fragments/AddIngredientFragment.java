@@ -14,8 +14,8 @@ import android.widget.Toast;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import edu.uco.schambers4.octane.DataAccessObjects.IIngredientDatabase;
-import edu.uco.schambers4.octane.DataAccessObjects.IngredientDatabase;
+import edu.uco.schambers4.octane.DataAccessObjects.IngredientRepository;
+import edu.uco.schambers4.octane.DataAccessObjects.InternalStorageIngredientRepository;
 import edu.uco.schambers4.octane.Models.IIngredient;
 import edu.uco.schambers4.octane.Models.Ingredient;
 import edu.uco.schambers4.octane.R;
@@ -37,7 +37,7 @@ public class AddIngredientFragment extends Fragment
     @Bind(R.id.add_ingredients_fab)
     FloatingActionButton addIngredientsFab;
 
-    IIngredientDatabase ingredientDatabase;
+    IngredientRepository ingredientDatabase;
 
     double quantity;
     int calories;
@@ -73,7 +73,7 @@ public class AddIngredientFragment extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        ingredientDatabase = new IngredientDatabase(getActivity());
+        ingredientDatabase = new InternalStorageIngredientRepository(getActivity());
         if (getArguments() != null)
         {
             int position= getArguments().getInt(ARG_INGREDIENT_POSITION);

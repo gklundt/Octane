@@ -9,7 +9,7 @@ import edu.uco.schambers4.octane.Models.IIngredient;
 /**
  * Created by Steven Chambers on 10/24/2015.
  */
-public interface IIngredientDatabase
+public interface IngredientRepository
 {
     void addIngredientToCollection(IIngredient ingredient);
     void removeIngredientFromCollection(IIngredient ingredient);
