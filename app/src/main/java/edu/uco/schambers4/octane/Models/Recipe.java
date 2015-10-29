@@ -50,4 +50,10 @@ public class Recipe implements IIngredient
     {
         ingredientAndAmountMap.remove(ingredient);
     }
+
+    @Override
+    public String toString()
+    {
+        return name;
+    }
 }

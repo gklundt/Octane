@@ -2,6 +2,7 @@ package edu.uco.schambers4.octane.DataAccessObjects;
 
 import com.annimon.stream.Stream;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.uco.schambers4.octane.Models.IIngredient;
@@ -26,8 +27,10 @@ public class MockRecipeRepository implements RecipeRespository
             recipe2.addIngredient(i,4);
             recipe3.addIngredient(i,4);
         }
-
-
+        recipes = new ArrayList<>();
+        recipes.add(recipe1);
+        recipes.add(recipe2);
+        recipes.add(recipe3);
     }
 
     @Override

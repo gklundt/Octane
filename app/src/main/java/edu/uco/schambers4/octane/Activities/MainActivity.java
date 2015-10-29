@@ -21,6 +21,7 @@ import butterknife.ButterKnife;
 import edu.uco.schambers4.octane.Fragments.ExerciseListFragment;
 import edu.uco.schambers4.octane.Fragments.DashboardFragment;
 import edu.uco.schambers4.octane.Fragments.IngredientsFragment;
+import edu.uco.schambers4.octane.Fragments.RecipeListFragment;
 import edu.uco.schambers4.octane.Fragments.WorkoutListFragment;
 import edu.uco.schambers4.octane.R;
 
@@ -128,6 +129,9 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_ingredients:
                 launchFragment(new IngredientsFragment());
+                break;
+            case R.id.nav_recipes:
+                launchFragment(new RecipeListFragment());
                 break;
             case R.id.nav_exercises:
                 launchFragment(new ExerciseListFragment());
