@@ -44,6 +44,7 @@ public class Ingredient implements IIngredient
     }
 
 
+    @Override
     public String getUnitOfMeasure()
     {
         return unitOfMeasure;

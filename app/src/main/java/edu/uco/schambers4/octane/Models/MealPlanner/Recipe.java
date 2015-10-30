@@ -65,6 +65,12 @@ public class Recipe implements IIngredient
     }
 
     @Override
+    public String getUnitOfMeasure()
+    {
+        return "Preparation";
+    }
+
+    @Override
     public String toString()
     {
         return String.format("%s, %d calories", name,getCalories());

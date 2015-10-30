@@ -9,4 +9,5 @@ public interface IIngredient extends Serializable
 {
     String getName();
     int getCalories();
+    String getUnitOfMeasure();
 }
