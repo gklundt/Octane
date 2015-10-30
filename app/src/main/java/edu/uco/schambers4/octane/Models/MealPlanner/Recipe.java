@@ -17,6 +17,11 @@ public class Recipe implements IIngredient
         ingredientAndAmountMap = new HashMap<>();
     }
 
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
     @Override
     public String getName()
     {

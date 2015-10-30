@@ -55,6 +55,14 @@ public class RecipeIngredientListAdapter extends ArrayAdapter<IIngredient>
         return convertView;
     }
 
+    public void refreshWithNewIngredient(Recipe recipe)
+    {
+        this.clear();
+        this.ingredientQuantityMap = recipe.getIngredientQuantityMap();
+        this.addAll(ingredientQuantityMap.keySet());
+        notifyDataSetChanged();
+    }
+
     /**
      * This class contains all butterknife-injected Views & Layouts from layout file 'recipe_ingredient_list_view_layout.xml'
      * for easy to all layout elements.

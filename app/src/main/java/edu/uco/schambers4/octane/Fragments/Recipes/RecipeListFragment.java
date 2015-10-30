@@ -14,6 +14,7 @@ import android.widget.ListView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.uco.schambers4.octane.Activities.MainActivity;
+import edu.uco.schambers4.octane.DataAccessObjects.Recipes.InternalStorageRecipeRepository;
 import edu.uco.schambers4.octane.DataAccessObjects.Recipes.MockRecipeRepository;
 import edu.uco.schambers4.octane.DataAccessObjects.Recipes.RecipeRespository;
 import edu.uco.schambers4.octane.Models.MealPlanner.IIngredient;
@@ -42,7 +43,7 @@ public class RecipeListFragment extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        recipeRespository = new MockRecipeRepository();
+        recipeRespository = new InternalStorageRecipeRepository(getActivity());
     }
 
     @Override
