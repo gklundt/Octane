@@ -3,13 +3,11 @@ package edu.uco.schambers4.octane.Fragments.Recipes;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -17,7 +15,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.uco.schambers4.octane.Activities.MainActivity;
 import edu.uco.schambers4.octane.DataAccessObjects.Recipes.InternalStorageRecipeRepository;
-import edu.uco.schambers4.octane.DataAccessObjects.Recipes.MockRecipeRepository;
 import edu.uco.schambers4.octane.DataAccessObjects.Recipes.RecipeRespository;
 import edu.uco.schambers4.octane.Models.MealPlanner.IIngredient;
 import edu.uco.schambers4.octane.R;
@@ -92,12 +89,12 @@ public class RecipeListFragment extends Fragment
         });
         recipeListView.setOnItemLongClickListener((parent, view, position, id) -> {
             IIngredient recipe = recipeAdapter.getItem(position);
-            showDeleteRecipePopUp(recipe);
+            showDeleteRecipeDialog(recipe);
             return true;
         });
     }
 
-    private void showDeleteRecipePopUp(IIngredient recipe)
+    private void showDeleteRecipeDialog(IIngredient recipe)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 

@@ -55,7 +55,7 @@ public class RecipeIngredientListAdapter extends ArrayAdapter<IIngredient>
         return convertView;
     }
 
-    public void refreshWithNewIngredient(Recipe recipe)
+    public void refreshIngredientChanges(Recipe recipe)
     {
         this.clear();
         this.ingredientQuantityMap = recipe.getIngredientQuantityMap();

@@ -15,12 +15,19 @@
         android:text="@string/name_lbl"
         />
 
+    <!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
+    <LinearLayout
+        android:focusable="true" android:focusableInTouchMode="true"
+        android:layout_width="0px" android:layout_height="0px"/>
+
     <EditText
         android:id="@id/name_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
+        android:inputType="textPersonName"
+        android:lines="1"
         android:layout_toEndOf="@id/recipe_name_lbl"
         android:gravity="end"
         />

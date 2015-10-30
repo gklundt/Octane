@@ -3,15 +3,22 @@ package edu.uco.schambers4.octane.Fragments.Recipes;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.annimon.stream.Collectors;
 
@@ -120,16 +127,112 @@ public class RecipeAddEditFragment extends Fragment
     {
         newRecipe = true;
         existingRecipe = new Recipe("");
+        setUpListView();
+    }
+
+    private void loadExistingRecipie()
+    {
+        nameEt.setText(existingRecipe.getName());
+        setUpListView();
+    }
+
+    private void setUpListView()
+    {
         recipeIngredientAdapter = new RecipeIngredientListAdapter(getActivity(), existingRecipe.getIngredientQuantityMap());
         recipeIngredientsListView.setAdapter(recipeIngredientAdapter);
+
+        recipeIngredientsListView.setOnItemLongClickListener((parent, view, position, id) -> {
+            IIngredient ingredient = (IIngredient) parent.getItemAtPosition(position);
+            launchDeleteIngredientDialog(ingredient);
+            return true;
+        });
+
+        recipeIngredientsListView.setOnItemClickListener((parent, view, position, id) -> {
+            IIngredient ingredient = (IIngredient) parent.getItemAtPosition(position);
+            launchIngredientAmountDialog(ingredient);
+        });
+    }
+
+    private void launchDeleteIngredientDialog(IIngredient ingredient)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        builder.setTitle(String.format("Delete %s?", ingredient.getName()))
+                .setPositiveButton(
+                        "Delete",
+                        (dialog, which) -> {
+                            existingRecipe.removeIngredient(ingredient);
+                            recipeIngredientAdapter.refreshIngredientChanges(existingRecipe);
+                        }
+                )
+                .setNegativeButton(
+                        "Cancel",
+                        (dialog, which) -> {
+                            dialog.dismiss();
+                        }
+                ).show();
+    }
+
+    private void launchIngredientAmountDialog(IIngredient ingredient)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        View layout = inflater.inflate(R.layout.ingredient_quantity_dialog, null);
+        ViewHolder holder = new ViewHolder(layout);
+        holder.quantityLblDialog.setText(ingredient.getUnitOfMeasure());
+        builder.setView(layout);
+
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+
+
+
+        builder.setTitle(String.format("Quantity for %s", ingredient.getName()))
+                .setPositiveButton(
+                        "Save",
+                        (dialog, which) -> {
+                            imm.toggleSoftInput(InputMethodManager.HIDE_NOT_ALWAYS, 0);
+                            existingRecipe.getIngredientQuantityMap().put(ingredient, parseQuantity(holder.quantityEtDialog.getText().toString()));
+                            recipeIngredientAdapter.refreshIngredientChanges(existingRecipe);
+                        }
+                )
+                .setNegativeButton(
+                        "Cancel",
+                        (dialog, which) -> {
+                            dialog.dismiss();
+                            imm.toggleSoftInput(InputMethodManager.HIDE_NOT_ALWAYS, 0);
+                        }
+                );
+        AlertDialog dialog = builder.create();
+        holder.quantityEtDialog.setOnEditorActionListener((v, actionId, event) -> {
+            if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE))
+            {
+                dialog.getButton(DialogInterface.BUTTON_POSITIVE).performClick();
+                return true;
+            }
+            return false;
+        });
+        dialog.show();
+    }
+
+    private Double parseQuantity(String s)
+    {
+        try
+        {
+            double d =Double.parseDouble(s);
+            return d;
+        }catch (Exception e)
+        {
+            return 1.0;
+        }
     }
 
     private void saveRecipeAndReturn()
     {
-        if(nameValid())
+        if (nameValid())
         {
             existingRecipe.setName(nameEt.getText().toString());
-            if(newRecipe)
+            if (newRecipe)
             {
                 recipeRespository.addRecipeToCollection(existingRecipe);
             }
@@ -154,14 +257,13 @@ public class RecipeAddEditFragment extends Fragment
                             addSelectedIngredientToRecipe(adapter.getItem(which));
                         }
                 ).show();
-
-
     }
 
     private void addSelectedIngredientToRecipe(IIngredient ingredient)
     {
+        launchIngredientAmountDialog(ingredient);
         existingRecipe.addIngredient(ingredient, 1);
-        recipeIngredientAdapter.refreshWithNewIngredient(existingRecipe);
+        recipeIngredientAdapter.refreshIngredientChanges(existingRecipe);
     }
 
     private ArrayAdapter<IIngredient> createEligibleIngredientsAdapter()
@@ -177,17 +279,30 @@ public class RecipeAddEditFragment extends Fragment
         return new ArrayAdapter<IIngredient>(getActivity(), android.R.layout.simple_list_item_1, aggregateList);
     }
 
-    private void loadExistingRecipie()
-    {
-        nameEt.setText(existingRecipe.getName());
-        recipeIngredientAdapter = new RecipeIngredientListAdapter(getActivity(), existingRecipe.getIngredientQuantityMap());
-        recipeIngredientsListView.setAdapter(recipeIngredientAdapter);
-    }
 
     @Override
     public void onDestroyView()
     {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    /**
+     * This class contains all butterknife-injected Views & Layouts from layout file 'ingredient_quantity_dialog.xml'
+     * for easy to all layout elements.
+     *
+     * @author ButterKnifeZelezny, plugin for Android Studio by Avast Developers (http://github.com/avast)
+     */
+    static class ViewHolder
+    {
+        @Bind(R.id.quantity_et_dialog)
+        EditText quantityEtDialog;
+        @Bind(R.id.quantity_lbl_dialog)
+        TextView quantityLblDialog;
+
+        ViewHolder(View view)
+        {
+            ButterKnife.bind(this, view);
+        }
     }
 }
