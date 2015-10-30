@@ -169,7 +169,7 @@ public class RecipeAddEditFragment extends Fragment
         List<IIngredient> recipeList = recipeRespository.getCollectionAsStream()
                 .filter(item -> !item.getName().equals(existingRecipe.getName())).collect(Collectors.toList());
         List<IIngredient> ingredientsList = ingredientRepository.getCollectionAsStream()
-                .filter(item -> !existingRecipe.getIngredientQuantityMap().containsKey(item))
+                .filter(item -> !existingRecipe.getIngredientNames().contains(item.getName()))
                 .collect(Collectors.toList());
         List<IIngredient> aggregateList = new ArrayList<>();
         aggregateList.addAll(ingredientsList);

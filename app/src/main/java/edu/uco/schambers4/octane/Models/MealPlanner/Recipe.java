@@ -1,6 +1,10 @@
 package edu.uco.schambers4.octane.Models.MealPlanner;
 
+import com.annimon.stream.Collectors;
+import com.annimon.stream.Stream;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -52,6 +56,12 @@ public class Recipe implements IIngredient
     public void removeIngredient(IIngredient ingredient)
     {
         ingredientAndAmountMap.remove(ingredient);
+    }
+
+    public List<String> getIngredientNames()
+    {
+       return Stream.of(ingredientAndAmountMap.keySet())
+               .map(ingredient -> ingredient.getName() ).distinct().collect(Collectors.toList());
     }
 
     @Override
