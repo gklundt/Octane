@@ -1,4 +1,4 @@
-package edu.uco.schambers4.octane.Fragments;
+package edu.uco.schambers4.octane.Fragments.Ingredients;
 
 
 import android.app.Fragment;
@@ -14,10 +14,10 @@ import android.widget.Toast;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import edu.uco.schambers4.octane.DataAccessObjects.IIngredientDatabase;
-import edu.uco.schambers4.octane.DataAccessObjects.IngredientDatabase;
-import edu.uco.schambers4.octane.Models.IIngredient;
-import edu.uco.schambers4.octane.Models.Ingredient;
+import edu.uco.schambers4.octane.DataAccessObjects.Ingredients.IngredientRepository;
+import edu.uco.schambers4.octane.DataAccessObjects.Ingredients.InternalStorageIngredientRepository;
+import edu.uco.schambers4.octane.Models.MealPlanner.IIngredient;
+import edu.uco.schambers4.octane.Models.MealPlanner.Ingredient;
 import edu.uco.schambers4.octane.R;
 
 /**
@@ -30,14 +30,12 @@ public class AddIngredientFragment extends Fragment
 
     @Bind(R.id.name_et)
     EditText nameEt;
-    @Bind(R.id.quantity_et)
-    EditText quantityEt;
-    @Bind(R.id.calories_et)
+    @Bind(R.id.calorie_et)
     EditText caloriesEt;
     @Bind(R.id.add_ingredients_fab)
     FloatingActionButton addIngredientsFab;
 
-    IIngredientDatabase ingredientDatabase;
+    IngredientRepository ingredientDatabase;
 
     double quantity;
     int calories;
@@ -73,7 +71,7 @@ public class AddIngredientFragment extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        ingredientDatabase = new IngredientDatabase(getActivity());
+        ingredientDatabase = new InternalStorageIngredientRepository(getActivity());
         if (getArguments() != null)
         {
             int position= getArguments().getInt(ARG_INGREDIENT_POSITION);
@@ -104,10 +102,9 @@ public class AddIngredientFragment extends Fragment
     {
         nameEt.setText(existingIngredient.getName());
         //set spinner to show the name of the existing ingredient's unit of measure
-        unitOfMeasureSpinner.setSelection(((ArrayAdapter)unitOfMeasureSpinner.getAdapter())
+        unitOfMeasureSpinner.setSelection(((ArrayAdapter) unitOfMeasureSpinner.getAdapter())
                 .getPosition(existingIngredient.getUnitOfMeasure()));
         caloriesEt.setText(String.valueOf(existingIngredient.getCalories()));
-        quantityEt.setText(String.valueOf(existingIngredient.getAmount()));
     }
 
     private void saveIngredientAndReturn()
@@ -119,12 +116,11 @@ public class AddIngredientFragment extends Fragment
 
             if (existingIngredient == null)
             {
-                IIngredient newIngredient = new Ingredient(ingredientName, quantity, unitOfMeasure, calories);
+                IIngredient newIngredient = new Ingredient(ingredientName, unitOfMeasure, calories);
                 ingredientDatabase.addIngredientToCollection(newIngredient);
             } else
             {
                 existingIngredient.setName(ingredientName);
-                existingIngredient.setAmount(quantity);
                 existingIngredient.setCalories(calories);
                 existingIngredient.setUnitOfMeasure(unitOfMeasure);
             }
@@ -138,18 +134,16 @@ public class AddIngredientFragment extends Fragment
     {
 
         return !nameEt.getText().toString().equals("")
-                && !quantityEt.getText().toString().equals("")
-                && quantityIsValidDouble()
                 && !caloriesEt.getText().toString().equals("")
                 && caloriesIsValidInteger();
     }
 
 
-    private boolean quantityIsValidDouble()
+    private boolean quantityIsValidDouble(EditText textInput)
     {
         try
         {
-            quantity = Double.parseDouble(quantityEt.getText().toString());
+            quantity = Double.parseDouble(textInput.getText().toString());
             return true;
         } catch (NumberFormatException e)
         {

@@ -1,4 +1,4 @@
-package edu.uco.schambers4.octane.Models;
+package edu.uco.schambers4.octane.Models.MealPlanner;
 
 /**
  * Created by Steven Chambers on 10/24/2015.
@@ -7,13 +7,11 @@ public class Ingredient implements IIngredient
 {
     private String name;
     private int calories;
-    private double amount;
     private String unitOfMeasure;
 
-    public Ingredient(String name, double amount, String unitOfMeasure, int calories)
+    public Ingredient(String name, String unitOfMeasure, int calories)
     {
         this.name = name;
-        this.amount = amount;
         this.unitOfMeasure = unitOfMeasure;
         this.calories = calories;
     }
@@ -35,9 +33,9 @@ public class Ingredient implements IIngredient
         this.calories = calories;
     }
 
-    public String getQuantity()
+    public String getCaloriesPerUnitOfMeasure()
     {
-        return String.format("$.2f %s", amount, unitOfMeasure);
+        return String.format("$.2f per %s", calories, unitOfMeasure);
     }
 
     public void setName(String name)
@@ -45,16 +43,8 @@ public class Ingredient implements IIngredient
         this.name = name;
     }
 
-    public double getAmount()
-    {
-        return amount;
-    }
 
-    public void setAmount(double amount)
-    {
-        this.amount = amount;
-    }
-
+    @Override
     public String getUnitOfMeasure()
     {
         return unitOfMeasure;
@@ -68,6 +58,6 @@ public class Ingredient implements IIngredient
     @Override
     public String toString()
     {
-        return String.format("%s, %.2f %s", this.name, this.amount, this.unitOfMeasure);
+        return String.format("%s, %d calories/%s", this.name, this.calories, this.unitOfMeasure);
     }
 }

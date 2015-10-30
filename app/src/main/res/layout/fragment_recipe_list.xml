@@ -2,29 +2,31 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="edu.uco.schambers4.octane.Fragments.Ingredients.IngredientsFragment">
+             tools:context="edu.uco.schambers4.octane.Fragments.Recipes.RecipeListFragment">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         style="@style/Base.TextAppearance.AppCompat.Large"
-        android:text="@string/ingredients"
-        android:id="@+id/ingredients_lbl"
+        android:text="@string/recipes"
+        android:id="@+id/recipe_lbl"
         />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/ingredients_listview"
-        android:layout_below="@id/ingredients_lbl"
-       />
+        android:id="@+id/recipe_list_view"
+        android:layout_below="@id/recipe_lbl"
+        />
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/ingredients_fab"
+        android:id="@+id/recipe_add_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/ic_action_add"/>
+
 </RelativeLayout>
