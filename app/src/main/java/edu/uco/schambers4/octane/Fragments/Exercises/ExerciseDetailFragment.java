@@ -1,4 +1,4 @@
-package edu.uco.schambers4.octane.Fragments;
+package edu.uco.schambers4.octane.Fragments.Exercises;
 
 
 import android.os.Bundle;

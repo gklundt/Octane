@@ -18,11 +18,11 @@ import android.widget.FrameLayout;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import edu.uco.schambers4.octane.Fragments.ExerciseListFragment;
+import edu.uco.schambers4.octane.Fragments.Exercises.ExerciseListFragment;
 import edu.uco.schambers4.octane.Fragments.DashboardFragment;
 import edu.uco.schambers4.octane.Fragments.Ingredients.IngredientsFragment;
 import edu.uco.schambers4.octane.Fragments.Recipes.RecipeListFragment;
-import edu.uco.schambers4.octane.Fragments.WorkoutListFragment;
+import edu.uco.schambers4.octane.Fragments.Workouts.WorkoutListFragment;
 import edu.uco.schambers4.octane.R;
 
 public class MainActivity extends AppCompatActivity
