@@ -1,74 +1,246 @@
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="edu.uco.schambers4.octane.Fragments.Exercises.ExerciseDetailFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              tools:context="edu.uco.schambers4.octane.Fragments.Exercises.ExerciseDetailFragment">
 
-<TableRow
-    android:background="@color/material_blue_grey_800">
-
-
-    <TextView
-        android:id="@+id/exercise_name"
-        android:layout_width="fill_parent"
+    <TableLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/activity_horizontal_margin"
-        android:text="Full Name"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/foreground_material_dark"
-        />
+        android:weightSum="3">
 
-</TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/editables_height">
 
-<TableRow>
+            <EditText
+                android:id="@+id/exercise_name_et"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/editables_height"
+                android:layout_span="3"
+                android:layout_weight="1"
+                android:text="Exercise Name"/>
 
+        </TableRow>
 
-    <TextView
-        android:layout_width="0px"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:text="Phone:"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/editables_height"
+            >
 
+            <EditText
+                android:id="@+id/exercise_description_et"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/editables_height"
+                android:layout_span="3"
+                android:layout_weight="1"
+                android:text="Exercise Description"/>
 
-    <TextView
-        android:id="@+id/exercise_phone"
-        android:layout_width="0px"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        tools:hint="Full Name"/>
-
-
-</TableRow>
-
-<TableRow>
-
-    <TextView
-        android:layout_width="0px"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:text="Email:"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
-
-    <TextView
-        android:id="@+id/exercise_email"
-        android:layout_width="0px"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        tools:hint="asdlfj@sladkfj.com"
-        />
-
-</TableRow>
+        </TableRow>
 
 
-</TableLayout>
+        <TableRow android:layout_height="@dimen/editables_height">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/editables_height"
+                android:layout_span="1"
+                android:layout_weight="1"
+                android:text="Muscle Group:"/>
+
+
+            <Spinner
+                android:id="@+id/exercise_muscle_group_spinner"
+                android:layout_height="@dimen/editables_height"
+                android:layout_span="2"
+                android:layout_weight="2"
+                android:spinnerMode="dropdown"/>
+
+        </TableRow>
+
+        <TableRow android:layout_height="@dimen/editables_height">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/editables_height"
+                android:layout_weight="1"
+                android:text="Exercise Type:"/>
+
+
+            <Spinner
+                android:id="@+id/exercise_type_spinner"
+                android:layout_height="@dimen/editables_height"
+                android:layout_span="2"
+                android:layout_weight="2"
+                android:spinnerMode="dropdown"/>
+
+        </TableRow>
+
+        <TableRow android:layout_height="@dimen/editables_height">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/editables_height"
+                android:layout_span="1"
+                android:layout_weight="1"
+                android:text="Resistance:"/>
+
+
+            <EditText
+                android:id="@+id/exercise_force_value_et"
+                android:layout_height="@dimen/editables_height"
+                android:layout_span="1"
+                android:layout_weight="1"
+                android:text="0"/>
+
+            <Spinner
+                android:id="@+id/exercise_force_unit_spinner"
+                android:layout_height="@dimen/editables_height"
+                android:layout_span="1"
+                android:layout_weight="1"
+                android:spinnerMode="dropdown"/>
+
+        </TableRow>
+
+        <TableRow android:layout_height="@dimen/editables_height">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/editables_height"
+                android:layout_span="1"
+                android:layout_weight="1"
+                android:text="Measure:"/>
+
+            <EditText
+                android:id="@+id/exercise_measure_value_et"
+                android:layout_height="@dimen/editables_height"
+                android:layout_span="1"
+                android:layout_weight="1"
+                android:text="0"/>
+
+            <Spinner
+                android:id="@+id/exercise_measure_unit_spinner"
+                android:layout_height="@dimen/editables_height"
+                android:layout_span="1"
+                android:layout_weight="1"
+                android:spinnerMode="dropdown"/>
+
+        </TableRow>
+
+
+        <TableRow android:layout_height="@dimen/editables_height">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/editables_height"
+                android:layout_span="1"
+                android:layout_weight="1"
+                android:text="Intensity"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/editables_height"
+                android:layout_span="1"
+                android:layout_weight="1"
+                android:text="Qty %"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/editables_height"
+                android:layout_span="1"
+                android:layout_weight="1"
+                android:text="Msr %"/>
+
+
+        </TableRow>
+
+        <TableRow android:layout_height="@dimen/editables_height">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/editables_height"
+                android:layout_span="1"
+                android:layout_weight="1"
+                android:text="High"/>
+
+            <Spinner
+                android:id="@+id/exercise_high_qty_spinner"
+                android:layout_height="@dimen/editables_height"
+                android:layout_span="1"
+                android:layout_weight="1"
+                android:entries="@array/intensity_percentages"
+                android:spinnerMode="dropdown"/>
+
+            <Spinner
+                android:id="@+id/exercise_high_msr_spinner"
+                android:layout_height="@dimen/editables_height"
+                android:layout_span="1"
+                android:layout_weight="1"
+                android:entries="@array/intensity_percentages"
+                android:spinnerMode="dropdown"/>
+
+
+        </TableRow>
+
+        <TableRow android:layout_height="@dimen/editables_height">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/editables_height"
+                android:layout_span="1"
+                android:layout_weight="1"
+                android:text="Medium"/>
+
+            <Spinner
+                android:id="@+id/exercise_med_qty_spinner"
+                android:layout_height="@dimen/editables_height"
+                android:layout_span="1"
+                android:layout_weight="1"
+                android:entries="@array/intensity_percentages"
+                android:spinnerMode="dropdown"/>
+
+            <Spinner
+                android:id="@+id/exercise_med_msr_spinner"
+                android:layout_height="@dimen/editables_height"
+                android:layout_span="1"
+                android:layout_weight="1"
+                android:entries="@array/intensity_percentages"
+                android:spinnerMode="dropdown"/>
+
+
+        </TableRow>
+
+        <TableRow android:layout_height="@dimen/editables_height">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/editables_height"
+                android:layout_span="1"
+                android:layout_weight="1"
+                android:text="Low"/>
+
+            <Spinner
+                android:id="@+id/exercise_low_qty_spinner"
+                android:layout_height="@dimen/editables_height"
+                android:layout_span="1"
+                android:layout_weight="1"
+                android:entries="@array/intensity_percentages"
+                android:spinnerMode="dropdown"/>
+
+            <Spinner
+                android:id="@+id/exercise_low_msr_spinner"
+                android:layout_height="@dimen/editables_height"
+                android:layout_span="1"
+                android:layout_weight="1"
+                android:entries="@array/intensity_percentages"
+                android:spinnerMode="dropdown"/>
+
+
+        </TableRow>
+
+    </TableLayout>
+
+
+</LinearLayout>

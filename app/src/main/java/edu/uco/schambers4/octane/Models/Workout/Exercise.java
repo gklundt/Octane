@@ -35,9 +35,45 @@ public class Exercise implements Serializable {
         }
     }
 
-    public enum MuscleGroup {ABS, ARMS, LEGS, CHEST, GLUTE, BACK, SHOULDERS}
+    public enum MuscleGroup {
+        ABS("Abdominals"),
+        ARMS("Arms"),
+        LEGS("Legs"),
+        CHEST("Chest"),
+        GLUTE("Glutes"),
+        BACK("Back"),
+        SHOULDERS("Shoulders"),
+        FULLBODY("Full Body"),
+        CORE("Core");
 
-    public enum ExerciseType {STRENGTH, ENDURANCE, FLEXIBILITY, BALANCE}
+        private final String mGroupName;
+
+        MuscleGroup(String groupName) {
+            mGroupName = groupName;
+        }
+
+        public String getGroupName() {
+            return mGroupName;
+        }
+
+    }
+
+    public enum ExerciseType {
+        STRENGTH("Strength"),
+        ENDURANCE("Endurance"),
+        FLEXIBILITY("Flexibility"),
+        BALANCE("Balance");
+
+        private final String mExerciseTypeName;
+
+        ExerciseType(String exerciseTypeName) {
+            mExerciseTypeName = exerciseTypeName;
+        }
+
+        public String getExerciseTypeName() {
+            return mExerciseTypeName;
+        }
+    }
 
     public String getName() {
         return mName;

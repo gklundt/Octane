@@ -25,8 +25,6 @@ public class WorkoutListFragment extends ListFragment {
         WorkoutAdapter adapter = new WorkoutAdapter(getActivity(), mWorkoutContainer.getWorkouts());
         setListAdapter(adapter);
 
-        View detailsFrame = getActivity().findViewById(R.id.workout_item_details);
-
         if (savedInstanceState!= null){
             mCurCheckPosition = savedInstanceState.getInt("curChoice",0);
         }

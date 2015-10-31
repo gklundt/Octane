@@ -16,7 +16,7 @@ public class ExerciseAdapter extends ArrayAdapter<Exercise>{
 
     public ExerciseAdapter(Context context, ArrayList<Exercise> exercises) {
         super(context, 0, exercises);
-        Collections.sort(exercises, new ExerciseComparator());
+        //Collections.sort(exercises, new ExerciseComparator());
     }
 
     @Override
@@ -29,7 +29,7 @@ public class ExerciseAdapter extends ArrayAdapter<Exercise>{
         }
 
         TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
-        tvName.setText(exercise.getName());
+        tvName.setText(String.format("%s (%d)",exercise.getName(),position));
 
         return convertView;
     }

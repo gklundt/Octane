@@ -4,8 +4,7 @@
              android:layout_height="match_parent"
              tools:context="edu.uco.schambers4.octane.Fragments.Workouts.WorkoutDetailFragment">
 
-<TableRow
-    android:background="@color/material_blue_grey_800">
+<TableRow>
 
 
     <TextView
