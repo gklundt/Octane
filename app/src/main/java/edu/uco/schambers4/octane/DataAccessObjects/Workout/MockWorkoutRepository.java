@@ -1,10 +1,10 @@
-package edu.uco.schambers4.octane.DataAccessObjects;
+package edu.uco.schambers4.octane.DataAccessObjects.Workout;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
 
-import edu.uco.schambers4.octane.Models.Workout;
+import edu.uco.schambers4.octane.Models.Workout.Workout;
 
 /**
  * Created by gordon on 10/26/15.

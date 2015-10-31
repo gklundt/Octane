@@ -1,12 +1,14 @@
-package edu.uco.schambers4.octane.DataAccessObjects;
+package edu.uco.schambers4.octane.DataAccessObjects.FitnessTest;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-import edu.uco.schambers4.octane.DataAccessObjects.FitnessTestRepository;
-import edu.uco.schambers4.octane.Models.FitnessTest;
+import edu.uco.schambers4.octane.Models.Workout.FitnessTest;
 
-public class InternalStorageFitnessTestRepository implements FitnessTestRepository {
+/**
+ * Created by gordon on 10/26/15.
+ */
+public class MockFitnessTestRepository implements FitnessTestRepository{
     @Override
     public FitnessTest getFitnessTest(String exerciseName, Date date) {
         return null;

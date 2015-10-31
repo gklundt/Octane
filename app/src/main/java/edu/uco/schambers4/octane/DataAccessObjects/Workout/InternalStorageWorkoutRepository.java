@@ -1,9 +1,8 @@
-package edu.uco.schambers4.octane.DataAccessObjects;
+package edu.uco.schambers4.octane.DataAccessObjects.Workout;
 
 import java.util.ArrayList;
 
-import edu.uco.schambers4.octane.DataAccessObjects.WorkoutRepository;
-import edu.uco.schambers4.octane.Models.Workout;
+import edu.uco.schambers4.octane.Models.Workout.Workout;
 
 /**
  * Created by gordon on 10/25/15.

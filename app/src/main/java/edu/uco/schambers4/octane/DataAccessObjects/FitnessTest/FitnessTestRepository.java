@@ -1,9 +1,9 @@
-package edu.uco.schambers4.octane.DataAccessObjects;
+package edu.uco.schambers4.octane.DataAccessObjects.FitnessTest;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-import edu.uco.schambers4.octane.Models.FitnessTest;
+import edu.uco.schambers4.octane.Models.Workout.FitnessTest;
 
 /**
  * Created by gordon on 10/25/15.

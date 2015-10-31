@@ -1,4 +1,4 @@
-package edu.uco.schambers4.octane.Models;
+package edu.uco.schambers4.octane.Models.Workout;
 
 import java.io.Serializable;
 import java.util.Map;

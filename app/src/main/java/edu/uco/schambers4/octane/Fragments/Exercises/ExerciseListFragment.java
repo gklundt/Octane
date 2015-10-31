@@ -1,16 +1,14 @@
 package edu.uco.schambers4.octane.Fragments.Exercises;
 
 import android.app.Fragment;
-import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
 import android.app.ListFragment;
 import android.view.View;
 import android.widget.ListView;
 
 import edu.uco.schambers4.octane.Activities.MainActivity;
-import edu.uco.schambers4.octane.Models.ExerciseAdapter;
-import edu.uco.schambers4.octane.Models.ExerciseContainer;
+import edu.uco.schambers4.octane.Models.Workout.ExerciseAdapter;
+import edu.uco.schambers4.octane.Models.Workout.ExerciseContainer;
 import edu.uco.schambers4.octane.R;
 public class ExerciseListFragment extends ListFragment {
 

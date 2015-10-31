@@ -1,9 +1,9 @@
-package edu.uco.schambers4.octane.Models;
+package edu.uco.schambers4.octane.Models.Workout;
 
 import java.util.ArrayList;
 
-import edu.uco.schambers4.octane.DataAccessObjects.MockWorkoutRepository;
-import edu.uco.schambers4.octane.DataAccessObjects.WorkoutRepository;
+import edu.uco.schambers4.octane.DataAccessObjects.Workout.MockWorkoutRepository;
+import edu.uco.schambers4.octane.DataAccessObjects.Workout.WorkoutRepository;
 
 
 /**
