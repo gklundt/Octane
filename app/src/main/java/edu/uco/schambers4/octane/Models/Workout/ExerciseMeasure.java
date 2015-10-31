@@ -54,9 +54,9 @@ public class ExerciseMeasure {
         MILES(UnitKind.DISTANCE, UnitSystem.IMPERIAL,"Miles"),
         FEET(UnitKind.DISTANCE, UnitSystem.IMPERIAL,"Feet"),
         YARDS(UnitKind.DISTANCE, UnitSystem.IMPERIAL,"Yards"),
-        KILOGRAMS(UnitKind.WEIGHT, UnitSystem.METRIC,"kg"),
-        KILOMETERS(UnitKind.DISTANCE, UnitSystem.METRIC,"km"),
-        METERS(UnitKind.DISTANCE, UnitSystem.METRIC,"m");
+        KILOGRAMS(UnitKind.WEIGHT, UnitSystem.METRIC,"Kilograms"),
+        KILOMETERS(UnitKind.DISTANCE, UnitSystem.METRIC,"Kilometers"),
+        METERS(UnitKind.DISTANCE, UnitSystem.METRIC,"Meters");
 
         private final UnitKind mUnitKind;
         private final UnitSystem mUnitSystem;

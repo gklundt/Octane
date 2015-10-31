@@ -6,6 +6,41 @@ import java.util.Map;
 public class Workout implements Serializable {
     private String mName;
     private Map<String, Integer> mExerciseSets;
+    private Integer mCalories;
+    private IntensityLevel mIntensityLevel;
+
+    public IntensityLevel getIntensityLevel() {
+        return mIntensityLevel;
+    }
+
+    public void setIntensityLevel(IntensityLevel intensityLevel) {
+        mIntensityLevel = intensityLevel;
+    }
+
+    public Integer getCalories() {
+        return mCalories;
+    }
+
+    public void setCalories(Integer calories) {
+        mCalories = calories;
+    }
+
+    public enum IntensityLevel{
+        HIGH("High"),
+        MEDIUM("Medium"),
+        LOW("Low");
+
+        private final String mLevel;
+
+        IntensityLevel(String level){
+            mLevel = level;
+        }
+
+        public String getLevel(){
+            return mLevel;
+        }
+
+    }
 
     public Workout(String name, Map<String, Integer> exerciseSets) {
         mName = name;

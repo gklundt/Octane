@@ -41,6 +41,20 @@ public class ExerciseDetailFragment extends Fragment {
     @Bind(R.id.exercise_measure_unit_spinner)
     Spinner mMeasureUnitSp;
 
+    @Bind(R.id.exercise_high_msr_et)
+    EditText mHighMeasureEt;
+    @Bind(R.id.exercise_high_qty_et)
+    EditText mHighQtyEt;
+
+    @Bind(R.id.exercise_med_msr_et)
+    EditText mMedMeasureEt;
+    @Bind(R.id.exercise_med_qty_et)
+    EditText mMedQtyEt;
+
+    @Bind(R.id.exercise_low_msr_et)
+    EditText mLowMeasureEt;
+    @Bind(R.id.exercise_low_qty_et)
+    EditText mLowQtyEt;
 
     public static ExerciseDetailFragment newInstance(int index) {
         ExerciseDetailFragment f = new ExerciseDetailFragment();
@@ -124,11 +138,18 @@ public class ExerciseDetailFragment extends Fragment {
         mMeasureUnitSp.setSelection(
                 mExerciseContainer
                         .getMeasurementUnitsArrayAdapter(context)
-                        .getPosition(mExercise.getMaxIntensityExerciseMeasure().getForceUnits().getUnitName())
+                        .getPosition(mExercise.getMaxIntensityExerciseMeasure().getMeasureUnits().getUnitName())
         );
         mMeasureValEt.setText(mExercise.getMaxIntensityExerciseMeasure().getMeasure().toString());
 
+        mHighQtyEt.setText(mExercise.getHighIntensity().getForceInteger().toString());
+        mHighMeasureEt.setText(mExercise.getHighIntensity().getMeasureInteger().toString());
 
+        mMedQtyEt.setText(mExercise.getMedIntensity().getForceInteger().toString());
+        mMedMeasureEt.setText(mExercise.getMedIntensity().getMeasureInteger().toString());
+
+        mLowQtyEt.setText(mExercise.getLowIntensity().getForceInteger().toString());
+        mLowMeasureEt.setText(mExercise.getLowIntensity().getMeasureInteger().toString());
 
     }
 

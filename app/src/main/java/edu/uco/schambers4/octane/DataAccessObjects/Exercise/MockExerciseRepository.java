@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import edu.uco.schambers4.octane.Models.Workout.Exercise;
 import edu.uco.schambers4.octane.Models.Workout.ExerciseMeasure;
+import edu.uco.schambers4.octane.Models.Workout.Intensity;
 import edu.uco.schambers4.octane.Models.Workout.Workout;
 
 /**
@@ -30,6 +31,22 @@ public class MockExerciseRepository implements ExerciseRepository {
         ExerciseMeasure pushups_measure = new ExerciseMeasure();
         ExerciseMeasure curls_measure = new ExerciseMeasure();
 
+
+        jumpingjacks.setHighIntensity(new Intensity(100,100));
+        jumpingjacks.setMedIntensity(new Intensity(90, 90));
+        jumpingjacks.setLowIntensity(new Intensity(70, 70));
+
+        situps.setHighIntensity(new Intensity(100,100));
+        situps.setMedIntensity(new Intensity(90,90));
+        situps.setLowIntensity(new Intensity(70,70));
+
+        pushups.setHighIntensity(new Intensity(100,100));
+        pushups.setMedIntensity(new Intensity(90,90));
+        pushups.setLowIntensity(new Intensity(70,70));
+
+        curls.setHighIntensity(new Intensity(80,110));
+        curls.setMedIntensity(new Intensity(90,90));
+        curls.setLowIntensity(new Intensity(90,75));
 
         situps.setName("Situps");
         pushups.setName("Pushups");

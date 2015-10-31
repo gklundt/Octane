@@ -165,21 +165,19 @@
                 android:layout_weight="1"
                 android:text="High"/>
 
-            <Spinner
-                android:id="@+id/exercise_high_qty_spinner"
+            <EditText
+                android:id="@+id/exercise_high_qty_et"
                 android:layout_height="@dimen/editables_height"
                 android:layout_span="1"
                 android:layout_weight="1"
-                android:entries="@array/intensity_percentages"
-                android:spinnerMode="dropdown"/>
+                android:text="100"/>
 
-            <Spinner
-                android:id="@+id/exercise_high_msr_spinner"
+            <EditText
+                android:id="@+id/exercise_high_msr_et"
                 android:layout_height="@dimen/editables_height"
                 android:layout_span="1"
                 android:layout_weight="1"
-                android:entries="@array/intensity_percentages"
-                android:spinnerMode="dropdown"/>
+                android:text="100"/>
 
 
         </TableRow>
@@ -193,21 +191,19 @@
                 android:layout_weight="1"
                 android:text="Medium"/>
 
-            <Spinner
-                android:id="@+id/exercise_med_qty_spinner"
+            <EditText
+                android:id="@+id/exercise_med_qty_et"
                 android:layout_height="@dimen/editables_height"
                 android:layout_span="1"
                 android:layout_weight="1"
-                android:entries="@array/intensity_percentages"
-                android:spinnerMode="dropdown"/>
+                android:text="100"/>
 
-            <Spinner
-                android:id="@+id/exercise_med_msr_spinner"
+            <EditText
+                android:id="@+id/exercise_med_msr_et"
                 android:layout_height="@dimen/editables_height"
                 android:layout_span="1"
                 android:layout_weight="1"
-                android:entries="@array/intensity_percentages"
-                android:spinnerMode="dropdown"/>
+                android:text="100"/>
 
 
         </TableRow>
@@ -221,21 +217,19 @@
                 android:layout_weight="1"
                 android:text="Low"/>
 
-            <Spinner
-                android:id="@+id/exercise_low_qty_spinner"
+            <EditText
+                android:id="@+id/exercise_low_qty_et"
                 android:layout_height="@dimen/editables_height"
                 android:layout_span="1"
                 android:layout_weight="1"
-                android:entries="@array/intensity_percentages"
-                android:spinnerMode="dropdown"/>
+                android:text="100"/>
 
-            <Spinner
-                android:id="@+id/exercise_low_msr_spinner"
+            <EditText
+                android:id="@+id/exercise_low_msr_et"
                 android:layout_height="@dimen/editables_height"
                 android:layout_span="1"
                 android:layout_weight="1"
-                android:entries="@array/intensity_percentages"
-                android:spinnerMode="dropdown"/>
+                android:text="100"/>
 
 
         </TableRow>

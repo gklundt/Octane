@@ -12,29 +12,6 @@ public class Exercise implements Serializable {
     private Intensity mMedIntensity;
     private Intensity mHighIntensity;
 
-    public class Intensity {
-        private double mForce;
-        private double mMeasure;
-
-        public double getForce() {
-            return mForce;
-        }
-
-        public double getMeasure() {
-            return mMeasure;
-        }
-
-        public Intensity(double force, double measure) {
-            mForce = force;
-            mMeasure = measure;
-        }
-
-        public Intensity(int force, int measure) {
-            mForce = (double) force / 100.0;
-            mMeasure = (double) measure / 100.0;
-        }
-    }
-
     public enum MuscleGroup {
         ABS("Abdominals"),
         ARMS("Arms"),
