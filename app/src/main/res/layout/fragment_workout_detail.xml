@@ -3,16 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.uco.schambers4.octane.Fragments.Workouts.WorkoutDetailFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="edu.uco.schambers4.octane.Fragments.Workouts.WorkoutDetailFragment">
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:stretchColumns="1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:stretchColumns="1">
 
         <TableRow>
+
             <EditText
                 android:id="@+id/workout_name_et"
                 android:layout_width="0dp"
@@ -23,11 +24,13 @@
         </TableRow>
 
         <TableRow>
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Intensity:"/>
+
             <Spinner
                 android:id="@+id/workout_intensity_sp"
                 android:layout_width="0dp"
@@ -37,11 +40,13 @@
 
 
         <TableRow>
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Calories:"/>
+
             <EditText
                 android:id="@+id/workout_calories_et"
                 android:layout_width="0dp"
@@ -53,9 +58,14 @@
 
     </TableLayout>
 
-    <ListView
+    <include
+        layout="@layout/item_workout_exercise_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/workout_exercise_list_lv"/>
+        android:layout_height="wrap_content"/>
+
+    <ListView
+        android:id="@+id/workout_exercise_list_lv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

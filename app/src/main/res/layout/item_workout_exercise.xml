@@ -38,5 +38,10 @@
             android:entries="@array/set_counts"
             android:text="LastName"/>
 
+        <CheckBox
+            android:id="@+id/workout_exercise_select_all_cb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
     </LinearLayout>
 </LinearLayout>
