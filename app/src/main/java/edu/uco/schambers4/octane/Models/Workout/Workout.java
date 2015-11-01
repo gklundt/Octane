@@ -42,9 +42,11 @@ public class Workout implements Serializable {
 
     }
 
-    public Workout(String name, Map<String, Integer> exerciseSets) {
+    public Workout(String name, Map<String, Integer> exerciseSets, IntensityLevel intensityLevel, Integer calories) {
         mName = name;
         mExerciseSets = exerciseSets;
+        mIntensityLevel = intensityLevel;
+        mCalories = calories;
     }
 
     public String getName() {

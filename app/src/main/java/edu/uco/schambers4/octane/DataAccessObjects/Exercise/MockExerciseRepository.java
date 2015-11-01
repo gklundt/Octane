@@ -11,15 +11,12 @@ import edu.uco.schambers4.octane.Models.Workout.Workout;
  * Created by gordon on 10/26/15.
  */
 public class MockExerciseRepository implements ExerciseRepository {
-    @Override
-    public Exercise getExerciseByName(String exerciseName) {
-        return null;
-    }
 
-    @Override
-    public ArrayList<Exercise> getAllExercises() {
+    ArrayList<Exercise> mExercises;
 
-        ArrayList<Exercise> l = new ArrayList<>();
+    public MockExerciseRepository() {
+
+        mExercises = new ArrayList<>();
 
         Exercise jumpingjacks = new Exercise();
         Exercise situps = new Exercise();
@@ -32,21 +29,21 @@ public class MockExerciseRepository implements ExerciseRepository {
         ExerciseMeasure curls_measure = new ExerciseMeasure();
 
 
-        jumpingjacks.setHighIntensity(new Intensity(100,100));
+        jumpingjacks.setHighIntensity(new Intensity(100, 100));
         jumpingjacks.setMedIntensity(new Intensity(90, 90));
         jumpingjacks.setLowIntensity(new Intensity(70, 70));
 
-        situps.setHighIntensity(new Intensity(100,100));
-        situps.setMedIntensity(new Intensity(90,90));
-        situps.setLowIntensity(new Intensity(70,70));
+        situps.setHighIntensity(new Intensity(100, 100));
+        situps.setMedIntensity(new Intensity(90, 90));
+        situps.setLowIntensity(new Intensity(70, 70));
 
-        pushups.setHighIntensity(new Intensity(100,100));
-        pushups.setMedIntensity(new Intensity(90,90));
-        pushups.setLowIntensity(new Intensity(70,70));
+        pushups.setHighIntensity(new Intensity(100, 100));
+        pushups.setMedIntensity(new Intensity(90, 90));
+        pushups.setLowIntensity(new Intensity(70, 70));
 
-        curls.setHighIntensity(new Intensity(80,110));
-        curls.setMedIntensity(new Intensity(90,90));
-        curls.setLowIntensity(new Intensity(90,75));
+        curls.setHighIntensity(new Intensity(80, 110));
+        curls.setMedIntensity(new Intensity(90, 90));
+        curls.setLowIntensity(new Intensity(90, 75));
 
         situps.setName("Situps");
         pushups.setName("Pushups");
@@ -95,14 +92,28 @@ public class MockExerciseRepository implements ExerciseRepository {
         curls.setMaxIntensityExerciseMeasure(curls_measure);
 
 
-        l.add(situps);
-        l.add(pushups);
-        l.add(jumpingjacks);
-        l.add(curls);
+        mExercises.add(situps);
+        mExercises.add(pushups);
+        mExercises.add(jumpingjacks);
+        mExercises.add(curls);
 
 
+    }
 
-        return l;
+    @Override
+    public Exercise getExerciseByName(String exerciseName) {
+        for (Exercise e : mExercises) {
+            if (e.getName().equals(exerciseName)) {
+                return e;
+            }
+
+        }
+        return null;
+    }
+
+    @Override
+    public ArrayList<Exercise> getAllExercises() {
+        return mExercises;
     }
 
     @Override

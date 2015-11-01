@@ -8,15 +8,15 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Collections;
+
 import edu.uco.schambers4.octane.R;
 
-public class WorkoutAdapter extends ArrayAdapter<Workout>{
+public class WorkoutAdapter extends ArrayAdapter<Workout> {
 
 
     public WorkoutAdapter(Context context, ArrayList<Workout> workouts) {
         super(context, 0, workouts);
-        Collections.sort(workouts, new WorkoutComparator());
+        //Collections.sort(workouts, new WorkoutComparator());
     }
 
     @Override
@@ -29,12 +29,10 @@ public class WorkoutAdapter extends ArrayAdapter<Workout>{
         }
 
         TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
-        tvName.setText(workout.getName());
+        tvName.setText(String.format("%s (%s Intensity: %d calories)", workout.getName(), workout.getIntensityLevel().getLevel(), workout.getCalories()));
 
         return convertView;
     }
-
-
 
 
 }

@@ -1,73 +1,61 @@
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="edu.uco.schambers4.octane.Fragments.Workouts.WorkoutDetailFragment">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="edu.uco.schambers4.octane.Fragments.Workouts.WorkoutDetailFragment"
+    android:orientation="vertical">
 
-<TableRow>
-
-
-    <TextView
-        android:id="@+id/workout_name"
-        android:layout_width="fill_parent"
+    <TableLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/activity_horizontal_margin"
-        android:text="Full Name"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/foreground_material_dark"
-        />
+        android:stretchColumns="1"
+        android:orientation="vertical">
 
-</TableRow>
+        <TableRow>
+            <EditText
+                android:id="@+id/workout_name_et"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="text"
+                android:text="Workout Name"/>
+        </TableRow>
 
-<TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Intensity:"/>
+            <Spinner
+                android:id="@+id/workout_intensity_sp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+        </TableRow>
 
 
-    <TextView
-        android:layout_width="0px"
+        <TableRow>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Calories:"/>
+            <EditText
+                android:id="@+id/workout_calories_et"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="text"
+                android:text="100"/>
+        </TableRow>
+
+    </TableLayout>
+
+    <ListView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:text="Phone:"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
+        android:id="@+id/workout_exercise_list_lv"/>
 
-
-    <TextView
-        android:id="@+id/workout_phone"
-        android:layout_width="0px"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        tools:hint="Full Name"/>
-
-
-</TableRow>
-
-<TableRow>
-
-    <TextView
-        android:layout_width="0px"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:text="Email:"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
-
-    <TextView
-        android:id="@+id/workout_email"
-        android:layout_width="0px"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        tools:hint="asdlfj@sladkfj.com"
-        />
-
-</TableRow>
-
-
-</TableLayout>
+</LinearLayout>

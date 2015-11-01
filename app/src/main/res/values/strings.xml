@@ -31,17 +31,17 @@
 
 
     <!--forceUnits of measurement -->
-    <string-array name="intensity_percentages">
-        <item>100</item><!-- 1-->
-        <item>90</item><!-- 9/10 -->
-        <item>80</item><!-- 4/5-->
-        <item>75</item><!-- 3/4 -->
-        <item>66</item><!-- 2/3 -->
-        <item>50</item><!-- 1/2 -->
-        <item>33</item><!-- 1/3 -->
-        <item>25</item><!-- 1/4 -->
-        <item>20</item><!-- 1/5 -->
-        <item>10</item><!-- 1/10 -->
+    <string-array name="set_counts">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
     </string-array>
 
 
