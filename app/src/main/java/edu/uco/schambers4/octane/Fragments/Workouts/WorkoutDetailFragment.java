@@ -26,7 +26,8 @@ import edu.uco.schambers4.octane.R;
  */
 public class WorkoutDetailFragment extends Fragment {
 
-    WorkoutContainer mWorkoutContainer = WorkoutContainer.getInstance();
+    ExerciseContainer mExerciseContainer = ExerciseContainer.getInstance();
+    WorkoutContainer mWorkoutContainer = WorkoutContainer.getInstance(mExerciseContainer.getRepository());
     Workout mWorkout;
 
     @Bind(R.id.workout_name_et)
@@ -58,7 +59,7 @@ public class WorkoutDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mWorkout = mWorkoutContainer.getWorkouts().get(getShownIndex());
+        mWorkout = mWorkoutContainer.getWorkouts(getActivity().getApplicationContext()).get(getShownIndex());
 
     }
 
@@ -100,7 +101,7 @@ public class WorkoutDetailFragment extends Fragment {
         );
 
 
-        WorkoutExerciseAdapter a = new WorkoutExerciseAdapter(context, mWorkoutContainer.getExercises(getShownIndex()), mWorkout);
+        WorkoutExerciseAdapter a = new WorkoutExerciseAdapter(context, mWorkoutContainer.getExercises(context, getShownIndex()), mWorkout);
 
         mExerciseList.setAdapter(a);
 

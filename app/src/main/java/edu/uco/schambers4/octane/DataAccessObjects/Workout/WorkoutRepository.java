@@ -1,5 +1,7 @@
 package edu.uco.schambers4.octane.DataAccessObjects.Workout;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 
 import edu.uco.schambers4.octane.Models.Workout.Workout;
@@ -9,14 +11,14 @@ import edu.uco.schambers4.octane.Models.Workout.Workout;
  */
 public interface WorkoutRepository {
     /* read functions */
-    Workout getWorkout(String name);
-    ArrayList<Workout> getAllWorkouts();
+    Workout getWorkout(Context context, String name);
+    ArrayList<Workout> getAllWorkouts(Context context);
 
     /* insert and update functions */
-    void saveWorkout(Workout workout);
-    void saveWorkouts(ArrayList<Workout> workouts);
+    void saveWorkout(Context context, Workout workout);
+    void saveWorkouts(Context context, ArrayList<Workout> workouts);
 
     /* delete functions */
-    void deleteWorkout(Workout workout);
+    void deleteWorkout(Context context, Workout workout);
 
 }

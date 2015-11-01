@@ -1,5 +1,7 @@
 package edu.uco.schambers4.octane.DataAccessObjects.Workout;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
@@ -11,12 +13,12 @@ import edu.uco.schambers4.octane.Models.Workout.Workout;
  */
 public class MockWorkoutRepository implements WorkoutRepository {
     @Override
-    public Workout getWorkout(String name) {
+    public Workout getWorkout(Context context, String name) {
         return null;
     }
 
     @Override
-    public ArrayList<Workout> getAllWorkouts() {
+    public ArrayList<Workout> getAllWorkouts(Context context) {
 
         ArrayList<Workout> w = new ArrayList<>();
 
@@ -50,17 +52,17 @@ public class MockWorkoutRepository implements WorkoutRepository {
 
 
     @Override
-    public void saveWorkout(Workout workout) {
+    public void saveWorkout(Context context, Workout workout) {
 
     }
 
     @Override
-    public void saveWorkouts(ArrayList<Workout> workouts) {
+    public void saveWorkouts(Context context, ArrayList<Workout> workouts) {
 
     }
 
     @Override
-    public void deleteWorkout(Workout workout) {
+    public void deleteWorkout(Context context, Workout workout) {
 
     }
 }

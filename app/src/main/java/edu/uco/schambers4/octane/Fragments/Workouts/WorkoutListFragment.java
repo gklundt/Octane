@@ -7,13 +7,16 @@ import android.view.View;
 import android.widget.ListView;
 
 import edu.uco.schambers4.octane.Activities.MainActivity;
+import edu.uco.schambers4.octane.Models.Workout.Exercise;
+import edu.uco.schambers4.octane.Models.Workout.ExerciseContainer;
 import edu.uco.schambers4.octane.Models.Workout.WorkoutAdapter;
 import edu.uco.schambers4.octane.Models.Workout.WorkoutContainer;
 import edu.uco.schambers4.octane.R;
 
 public class WorkoutListFragment extends ListFragment {
 
-    private WorkoutContainer mWorkoutContainer;
+    private ExerciseContainer mExerciseContainer = ExerciseContainer.getInstance();
+    private WorkoutContainer mWorkoutContainer =  WorkoutContainer.getInstance(mExerciseContainer.getRepository());
     private int mCurCheckPosition = 0;
 
 
@@ -21,8 +24,8 @@ public class WorkoutListFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mWorkoutContainer = WorkoutContainer.getInstance();
-        WorkoutAdapter adapter = new WorkoutAdapter(getActivity(), mWorkoutContainer.getWorkouts());
+        WorkoutAdapter adapter = mWorkoutContainer.getWorkoutAdapter(getActivity().getApplicationContext());
+
         setListAdapter(adapter);
 
         if (savedInstanceState!= null){

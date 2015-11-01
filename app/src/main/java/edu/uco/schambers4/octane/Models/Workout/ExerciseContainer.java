@@ -1,5 +1,6 @@
 package edu.uco.schambers4.octane.Models.Workout;
 
+import android.app.Application;
 import android.content.Context;
 import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
@@ -7,6 +8,7 @@ import android.widget.SpinnerAdapter;
 import java.util.ArrayList;
 
 import edu.uco.schambers4.octane.DataAccessObjects.Exercise.ExerciseRepository;
+import edu.uco.schambers4.octane.DataAccessObjects.Exercise.InternalStorageExerciseRepository;
 import edu.uco.schambers4.octane.DataAccessObjects.Exercise.MockExerciseRepository;
 
 public class ExerciseContainer {
@@ -17,6 +19,7 @@ public class ExerciseContainer {
 
     public static ExerciseContainer getInstance() {
         if (ourInstance == null) {
+            //ExerciseRepository repo = new InternalStorageExerciseRepository();
             ExerciseRepository repo = new MockExerciseRepository();
             ourInstance = new ExerciseContainer(repo);
         }
@@ -33,17 +36,17 @@ public class ExerciseContainer {
         mExercises = new ArrayList<>();
     }
 
-    public ArrayList<Exercise> getExercises() {
-        return mExerciseRepository.getAllExercises();
-        //return mExercises;
+    public ArrayList<Exercise> getExercises(Context context) {
+        mExercises = mExerciseRepository.getAllExercises(context);
+        return mExercises;
     }
 
-    public void save() {
-        mExerciseRepository.saveExercises(mExercises);
+    public void save(Context context) {
+        mExerciseRepository.saveExercises(context, mExercises);
     }
 
-    public void save(Exercise exercise) {
-        mExerciseRepository.saveExercise(exercise);
+    public void save(Context context, Exercise exercise) {
+        mExerciseRepository.saveExercise(context, exercise);
     }
 
 
@@ -128,4 +131,12 @@ public class ExerciseContainer {
 
     }
 
+    public ExerciseAdapter getExerciseAdapter(Context context) {
+        ExerciseAdapter ea = new ExerciseAdapter(context, getExercises(context));
+        return ea;
+    }
+
+    public ExerciseRepository getRepository() {
+        return mExerciseRepository;
+    }
 }

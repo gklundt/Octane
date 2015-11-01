@@ -1,5 +1,7 @@
 package edu.uco.schambers4.octane.DataAccessObjects.Exercise;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 
 import edu.uco.schambers4.octane.Models.Workout.Exercise;
@@ -101,7 +103,7 @@ public class MockExerciseRepository implements ExerciseRepository {
     }
 
     @Override
-    public Exercise getExerciseByName(String exerciseName) {
+    public Exercise getExerciseByName(Context context, String exerciseName) {
         for (Exercise e : mExercises) {
             if (e.getName().equals(exerciseName)) {
                 return e;
@@ -112,42 +114,37 @@ public class MockExerciseRepository implements ExerciseRepository {
     }
 
     @Override
-    public ArrayList<Exercise> getAllExercises() {
+    public ArrayList<Exercise> getAllExercises(Context context) {
         return mExercises;
     }
 
     @Override
-    public ArrayList<Exercise> getExerciseByType(Exercise.ExerciseType exerciseType) {
+    public ArrayList<Exercise> getExerciseByType(Context context, Exercise.ExerciseType exerciseType) {
         return null;
     }
 
     @Override
-    public ArrayList<Exercise> getExerciseByMuscleGroup(Exercise.MuscleGroup muscleGroup) {
+    public ArrayList<Exercise> getExerciseByMuscleGroup(Context context, Exercise.MuscleGroup muscleGroup) {
         return null;
     }
 
     @Override
-    public ArrayList<Exercise> getExerciseByWorkout(Workout workout) {
-        return null;
-    }
-
-    @Override
-    public void saveExercise(Exercise exercise) {
+    public void saveExercise(Context context, Exercise exercise) {
 
     }
 
     @Override
-    public void saveExercises(ArrayList<Exercise> exercises) {
+    public void saveExercises(Context context, ArrayList<Exercise> exercises) {
 
     }
 
     @Override
-    public void deleteExercise(Exercise exercise) {
+    public void deleteExercise(Context context, Exercise exercise) {
 
     }
 
     @Override
-    public void deleteExercises(ArrayList<Exercise> exercises) {
+    public void deleteExercises(Context context, ArrayList<Exercise> exercises) {
 
     }
 }
