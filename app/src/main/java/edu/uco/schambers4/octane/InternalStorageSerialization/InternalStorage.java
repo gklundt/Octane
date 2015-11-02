@@ -16,6 +16,8 @@ public final class InternalStorage
 {
     public static final String STORAGE_KEY_INGREDIENTS = "edu.uco.schambers4.octane.InternalStorageSerialization.InternalStorage.Ingredients";
     public static final String STORAGE_KEY_RECIPES = "edu.uco.schambers4.octane.InternalStorageSerialization.InternalStorage.Recipes";
+    public static final String STORAGE_KEY_EXERCISES = "edu.uco.schambers4.octane.InternalStorageSerialization.InternalStorage.Exercises";
+    public static final String STORAGE_KEY_WORKOUTS = "edu.uco.schambers4.octane.InternalStorageSerialization.InternalStorage.Workouts";
 
     private InternalStorage()
     {

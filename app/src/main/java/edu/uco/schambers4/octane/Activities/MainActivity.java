@@ -18,11 +18,12 @@ import android.widget.FrameLayout;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import edu.uco.schambers4.octane.Fragments.ExerciseListFragment;
+import edu.uco.schambers4.octane.Fragments.Workout.ExerciseListFragment;
 import edu.uco.schambers4.octane.Fragments.DashboardFragment;
 import edu.uco.schambers4.octane.Fragments.Ingredients.IngredientsFragment;
 import edu.uco.schambers4.octane.Fragments.Recipes.RecipeListFragment;
-import edu.uco.schambers4.octane.Fragments.WorkoutListFragment;
+import edu.uco.schambers4.octane.Fragments.Workout.WorkoutListFragment;
+import edu.uco.schambers4.octane.Models.Workout.ExerciseContainer;
 import edu.uco.schambers4.octane.R;
 
 public class MainActivity extends AppCompatActivity
@@ -144,6 +145,12 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ExerciseContainer.DestroyExerciseContainer();
     }
 
     public void launchFragment(Fragment fragment)
