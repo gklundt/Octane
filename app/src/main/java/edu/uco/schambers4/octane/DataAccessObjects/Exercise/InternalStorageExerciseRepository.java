@@ -139,7 +139,5 @@ public class InternalStorageExerciseRepository implements ExerciseRepository {
                 e.printStackTrace();
             }
         }
-
     }
-
 }

@@ -11,6 +11,7 @@ import edu.uco.schambers4.octane.Models.Workout.Workout;
 public class InternalStorageWorkoutRepository implements WorkoutRepository{
 
     ArrayList<Workout> mWorkouts;
+
     @Override
     public Workout getWorkout(Context context, String workoutName) {
         loadcheck(context);
@@ -86,19 +87,22 @@ public class InternalStorageWorkoutRepository implements WorkoutRepository{
 
     private void flush(Context context) throws IOException {
         loadcheck(context);
-        InternalStorage.writeObject(context, InternalStorage.STORAGE_KEY_EXERCISES, mWorkouts);
+        InternalStorage.writeObject(context, InternalStorage.STORAGE_KEY_WORKOUTS, mWorkouts);
     }
 
     private ArrayList<Workout> load(Context context) throws IOException, ClassNotFoundException {
         ArrayList<Workout> ae = (ArrayList<Workout>)
-                InternalStorage.readObject(context, InternalStorage.STORAGE_KEY_EXERCISES);
+                InternalStorage.readObject(context, InternalStorage.STORAGE_KEY_WORKOUTS);
         return ae;
     }
 
     private void loadcheck(Context context) {
         if(mWorkouts == null){
             try {
-                load(context);
+                mWorkouts = load(context);
+                if(mWorkouts==null){
+                    mWorkouts = new ArrayList<>();
+                }
             } catch (IOException e) {
                 mWorkouts = new ArrayList<>();
                 e.printStackTrace();
@@ -107,11 +111,5 @@ public class InternalStorageWorkoutRepository implements WorkoutRepository{
                 e.printStackTrace();
             }
         }
-        else {
-            mWorkouts = new ArrayList<>();
-        }
-
     }
-
-
 }

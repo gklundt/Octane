@@ -1,5 +1,6 @@
 package edu.uco.schambers4.octane.Fragments.Workout;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
@@ -24,16 +25,15 @@ public class AddFragment extends Fragment {
         mListener = listener;
     }
 
-    public static AddFragment add_fab(MainActivity activity) {
+    public static AddFragment add_fab(Activity activity, Integer container, String tag) {
 
-        MainActivity mainActivity = activity;
-        FragmentManager fragmentManager = mainActivity.getFragmentManager();
-        Fragment fragment = fragmentManager.findFragmentByTag("add_exercise");
+        FragmentManager fragmentManager = activity.getFragmentManager();
+        Fragment fragment = fragmentManager.findFragmentByTag(tag);
         if (fragment == null) {
             AddFragment addFragment = new AddFragment();
             fragmentManager
                     .beginTransaction()
-                    .add(R.id.fragment_container, addFragment, "add_exercise")
+                    .add(container, addFragment, tag)
                     .commit();
 
             return addFragment;
@@ -43,18 +43,17 @@ public class AddFragment extends Fragment {
     }
 
 
-    public static void remove_fab(MainActivity activity) {
-        MainActivity mainActivity = activity;
-        FragmentManager fragmentManager = mainActivity.getFragmentManager();
-        Fragment fragment = fragmentManager.findFragmentByTag("add_exercise");
+    public static void remove_fab(Activity activity, Integer container, String tag) {
+        FragmentManager fragmentManager = activity.getFragmentManager();
+        Fragment fragment = fragmentManager.findFragmentByTag(tag);
         if (fragment != null) {
             fragmentManager
                     .beginTransaction()
                     .remove(fragment)
                     .commit();
 
-            ViewGroup container = (ViewGroup) mainActivity.findViewById(R.id.fragment_container);
-            container.removeView(mainActivity.findViewById(R.id.fucking_delete_me));
+            ViewGroup containerVg = (ViewGroup) activity.findViewById(container);
+            containerVg.removeView(activity.findViewById(R.id.generic_add_fab_fragment_handle));
         }
     }
 

@@ -29,7 +29,7 @@ public class ExerciseAdapter extends ArrayAdapter<Exercise>{
         }
 
         TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
-        tvName.setText(String.format("%s (%d)",exercise.getName(),position));
+        tvName.setText(String.format("%s",exercise.getName(),position));
 
         return convertView;
     }

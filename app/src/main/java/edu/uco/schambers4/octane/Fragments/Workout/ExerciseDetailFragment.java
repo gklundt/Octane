@@ -134,7 +134,7 @@ public class ExerciseDetailFragment extends Fragment {
 
     private void fillForm(Context context) {
 
-        mExerciseNameEt.setText(String.format("%s (%d)", mExercise.getName(), getShownIndex()));
+        mExerciseNameEt.setText(String.format("%s", mExercise.getName(), getShownIndex()));
 
         mExerciseDescriptionEt.setText(String.format("%s", mExercise.getDescription()));
 

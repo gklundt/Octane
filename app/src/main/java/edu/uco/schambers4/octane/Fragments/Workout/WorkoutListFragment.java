@@ -10,20 +10,38 @@ import edu.uco.schambers4.octane.Activities.MainActivity;
 import edu.uco.schambers4.octane.Models.Workout.ExerciseContainer;
 import edu.uco.schambers4.octane.Models.Workout.WorkoutAdapter;
 import edu.uco.schambers4.octane.Models.Workout.WorkoutContainer;
+import edu.uco.schambers4.octane.R;
 
-public class WorkoutListFragment extends ListFragment {
+public class WorkoutListFragment extends ListFragment implements AddFragment.OnAddFabClick {
+
+    private int mCurCheckPosition = 0;
 
     private ExerciseContainer mExerciseContainer = ExerciseContainer.getInstance();
     private WorkoutContainer mWorkoutContainer =  WorkoutContainer.getInstance(mExerciseContainer.getRepository());
-    private int mCurCheckPosition = 0;
 
+    private final String FABTAG = "add_workout_fab";
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        AddFragment addFragment = AddFragment.add_fab(getActivity(), R.id.fragment_container, FABTAG);
+        if (addFragment != null) {
+            addFragment.AddOnAddFabClickListener(this);
+        }
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        AddFragment.remove_fab(getActivity(), R.id.fragment_container, FABTAG);
+    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         WorkoutAdapter adapter = mWorkoutContainer.getWorkoutAdapter(getActivity().getApplicationContext());
-
         setListAdapter(adapter);
 
         if (savedInstanceState!= null){
@@ -46,16 +64,20 @@ public class WorkoutListFragment extends ListFragment {
 
     }
 
-
-
-
     private void showDetails(int index){
 
         mCurCheckPosition = index;
 
-        Fragment editFragment = WorkoutDetailFragment.newInstance(index);
-        ((MainActivity) getActivity()).launchFragment(editFragment);
+        Fragment editFragment = WorkoutDetailFragment.newInstance(mCurCheckPosition);
+        MainActivity main = (MainActivity) getActivity();
+        main.launchFragment(editFragment);
+    }
+    @Override
 
+    public void add() {
+
+        int val = mWorkoutContainer.createDefaultExercise(getActivity().getApplicationContext());
+        showDetails(val);
     }
 
 }

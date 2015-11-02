@@ -11,33 +11,28 @@ import android.widget.ListView;
 import edu.uco.schambers4.octane.Activities.MainActivity;
 import edu.uco.schambers4.octane.Models.Workout.ExerciseAdapter;
 import edu.uco.schambers4.octane.Models.Workout.ExerciseContainer;
+import edu.uco.schambers4.octane.R;
 
 public class ExerciseListFragment extends ListFragment implements AddFragment.OnAddFabClick {
 
     private int mCurCheckPosition = 0;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
-    }
+    private final String FABTAG = "add_exercise_fab";
 
     @Override
     public void onResume() {
         super.onResume();
-        AddFragment addFragment = AddFragment.add_fab((MainActivity) getActivity());
-        addFragment.AddOnAddFabClickListener(this);
+        AddFragment addFragment = AddFragment.add_fab(getActivity(), R.id.fragment_container, FABTAG);
+        if (addFragment != null) {
+            addFragment.AddOnAddFabClickListener(this);
+        }
 
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        AddFragment.remove_fab((MainActivity) getActivity());
+        AddFragment.remove_fab(getActivity(), R.id.fragment_container, FABTAG);
     }
 
     @Override
