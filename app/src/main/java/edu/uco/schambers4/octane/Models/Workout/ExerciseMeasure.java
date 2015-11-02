@@ -1,6 +1,8 @@
 package edu.uco.schambers4.octane.Models.Workout;
 
-public class ExerciseMeasure {
+import java.io.Serializable;
+
+public class ExerciseMeasure implements Serializable{
 
     private Integer mForce;
     private Integer mMeasure;

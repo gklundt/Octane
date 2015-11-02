@@ -69,7 +69,7 @@ public class InternalStorageExerciseRepository implements ExerciseRepository {
         if (found) {
             mExercises.remove(pos);
         }
-        mExercises.add(pos,exercise);
+        mExercises.add(pos, exercise);
         try {
             flush(context);
         } catch (IOException e) {
@@ -79,7 +79,7 @@ public class InternalStorageExerciseRepository implements ExerciseRepository {
 
     @Override
     public void saveExercises(Context context, ArrayList<Exercise> exercises) {
-        for(Exercise exercise : exercises){
+        for (Exercise exercise : exercises) {
             saveExercise(context, exercise);
         }
     }
@@ -109,7 +109,7 @@ public class InternalStorageExerciseRepository implements ExerciseRepository {
 
     @Override
     public void deleteExercises(Context context, ArrayList<Exercise> exercises) {
-        for(Exercise exercise : exercises){
+        for (Exercise exercise : exercises) {
             deleteExercise(context, exercise);
         }
     }
@@ -120,15 +120,17 @@ public class InternalStorageExerciseRepository implements ExerciseRepository {
     }
 
     private ArrayList<Exercise> load(Context context) throws IOException, ClassNotFoundException {
-        ArrayList<Exercise> ae = (ArrayList<Exercise>)
+        return (ArrayList<Exercise>)
                 InternalStorage.readObject(context, InternalStorage.STORAGE_KEY_EXERCISES);
-        return ae;
     }
 
     private void loadcheck(Context context) {
-        if(mExercises == null){
+        if (mExercises == null) {
             try {
-                load(context);
+                mExercises = load(context);
+                if (mExercises == null) {
+                    mExercises = new ArrayList<>();
+                }
             } catch (IOException e) {
                 mExercises = new ArrayList<>();
                 e.printStackTrace();
@@ -136,9 +138,6 @@ public class InternalStorageExerciseRepository implements ExerciseRepository {
                 mExercises = new ArrayList<>();
                 e.printStackTrace();
             }
-        }
-        else {
-            mExercises = new ArrayList<>();
         }
 
     }

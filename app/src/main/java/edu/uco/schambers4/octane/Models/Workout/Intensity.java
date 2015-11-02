@@ -1,7 +1,9 @@
 package edu.uco.schambers4.octane.Models.Workout;
 
 
-public class Intensity {
+import java.io.Serializable;
+
+public class Intensity implements Serializable {
     private Double mForce;
     private Double mMeasure;
 

@@ -6,18 +6,16 @@ import android.widget.ArrayAdapter;
 import java.util.ArrayList;
 
 import edu.uco.schambers4.octane.DataAccessObjects.Exercise.ExerciseRepository;
-import edu.uco.schambers4.octane.DataAccessObjects.Exercise.MockExerciseRepository;
+import edu.uco.schambers4.octane.DataAccessObjects.Exercise.InternalStorageExerciseRepository;
 
 public class ExerciseContainer {
     private static ExerciseContainer ourInstance;
-
     private ArrayList<Exercise> mExercises;
     private ExerciseRepository mExerciseRepository;
 
     public static ExerciseContainer getInstance() {
         if (ourInstance == null) {
-            //ExerciseRepository repo = new InternalStorageExerciseRepository();
-            ExerciseRepository repo = new MockExerciseRepository();
+            ExerciseRepository repo = new InternalStorageExerciseRepository();
             ourInstance = new ExerciseContainer(repo);
         }
         return ourInstance;
@@ -31,8 +29,12 @@ public class ExerciseContainer {
 
     private ExerciseContainer(ExerciseRepository repo) {
         mExerciseRepository = repo;
-        mExercises = new ArrayList<>();
     }
+
+    public ExerciseRepository getRepository() {
+        return mExerciseRepository;
+    }
+
 
     public ArrayList<Exercise> getExercises(Context context) {
         mExercises = mExerciseRepository.getAllExercises(context);
@@ -41,12 +43,46 @@ public class ExerciseContainer {
 
     public void save(Context context) {
         mExerciseRepository.saveExercises(context, mExercises);
+        mExercises = getExercises(context);
     }
 
     public void save(Context context, Exercise exercise) {
         mExerciseRepository.saveExercise(context, exercise);
+        mExercises = getExercises(context);
     }
 
+    public Exercise getDefaultExercise() {
+        Exercise exercise = new Exercise();
+
+        exercise.setName("New Exercise");
+
+        exercise.setExerciseType(Exercise.ExerciseType.STRENGTH);
+
+        ExerciseMeasure measure = new ExerciseMeasure();
+        measure.setMeasure(0);
+        measure.setForce(0);
+        measure.setForceUnits(ExerciseMeasure.Units.LBS);
+        measure.setMeasureUnits(ExerciseMeasure.Units.MILES);
+        exercise.setMaxIntensityExerciseMeasure(measure);
+
+        exercise.setHighIntensity(new Intensity(100, 100));
+        exercise.setMedIntensity(new Intensity(100, 100));
+        exercise.setLowIntensity(new Intensity(100, 100));
+
+        exercise.setDescription("Exercise Description");
+
+        exercise.setMuscleGroup(Exercise.MuscleGroup.ABS);
+
+        return exercise;
+    }
+
+    public int createDefaultExercise(Context context) {
+        Exercise exercise = getDefaultExercise();
+        save(context, exercise);
+        int i = mExercises.indexOf(exercise);
+        return i;
+
+    }
 
     private ArrayList<String> getMusclesArray() {
         ArrayList<String> ma = new ArrayList<>();
@@ -65,7 +101,6 @@ public class ExerciseContainer {
         }
         return ta;
     }
-
 
     private ArrayList<String> getResistanceUnitsArray() {
         ArrayList<String> myArray = new ArrayList<>();
@@ -97,7 +132,6 @@ public class ExerciseContainer {
         }
         return myArray;
     }
-
 
     public ArrayAdapter<String> getMuscleArrayAdapter(Context context) {
 
@@ -134,39 +168,7 @@ public class ExerciseContainer {
         return ea;
     }
 
-    public ExerciseRepository getRepository() {
-        return mExerciseRepository;
-    }
-
-    public Exercise getDefaultExercise() {
-        Exercise exercise = new Exercise();
-
-        exercise.setName("New Exercise");
-
-        exercise.setExerciseType(Exercise.ExerciseType.STRENGTH);
-
-        ExerciseMeasure measure = new ExerciseMeasure();
-        measure.setMeasure(0);
-        measure.setForce(0);
-        measure.setForceUnits(ExerciseMeasure.Units.LBS);
-        measure.setMeasureUnits(ExerciseMeasure.Units.MILES);
-        exercise.setMaxIntensityExerciseMeasure(measure);
-
-        exercise.setHighIntensity(new Intensity(100, 100));
-        exercise.setMedIntensity(new Intensity(100, 100));
-        exercise.setLowIntensity(new Intensity(100, 100));
-
-        exercise.setDescription("");
-
-        exercise.setMuscleGroup(Exercise.MuscleGroup.ABS);
-
-        return exercise;
-    }
-
-    public int createDefaultExercise() {
-        Exercise exercise = getDefaultExercise();
-        mExercises.add(exercise);
-        return mExercises.indexOf(exercise);
-
+    public void delete(Context context, Exercise exercise) {
+        mExerciseRepository.deleteExercise(context, exercise);
     }
 }

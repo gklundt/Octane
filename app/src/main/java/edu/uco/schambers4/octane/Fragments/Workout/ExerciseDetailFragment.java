@@ -4,11 +4,14 @@ package edu.uco.schambers4.octane.Fragments.Workout;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -56,6 +59,11 @@ public class ExerciseDetailFragment extends Fragment {
     @Bind(R.id.exercise_low_qty_et)
     EditText mLowQtyEt;
 
+    @Bind(R.id.update_exercise_fab)
+    FloatingActionButton mUpdateExercise;
+    @Bind(R.id.delete_exercise_fab)
+    FloatingActionButton mDeleteExercise;
+
     public static ExerciseDetailFragment newInstance(int index) {
         ExerciseDetailFragment f = new ExerciseDetailFragment();
         Bundle args = new Bundle();
@@ -77,7 +85,8 @@ public class ExerciseDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         int i = getShownIndex();
-        mExercise = mExerciseContainer.getExercises(getActivity().getApplicationContext()).get(i);
+        ArrayList<Exercise> exercises = mExerciseContainer.getExercises(getActivity().getApplicationContext());
+        mExercise = exercises.get(i);
     }
 
     @Override
@@ -93,8 +102,26 @@ public class ExerciseDetailFragment extends Fragment {
             fillForm(container.getContext());
         }
 
+        mUpdateExercise.setOnClickListener(v -> doUpdate());
+        mDeleteExercise.setOnClickListener(v -> doDelete());
 
         return view;
+    }
+
+    private void doUpdate(){
+        mExerciseContainer.delete(getActivity().getApplicationContext(), mExercise);
+
+        mExercise.setName(mExerciseNameEt.getText().toString());
+        mExercise.setDescription(mExerciseDescriptionEt.getText().toString());
+
+
+        mExerciseContainer.save(getActivity().getApplicationContext(), mExercise);
+        getActivity().onBackPressed();
+    }
+
+    private void doDelete() {
+        mExerciseContainer.delete(getActivity().getApplicationContext(), mExercise);
+        getActivity().onBackPressed();
     }
 
     @Override
