@@ -1,10 +1,8 @@
-package edu.uco.schambers4.octane.Fragments.Exercises;
+package edu.uco.schambers4.octane.Fragments.Workout;
 
 
-import android.app.Application;
 import android.app.Fragment;
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -78,7 +76,8 @@ public class ExerciseDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mExercise = mExerciseContainer.getExercises(getActivity().getApplicationContext()).get(getShownIndex());
+        int i = getShownIndex();
+        mExercise = mExerciseContainer.getExercises(getActivity().getApplicationContext()).get(i);
     }
 
     @Override

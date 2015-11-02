@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Collections;
+
 import edu.uco.schambers4.octane.R;
 
 public class ExerciseAdapter extends ArrayAdapter<Exercise>{

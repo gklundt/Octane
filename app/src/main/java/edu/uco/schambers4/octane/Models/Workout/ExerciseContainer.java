@@ -1,14 +1,11 @@
 package edu.uco.schambers4.octane.Models.Workout;
 
-import android.app.Application;
 import android.content.Context;
 import android.widget.ArrayAdapter;
-import android.widget.SpinnerAdapter;
 
 import java.util.ArrayList;
 
 import edu.uco.schambers4.octane.DataAccessObjects.Exercise.ExerciseRepository;
-import edu.uco.schambers4.octane.DataAccessObjects.Exercise.InternalStorageExerciseRepository;
 import edu.uco.schambers4.octane.DataAccessObjects.Exercise.MockExerciseRepository;
 
 public class ExerciseContainer {
@@ -26,11 +23,12 @@ public class ExerciseContainer {
         return ourInstance;
     }
 
-    public static void DestroyExerciseContainer(){
-        if(ourInstance != null){
+    public static void DestroyExerciseContainer() {
+        if (ourInstance != null) {
             ourInstance = null;
         }
     }
+
     private ExerciseContainer(ExerciseRepository repo) {
         mExerciseRepository = repo;
         mExercises = new ArrayList<>();
@@ -95,7 +93,7 @@ public class ExerciseContainer {
         ArrayList<String> myArray = new ArrayList<>();
 
         for (ExerciseMeasure.Units u : ExerciseMeasure.Units.values()) {
-                myArray.add(u.getUnitName());
+            myArray.add(u.getUnitName());
         }
         return myArray;
     }
@@ -138,5 +136,37 @@ public class ExerciseContainer {
 
     public ExerciseRepository getRepository() {
         return mExerciseRepository;
+    }
+
+    public Exercise getDefaultExercise() {
+        Exercise exercise = new Exercise();
+
+        exercise.setName("New Exercise");
+
+        exercise.setExerciseType(Exercise.ExerciseType.STRENGTH);
+
+        ExerciseMeasure measure = new ExerciseMeasure();
+        measure.setMeasure(0);
+        measure.setForce(0);
+        measure.setForceUnits(ExerciseMeasure.Units.LBS);
+        measure.setMeasureUnits(ExerciseMeasure.Units.MILES);
+        exercise.setMaxIntensityExerciseMeasure(measure);
+
+        exercise.setHighIntensity(new Intensity(100, 100));
+        exercise.setMedIntensity(new Intensity(100, 100));
+        exercise.setLowIntensity(new Intensity(100, 100));
+
+        exercise.setDescription("");
+
+        exercise.setMuscleGroup(Exercise.MuscleGroup.ABS);
+
+        return exercise;
+    }
+
+    public int createDefaultExercise() {
+        Exercise exercise = getDefaultExercise();
+        mExercises.add(exercise);
+        return mExercises.indexOf(exercise);
+
     }
 }

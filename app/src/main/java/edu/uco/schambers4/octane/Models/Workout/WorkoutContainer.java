@@ -7,9 +7,6 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import edu.uco.schambers4.octane.DataAccessObjects.Exercise.ExerciseRepository;
-import edu.uco.schambers4.octane.DataAccessObjects.Exercise.InternalStorageExerciseRepository;
-import edu.uco.schambers4.octane.DataAccessObjects.Exercise.MockExerciseRepository;
-import edu.uco.schambers4.octane.DataAccessObjects.Workout.InternalStorageWorkoutRepository;
 import edu.uco.schambers4.octane.DataAccessObjects.Workout.MockWorkoutRepository;
 import edu.uco.schambers4.octane.DataAccessObjects.Workout.WorkoutRepository;
 
@@ -27,7 +24,8 @@ public class WorkoutContainer {
 
     public static WorkoutContainer getInstance(ExerciseRepository exerciseRepository) {
         if (ourInstance == null) {
-            WorkoutRepository repo = new InternalStorageWorkoutRepository();
+            WorkoutRepository repo = new MockWorkoutRepository();
+            //WorkoutRepository repo = new InternalStorageWorkoutRepository();
             //ExerciseRepository exerciseRepository = new InternalStorageExerciseRepository();
             ourInstance = new WorkoutContainer(repo, exerciseRepository);
         }

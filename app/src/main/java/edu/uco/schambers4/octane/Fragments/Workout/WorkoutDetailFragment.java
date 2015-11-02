@@ -1,4 +1,4 @@
-package edu.uco.schambers4.octane.Fragments.Workouts;
+package edu.uco.schambers4.octane.Fragments.Workout;
 
 
 import android.app.Fragment;
@@ -13,8 +13,6 @@ import android.widget.Spinner;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import edu.uco.schambers4.octane.DataAccessObjects.Exercise.ExerciseRepository;
-import edu.uco.schambers4.octane.Models.Workout.ExerciseAdapter;
 import edu.uco.schambers4.octane.Models.Workout.ExerciseContainer;
 import edu.uco.schambers4.octane.Models.Workout.Workout;
 import edu.uco.schambers4.octane.Models.Workout.WorkoutContainer;

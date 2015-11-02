@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import edu.uco.schambers4.octane.Models.Workout.Exercise;
 import edu.uco.schambers4.octane.Models.Workout.ExerciseMeasure;
 import edu.uco.schambers4.octane.Models.Workout.Intensity;
-import edu.uco.schambers4.octane.Models.Workout.Workout;
 
 /**
  * Created by gordon on 10/26/15.

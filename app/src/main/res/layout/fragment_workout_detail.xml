@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="edu.uco.schambers4.octane.Fragments.Workouts.WorkoutDetailFragment">
+    tools:context="edu.uco.schambers4.octane.Fragments.Workout.WorkoutDetailFragment">
 
     <TableLayout
         android:layout_width="match_parent"
