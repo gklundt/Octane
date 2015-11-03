@@ -17,15 +17,13 @@
             android:text="@string/app_name"
             android:id="@+id/dashboard_lbl" />
 
-        <CalendarView
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
+        <com.telerik.widget.calendar.RadCalendarView
             android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:layout_below="@+id/dashboard_lbl"/>
-
-
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/add_workout_fab"
@@ -34,6 +32,7 @@
             android:src="@drawable/ic_directions_bike_24dp"
             android:layout_marginLeft="@dimen/fab_margin"
             android:layout_marginRight="@dimen/fab_margin"
+            android:layout_marginTop="@dimen/fab_margin"
             android:layout_below="@+id/calendarView"
             android:layout_toStartOf="@+id/add_meal_fab" />
 
@@ -44,6 +43,7 @@
             android:src="@drawable/ic_local_pizza"
             android:layout_marginLeft="@dimen/fab_margin"
             android:layout_marginRight="@dimen/fab_margin"
+            android:layout_marginTop="@dimen/fab_margin"
             android:layout_below="@id/calendarView"
             android:layout_alignParentEnd="true" />
 
