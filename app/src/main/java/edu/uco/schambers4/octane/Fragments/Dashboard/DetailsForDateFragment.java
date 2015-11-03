@@ -55,7 +55,7 @@ public class DetailsForDateFragment extends Fragment {
         SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
         String formattedDate = formatter.format(date);
 
-        detailsTitle.setText(String.format("Details for %s", formattedDate));
+        detailsTitle.setText(String.format("%s", formattedDate));
 
         return view;
     }

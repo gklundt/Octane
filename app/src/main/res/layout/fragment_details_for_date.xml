@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:id="@+id/details_lbl"
-        android:textSize="30dp"
+        android:textSize="24dp"
         android:textStyle="bold" />
 
 </FrameLayout>
