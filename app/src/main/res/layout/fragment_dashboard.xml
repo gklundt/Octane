@@ -1,7 +1,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.uco.schambers4.octane.Fragments.DashboardFragment">
+    tools:context="edu.uco.schambers4.octane.Fragments.Dashboard.DashboardFragment">
 
 
     <RelativeLayout
@@ -52,7 +52,7 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context="edu.uco.schambers4.octane.Fragments.DashboardFragment"
+            tools:context="edu.uco.schambers4.octane.Fragments.Dashboard.DashboardFragment"
             android:id="@+id/fragment_container_dashboard"
             android:layout_below="@+id/add_workout_fab"
             android:layout_alignParentStart="true">

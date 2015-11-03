@@ -1,4 +1,4 @@
-package edu.uco.schambers4.octane.Fragments;
+package edu.uco.schambers4.octane.Fragments.Dashboard;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
@@ -47,7 +47,20 @@ public class DashboardFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    private void initializeCalender(){
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState)
+    {
+        View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        ButterKnife.bind(this, view);
+
+        initializeCalendar();
+
+        return view;
+    }
+
+    private void initializeCalendar()
+    {
         calendar.setSelectionMode(CalendarSelectionMode.Single);
 
         calendar.setOnSelectedDatesChangedListener((context) -> {
@@ -55,13 +68,18 @@ public class DashboardFragment extends Fragment {
             launchDetailsForDateFragment(date);
         });
 
+        loadCalendarEvents();
+    }
+
+    private void loadCalendarEvents()
+    {
         MockWorkoutRepository mockWorkoutRepo = new MockWorkoutRepository();
         List<Workout> workouts = mockWorkoutRepo.getAllWorkouts(getActivity().getApplicationContext());
-
 
         List<Event> events = new ArrayList<>();
         Calendar dateProcessor = Calendar.getInstance();
 
+        //Temporary code
         for(Workout workout : workouts) {
             dateProcessor.set(Calendar.HOUR_OF_DAY, 20);
             dateProcessor.set(Calendar.MINUTE, 0);
@@ -77,27 +95,16 @@ public class DashboardFragment extends Fragment {
 
             events.add(event);
 
-            dateProcessor.add(Calendar.DAY_OF_YEAR, 1);
+            dateProcessor.add(Calendar.DAY_OF_YEAR, 2);
         }
 
         calendar.getEventAdapter().setEvents(events);
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState)
-    {
-        View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        ButterKnife.bind(this, view);
-
-        initializeCalender();
-
-        return view;
-    }
-
     private void launchDetailsForDateFragment(Date date)
     {
         Fragment fragment = DetailsForDateFragment.newInstance(date);
+
         launchSubFragment(fragment);
     }
 
