@@ -1,10 +1,7 @@
-package edu.uco.schambers4.octane.Fragments;
+package edu.uco.schambers4.octane.Fragments.Dashboard;
 
-import android.app.Activity;
-import android.net.Uri;
-import android.os.Bundle;
 import android.app.Fragment;
-import android.support.design.widget.FloatingActionButton;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +55,7 @@ public class DetailsForDateFragment extends Fragment {
         SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
         String formattedDate = formatter.format(date);
 
-        detailsTitle.setText(String.format("Details for %s", formattedDate));
+        detailsTitle.setText(String.format("%s", formattedDate));
 
         return view;
     }

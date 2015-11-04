@@ -1,7 +1,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.uco.schambers4.octane.Fragments.DashboardFragment">
+    tools:context="edu.uco.schambers4.octane.Fragments.Dashboard.DashboardFragment">
 
 
     <RelativeLayout
@@ -17,15 +17,13 @@
             android:text="@string/app_name"
             android:id="@+id/dashboard_lbl" />
 
-        <CalendarView
+        <com.telerik.widget.calendar.RadCalendarView
+            android:id="@+id/calendarView"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:id="@+id/calendarView"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:layout_below="@+id/dashboard_lbl"/>
-
-
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/add_workout_fab"
@@ -34,6 +32,7 @@
             android:src="@drawable/ic_directions_bike_24dp"
             android:layout_marginLeft="@dimen/fab_margin"
             android:layout_marginRight="@dimen/fab_margin"
+            android:layout_marginTop="@dimen/fab_margin"
             android:layout_below="@+id/calendarView"
             android:layout_toStartOf="@+id/add_meal_fab" />
 
@@ -44,6 +43,7 @@
             android:src="@drawable/ic_local_pizza"
             android:layout_marginLeft="@dimen/fab_margin"
             android:layout_marginRight="@dimen/fab_margin"
+            android:layout_marginTop="@dimen/fab_margin"
             android:layout_below="@id/calendarView"
             android:layout_alignParentEnd="true" />
 
@@ -52,7 +52,7 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context="edu.uco.schambers4.octane.Fragments.DashboardFragment"
+            tools:context="edu.uco.schambers4.octane.Fragments.Dashboard.DashboardFragment"
             android:id="@+id/fragment_container_dashboard"
             android:layout_below="@+id/add_workout_fab"
             android:layout_alignParentStart="true">
