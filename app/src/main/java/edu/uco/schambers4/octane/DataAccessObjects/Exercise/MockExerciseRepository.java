@@ -68,28 +68,28 @@ public class MockExerciseRepository implements ExerciseRepository {
 
         jumpingjacks_measure.setForce(1);
         jumpingjacks_measure.setMeasure(100);
-        jumpingjacks_measure.setForceUnits(ExerciseMeasure.Units.BODYWEIGHT);
-        jumpingjacks_measure.setMeasureUnits(ExerciseMeasure.Units.COUNT);
+        jumpingjacks_measure.setForceUnits(ExerciseMeasure.Unit.BODYWEIGHT);
+        jumpingjacks_measure.setMeasureUnits(ExerciseMeasure.Unit.COUNT);
         jumpingjacks.setMaxIntensityExerciseMeasure(jumpingjacks_measure);
 
 
         situps_measure.setForce(1);
         situps_measure.setMeasure(100);
-        situps_measure.setForceUnits(ExerciseMeasure.Units.BODYWEIGHT);
-        situps_measure.setMeasureUnits(ExerciseMeasure.Units.COUNT);
+        situps_measure.setForceUnits(ExerciseMeasure.Unit.BODYWEIGHT);
+        situps_measure.setMeasureUnits(ExerciseMeasure.Unit.COUNT);
         situps.setMaxIntensityExerciseMeasure(situps_measure);
 
         pushups_measure.setForce(1);
         pushups_measure.setMeasure(100);
-        pushups_measure.setForceUnits(ExerciseMeasure.Units.BODYWEIGHT);
-        pushups_measure.setMeasureUnits(ExerciseMeasure.Units.COUNT);
+        pushups_measure.setForceUnits(ExerciseMeasure.Unit.BODYWEIGHT);
+        pushups_measure.setMeasureUnits(ExerciseMeasure.Unit.COUNT);
         pushups.setMaxIntensityExerciseMeasure(pushups_measure);
 
 
         curls_measure.setForce(25);
         curls_measure.setMeasure(10);
-        curls_measure.setForceUnits(ExerciseMeasure.Units.LBS);
-        curls_measure.setMeasureUnits(ExerciseMeasure.Units.COUNT);
+        curls_measure.setForceUnits(ExerciseMeasure.Unit.LBS);
+        curls_measure.setMeasureUnits(ExerciseMeasure.Unit.COUNT);
         curls.setMaxIntensityExerciseMeasure(curls_measure);
 
 

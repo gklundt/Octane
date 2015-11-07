@@ -61,8 +61,8 @@ public class ExerciseContainer {
         ExerciseMeasure measure = new ExerciseMeasure();
         measure.setMeasure(0);
         measure.setForce(0);
-        measure.setForceUnits(ExerciseMeasure.Units.LBS);
-        measure.setMeasureUnits(ExerciseMeasure.Units.MILES);
+        measure.setForceUnits(ExerciseMeasure.Unit.LBS);
+        measure.setMeasureUnits(ExerciseMeasure.Unit.MILES);
         exercise.setMaxIntensityExerciseMeasure(measure);
 
         exercise.setHighIntensity(new Intensity(100, 100));
@@ -105,8 +105,8 @@ public class ExerciseContainer {
     private ArrayList<String> getResistanceUnitsArray() {
         ArrayList<String> myArray = new ArrayList<>();
 
-        for (ExerciseMeasure.Units u : ExerciseMeasure.Units.values()) {
-            if (u.getUnitKind() == ExerciseMeasure.UnitKind.WEIGHT) {
+        for (ExerciseMeasure.Unit u : ExerciseMeasure.Unit.values()) {
+            if (u.getUnitKind() == ExerciseMeasure.UnitKind.WEIGHT || u.getUnitKind() == ExerciseMeasure.UnitKind.RATE) {
                 myArray.add(u.getUnitName());
             }
         }
@@ -116,8 +116,8 @@ public class ExerciseContainer {
     private ArrayList<String> getMeasurementUnitsArray() {
         ArrayList<String> myArray = new ArrayList<>();
 
-        for (ExerciseMeasure.Units u : ExerciseMeasure.Units.values()) {
-            if (u.getUnitKind() != ExerciseMeasure.UnitKind.WEIGHT) {
+        for (ExerciseMeasure.Unit u : ExerciseMeasure.Unit.values()) {
+            if (!(u.getUnitKind() == ExerciseMeasure.UnitKind.WEIGHT || u.getUnitKind() == ExerciseMeasure.UnitKind.RATE)) {
                 myArray.add(u.getUnitName());
             }
         }
@@ -127,7 +127,7 @@ public class ExerciseContainer {
     private ArrayList<String> getUnitsArray() {
         ArrayList<String> myArray = new ArrayList<>();
 
-        for (ExerciseMeasure.Units u : ExerciseMeasure.Units.values()) {
+        for (ExerciseMeasure.Unit u : ExerciseMeasure.Unit.values()) {
             myArray.add(u.getUnitName());
         }
         return myArray;

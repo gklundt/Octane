@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -17,6 +18,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.uco.schambers4.octane.Models.Workout.Exercise;
 import edu.uco.schambers4.octane.Models.Workout.ExerciseContainer;
+import edu.uco.schambers4.octane.Models.Workout.ExerciseMeasure;
+import edu.uco.schambers4.octane.Models.Workout.Intensity;
 import edu.uco.schambers4.octane.R;
 
 /**
@@ -92,8 +95,6 @@ public class ExerciseDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_exercise_detail, container, false);
         ButterKnife.bind(this, view);
 
@@ -108,13 +109,154 @@ public class ExerciseDetailFragment extends Fragment {
         return view;
     }
 
-    private void doUpdate(){
+    private void doUpdate() {
+
+        Context context = getActivity().getApplicationContext();
+
+        String fExerciseName;
+        fExerciseName = mExerciseNameEt.getText().toString();
+        if (fExerciseName == null) {
+            Toast.makeText(context, "Exercise Name", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        mExercise.setName(fExerciseName);
+
+
+        String fExerciseDescription;
+        fExerciseDescription = mExerciseDescriptionEt.getText().toString();
+        if (fExerciseDescription == null) {
+            Toast.makeText(context, "Exercise Description", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        mExercise.setDescription(fExerciseDescription);
+
+
+        Exercise.MuscleGroup fMusleGroup = null;
+        String muscleGroupItem = mMuscleGroupSp.getSelectedItem().toString();
+        for (Exercise.MuscleGroup m : Exercise.MuscleGroup.values()) {
+            if (m.getGroupName() == muscleGroupItem) {
+                fMusleGroup = m;
+            }
+        }
+        if (fMusleGroup == null) {
+            Toast.makeText(context, "Muscle Group", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        mExercise.setMuscleGroup(fMusleGroup);
+
+
+        Exercise.ExerciseType fExerciseType = null;
+        String exerciseTypeItem = mExerciseTypeSp.getSelectedItem().toString();
+        for (Exercise.ExerciseType t : Exercise.ExerciseType.values()) {
+            if (t.getExerciseTypeName() == exerciseTypeItem) {
+                fExerciseType = t;
+            }
+        }
+        if (fExerciseType == null) {
+            Toast.makeText(context, "Exercise Type", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        mExercise.setExerciseType(fExerciseType);
+
+
+        String fResistance;
+        fResistance = mForceValEt.getText().toString();
+        if (fResistance == null) {
+            Toast.makeText(context, "Resistance Value", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String fMeasure;
+        fMeasure = mMeasureValEt.getText().toString();
+        if (fMeasure == null) {
+            Toast.makeText(context, "Measure Value", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        ExerciseMeasure.Unit fResistanceUnit = null;
+        String rUnitItem = mForceMsrSp.getSelectedItem().toString();
+        for (ExerciseMeasure.Unit u : ExerciseMeasure.Unit.values()) {
+            if (u.getUnitName() == rUnitItem) {
+                fResistanceUnit = u;
+            }
+        }
+        if (fResistanceUnit == null) {
+            Toast.makeText(context, "Resistance Unit", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        ExerciseMeasure.Unit fMeasureUnit = null;
+        String mUnitItem = mMeasureUnitSp.getSelectedItem().toString();
+        for (ExerciseMeasure.Unit u : ExerciseMeasure.Unit.values()) {
+            if (u.getUnitName() == mUnitItem) {
+                fMeasureUnit = u;
+            }
+        }
+        if (fMeasureUnit == null) {
+            Toast.makeText(context, "Measure Unit", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        ExerciseMeasure fExerciseMeasure;
+        try {
+            fExerciseMeasure = new ExerciseMeasure();
+            fExerciseMeasure.setForce(Integer.parseInt(fResistance));
+            fExerciseMeasure.setMeasure(Integer.parseInt(fMeasure));
+            fExerciseMeasure.setForceUnits(fResistanceUnit);
+            fExerciseMeasure.setMeasureUnits(fMeasureUnit);
+        } catch (Exception e) {
+            Toast.makeText(context, "Exercise Measure", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+            return;
+        }
+        mExercise.setMaxIntensityExerciseMeasure(fExerciseMeasure);
+
+        String fHighResPct = null;
+        String fHighMesPct = null;
+        Intensity fHighIntensity;
+        fHighResPct = mHighQtyEt.getText().toString();
+        fHighMesPct = mHighMeasureEt.getText().toString();
+        try {
+            fHighIntensity = new Intensity(
+                    Integer.parseInt(fHighResPct),
+                    Integer.parseInt(fHighMesPct));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
+        mExercise.setHighIntensity(fHighIntensity);
+
+        String fMedResPct = null;
+        String fMedMesPct = null;
+        Intensity fMedIntensity = null;
+        fMedResPct = mMedQtyEt.getText().toString();
+        fMedMesPct = mMedMeasureEt.getText().toString();
+        try {
+            fMedIntensity = new Intensity(
+                    Integer.parseInt(fMedResPct),
+                    Integer.parseInt(fMedMesPct));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
+        mExercise.setMedIntensity(fMedIntensity);
+
+        String fLowResPct = null;
+        String fLowMesPct = null;
+        Intensity fLowIntensity = null;
+        fLowResPct = mLowQtyEt.getText().toString();
+        fLowMesPct = mLowMeasureEt.getText().toString();
+        try {
+            fLowIntensity = new Intensity(
+                    Integer.parseInt(fLowResPct),
+                    Integer.parseInt(fLowMesPct));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
+        mExercise.setLowIntensity(fLowIntensity);
+
+
         mExerciseContainer.delete(getActivity().getApplicationContext(), mExercise);
-
-        mExercise.setName(mExerciseNameEt.getText().toString());
-        mExercise.setDescription(mExerciseDescriptionEt.getText().toString());
-
-
         mExerciseContainer.save(getActivity().getApplicationContext(), mExercise);
         getActivity().onBackPressed();
     }

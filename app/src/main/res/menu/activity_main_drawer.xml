@@ -25,13 +25,23 @@
                 <item
                     android:id="@+id/nav_exercises"
                     android:checkable="true"
-                    android:icon="@drawable/ic_directions_bike_24dp"
+                    android:icon="@drawable/ic_directions_run_black_24dp"
                     android:title="@string/exercise_list"/>
                 <item
                     android:id="@+id/nav_workouts"
                     android:checkable="true"
                     android:icon="@drawable/ic_directions_bike_24dp"
                     android:title="@string/workout_list"/>
+                <item
+                    android:id="@+id/nav_workout_builder"
+                    android:checkable="true"
+                    android:icon="@drawable/ic_settings_applications_black_24dp"
+                    android:title="@string/workout_builder"/>
+                <item
+                    android:id="@+id/nav_fit_test"
+                    android:checkable="true"
+                    android:icon="@drawable/ic_poll_black_24dp"
+                    android:title="@string/fit_test"/>
             </menu>
         </item>
     </group>

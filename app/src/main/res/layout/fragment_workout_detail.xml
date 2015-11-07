@@ -1,12 +1,13 @@
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     tools:context="edu.uco.schambers4.octane.Fragments.Workout.WorkoutDetailFragment">
 
+
     <TableLayout
+        android:id="@+id/workout_exercise_tablelayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -58,38 +59,49 @@
 
     </TableLayout>
 
+
     <include
+        android:id="@+id/exercise_workout_list_header"
         layout="@layout/item_workout_exercise_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/workout_exercise_tablelayout"/>
+
 
     <ListView
         android:id="@+id/workout_exercise_list_lv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@id/exercise_workout_list_header"
+        android:clickable="true"
+        android:longClickable="true"/>
+
 
     <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/workout_exercise_list_lv"
+        >
+
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/delete_workout_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
             android:layout_margin="@dimen/fab_margin"
             android:src="@drawable/ic_delete_white_24dp"
-            android:layout_alignParentLeft="true"
             />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/update_workout_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_margin="@dimen/fab_margin"
             android:src="@drawable/ic_check"
-            android:layout_alignParentRight="true"
             />
 
     </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>

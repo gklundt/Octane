@@ -52,19 +52,18 @@ public class WorkoutContainer {
         mWorkoutRepository.saveWorkout(context, workout);
     }
 
-    private Workout getDefaultExercise() {
+    private Workout getDefaultWorkout() {
         Map<String, Integer> map = new Hashtable<>();
         Workout workout = new Workout("NewWorkout", map, Workout.IntensityLevel.LOW, 3);
         return workout;
     }
 
-    public int createDefaultExercise(Context context) {
-        Workout workout = getDefaultExercise();
+    public int createDefaultWorkout(Context context) {
+        Workout workout = getDefaultWorkout();
         save(context, workout);
         int i = mWorkouts.indexOf(workout);
         return i;
     }
-
 
 
     private ArrayList<String> getIntensityLevelArray() {
@@ -84,9 +83,15 @@ public class WorkoutContainer {
 
     public ArrayList<Exercise> getExercises(Context context, int index) {
         ArrayList<Exercise> ae = new ArrayList<>();
+
+
         for (Map.Entry<String, Integer> h : mWorkouts.get(index).getExerciseSets().entrySet()) {
-            ae.add(mExerciseRepository.getExerciseByName(context, h.getKey()));
+            Exercise exercise = mExerciseRepository.getExerciseByName(context, h.getKey());
+            if (exercise != null) {
+                ae.add(exercise);
+            }
         }
+
         return ae;
     }
 
@@ -96,5 +101,20 @@ public class WorkoutContainer {
 
     public void delete(Context context, Workout workout) {
         mWorkoutRepository.deleteWorkout(context, workout);
+    }
+
+    public void addExercise(Context context, Workout workout, String exerciseName, Integer sets) {
+        workout.addExerciseSet(exerciseName, sets);
+        mWorkoutRepository.saveWorkout(context, workout);
+    }
+
+    public void removeExercise(Context context, Workout workout, Exercise exercise) {
+        workout.removeExerciseSet(exercise.getName());
+        mWorkoutRepository.saveWorkout(context, workout);
+    }
+
+    public void updateExercise(Context context, Workout workout, Exercise exercise, int i) {
+        workout.updateExerciseSet(exercise.getName(),i);
+        mWorkoutRepository.saveWorkout(context,workout);
     }
 }

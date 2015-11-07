@@ -34,7 +34,8 @@ public class ExerciseAdapter extends ArrayAdapter<Exercise>{
         return convertView;
     }
 
-
-
-
+    @Override
+    public void add(Exercise object) {
+        super.add(object);
+    }
 }

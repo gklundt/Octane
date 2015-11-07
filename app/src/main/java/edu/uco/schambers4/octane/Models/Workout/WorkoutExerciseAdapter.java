@@ -23,8 +23,8 @@ public class WorkoutExerciseAdapter extends ArrayAdapter<Exercise> {
     TextView mWorkoutExerciseResistanceTv;
     @Bind(R.id.workout_exercise_measure_tv)
     TextView mWorkoutExerciseMeasureTv;
-    @Bind(R.id.workout_exercise_sets_sp)
-    Spinner mWorkoutExerciseSp;
+    @Bind(R.id.workout_exercise_sets_tv)
+    TextView mWorkoutExerciseTv;
 
     public WorkoutExerciseAdapter(Context context, ArrayList<Exercise> exercises, Workout workout) {
         super(context, 0, exercises);
@@ -55,7 +55,7 @@ public class WorkoutExerciseAdapter extends ArrayAdapter<Exercise> {
         String wemString = String.format("%d %s", ((Double) Math.ceil(wem)).intValue(), exercise.getMaxIntensityExerciseMeasure().getMeasureUnits().getUnitName());
         mWorkoutExerciseMeasureTv.setText(wemString);
 
-        mWorkoutExerciseSp.setSelection(mWorkout.getExerciseSets().get(exercise.getName()) - 1);
+        mWorkoutExerciseTv.setText(mWorkout.getExerciseSets().get(exercise.getName()).toString());
 
         return convertView;
     }
@@ -74,6 +74,11 @@ public class WorkoutExerciseAdapter extends ArrayAdapter<Exercise> {
                 return new Intensity(100, 100);
         }
 
+    }
+
+    @Override
+    public void add(Exercise object) {
+        super.add(object);
     }
 
 

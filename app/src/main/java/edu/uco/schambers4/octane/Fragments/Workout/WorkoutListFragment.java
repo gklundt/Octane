@@ -76,7 +76,7 @@ public class WorkoutListFragment extends ListFragment implements AddFragment.OnA
 
     public void add() {
 
-        int val = mWorkoutContainer.createDefaultExercise(getActivity().getApplicationContext());
+        int val = mWorkoutContainer.createDefaultWorkout(getActivity().getApplicationContext());
         showDetails(val);
     }
 
