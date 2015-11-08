@@ -6,8 +6,8 @@ public class ExerciseMeasure implements Serializable{
 
     private Integer mForce;
     private Integer mMeasure;
-    private Units mForceUnits;
-    private Units mMeasureUnits;
+    private Unit mForceUnits;
+    private Unit mMeasureUnits;
 
     public Integer getForce() {
         return mForce;
@@ -25,27 +25,27 @@ public class ExerciseMeasure implements Serializable{
         mMeasure = measure;
     }
 
-    public Units getForceUnits() {
+    public Unit getForceUnits() {
         return mForceUnits;
     }
 
-    public Units getMeasureUnits() {
+    public Unit getMeasureUnits() {
         return mMeasureUnits;
     }
 
-    public void setForceUnits(Units forceUnits) {
+    public void setForceUnits(Unit forceUnits) {
         mForceUnits = forceUnits;
     }
 
-    public void setMeasureUnits(Units forceUnits) {
+    public void setMeasureUnits(Unit forceUnits) {
         mMeasureUnits = forceUnits;
     }
 
-    public enum UnitKind {WEIGHT, REPS, DISTANCE, TIME}
+    public enum UnitKind {WEIGHT, REPS, DISTANCE, TIME, RATE}
 
     public enum UnitSystem {IMPERIAL, METRIC, UNIVERSAL}
 
-    public enum Units {
+    public enum Unit {
 
         BODYWEIGHT(UnitKind.WEIGHT, UnitSystem.UNIVERSAL,"Body Weight"),
         COUNT(UnitKind.REPS, UnitSystem.UNIVERSAL,"Count"),
@@ -58,13 +58,16 @@ public class ExerciseMeasure implements Serializable{
         YARDS(UnitKind.DISTANCE, UnitSystem.IMPERIAL,"Yards"),
         KILOGRAMS(UnitKind.WEIGHT, UnitSystem.METRIC,"Kilograms"),
         KILOMETERS(UnitKind.DISTANCE, UnitSystem.METRIC,"Kilometers"),
-        METERS(UnitKind.DISTANCE, UnitSystem.METRIC,"Meters");
+        METERS(UnitKind.DISTANCE, UnitSystem.METRIC,"Meters"),
+        MPH(UnitKind.RATE,UnitSystem.IMPERIAL,"MPH"),
+        KPH(UnitKind.RATE,UnitSystem.IMPERIAL,"KPH")
+        ;
 
         private final UnitKind mUnitKind;
         private final UnitSystem mUnitSystem;
         private final String mUnitName;
 
-        Units(UnitKind unitKind, UnitSystem unitSystem, String unitName) {
+        Unit(UnitKind unitKind, UnitSystem unitSystem, String unitName) {
             mUnitKind = unitKind;
             mUnitSystem = unitSystem;
             mUnitName = unitName;

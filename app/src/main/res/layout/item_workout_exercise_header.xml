@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:paddingTop="@dimen/nav_header_vertical_spacing">
 
@@ -11,29 +11,36 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:layout_gravity="center_vertical"
         android:text="Resistance"
-        android:textStyle="bold"
-        android:textSize="@dimen/abc_text_size_medium_material"/>
+        android:textSize="@dimen/abc_text_size_medium_material"
+        android:textStyle="bold"/>
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:layout_gravity="center_vertical"
         android:text="Measure"
-        android:textStyle="bold"
-        android:textSize="@dimen/abc_text_size_medium_material"/>
+        android:textSize="@dimen/abc_text_size_medium_material"
+        android:textStyle="bold"/>
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:layout_gravity="center_vertical"
         android:text="Sets"
-        android:textStyle="bold"
-        android:textSize="@dimen/abc_text_size_medium_material"/>
+        android:textSize="@dimen/abc_text_size_medium_material"
+        android:textStyle="bold"/>
 
-    <CheckBox
-        android:id="@+id/workout_exercise_select_all_cb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <ImageButton
+        android:id="@+id/workout_add_exercise_ib"
+        android:layout_width="@dimen/editables_height"
+        android:layout_height="@dimen/editables_height"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/ic_action_add"
+
+        />
 
 </LinearLayout>

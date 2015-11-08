@@ -22,6 +22,7 @@ import edu.uco.schambers4.octane.Fragments.Dashboard.DashboardFragment;
 import edu.uco.schambers4.octane.Fragments.Ingredients.IngredientsFragment;
 import edu.uco.schambers4.octane.Fragments.Recipes.RecipeListFragment;
 import edu.uco.schambers4.octane.Fragments.Workout.ExerciseListFragment;
+import edu.uco.schambers4.octane.Fragments.Workout.FitnessTestListFragment;
 import edu.uco.schambers4.octane.Fragments.Workout.WorkoutListFragment;
 import edu.uco.schambers4.octane.Models.Workout.ExerciseContainer;
 import edu.uco.schambers4.octane.R;
@@ -140,6 +141,10 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_workouts:
                 launchFragment(new WorkoutListFragment());
                 break;
+            case R.id.nav_fit_test:
+                launchFragment(new FitnessTestListFragment());
+                break;
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

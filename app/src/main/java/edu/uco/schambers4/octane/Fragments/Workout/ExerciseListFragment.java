@@ -3,12 +3,11 @@ package edu.uco.schambers4.octane.Fragments.Workout;
 import android.app.Fragment;
 import android.app.ListFragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
 
 import edu.uco.schambers4.octane.Activities.MainActivity;
+import edu.uco.schambers4.octane.Models.Workout.Exercise;
 import edu.uco.schambers4.octane.Models.Workout.ExerciseAdapter;
 import edu.uco.schambers4.octane.Models.Workout.ExerciseContainer;
 import edu.uco.schambers4.octane.R;
@@ -46,7 +45,6 @@ public class ExerciseListFragment extends ListFragment implements AddFragment.On
         if (savedInstanceState != null) {
             mCurCheckPosition = savedInstanceState.getInt("curChoice", 0);
         }
-
     }
 
     @Override
@@ -72,10 +70,11 @@ public class ExerciseListFragment extends ListFragment implements AddFragment.On
 
     @Override
     public void add() {
-
         ExerciseContainer exerciseContainer = ExerciseContainer.getInstance();
-        int val = exerciseContainer.createDefaultExercise(getActivity().getApplicationContext());
-        showDetails(val);
+        Exercise exercise = exerciseContainer.createDefaultExercise(getActivity().getApplicationContext());
+        ExerciseAdapter adapter = (ExerciseAdapter) getListAdapter();
+        adapter.notifyDataSetChanged();
+        showDetails(adapter.getPosition(exercise));
     }
 }
 

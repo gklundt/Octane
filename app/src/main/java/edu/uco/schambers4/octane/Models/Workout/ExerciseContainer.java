@@ -10,7 +10,7 @@ import edu.uco.schambers4.octane.DataAccessObjects.Exercise.InternalStorageExerc
 
 public class ExerciseContainer {
     private static ExerciseContainer ourInstance;
-    private ArrayList<Exercise> mExercises;
+    //private ArrayList<Exercise> mExercises;
     private ExerciseRepository mExerciseRepository;
 
     public static ExerciseContainer getInstance() {
@@ -31,57 +31,43 @@ public class ExerciseContainer {
         mExerciseRepository = repo;
     }
 
-    public ExerciseRepository getRepository() {
-        return mExerciseRepository;
-    }
-
-
     public ArrayList<Exercise> getExercises(Context context) {
-        mExercises = mExerciseRepository.getAllExercises(context);
-        return mExercises;
-    }
-
-    public void save(Context context) {
-        mExerciseRepository.saveExercises(context, mExercises);
-        mExercises = getExercises(context);
+        return mExerciseRepository.getAllExercises(context);
     }
 
     public void save(Context context, Exercise exercise) {
         mExerciseRepository.saveExercise(context, exercise);
-        mExercises = getExercises(context);
     }
 
     public Exercise getDefaultExercise() {
         Exercise exercise = new Exercise();
 
-        exercise.setName("New Exercise");
+        exercise.setName("");
 
         exercise.setExerciseType(Exercise.ExerciseType.STRENGTH);
 
         ExerciseMeasure measure = new ExerciseMeasure();
         measure.setMeasure(0);
         measure.setForce(0);
-        measure.setForceUnits(ExerciseMeasure.Units.LBS);
-        measure.setMeasureUnits(ExerciseMeasure.Units.MILES);
+        measure.setForceUnits(ExerciseMeasure.Unit.LBS);
+        measure.setMeasureUnits(ExerciseMeasure.Unit.MILES);
         exercise.setMaxIntensityExerciseMeasure(measure);
 
         exercise.setHighIntensity(new Intensity(100, 100));
         exercise.setMedIntensity(new Intensity(100, 100));
         exercise.setLowIntensity(new Intensity(100, 100));
 
-        exercise.setDescription("Exercise Description");
+        exercise.setDescription("");
 
         exercise.setMuscleGroup(Exercise.MuscleGroup.ABS);
 
         return exercise;
     }
 
-    public int createDefaultExercise(Context context) {
+    public Exercise createDefaultExercise(Context context) {
         Exercise exercise = getDefaultExercise();
         save(context, exercise);
-        int i = mExercises.indexOf(exercise);
-        return i;
-
+        return exercise;
     }
 
     private ArrayList<String> getMusclesArray() {
@@ -105,8 +91,8 @@ public class ExerciseContainer {
     private ArrayList<String> getResistanceUnitsArray() {
         ArrayList<String> myArray = new ArrayList<>();
 
-        for (ExerciseMeasure.Units u : ExerciseMeasure.Units.values()) {
-            if (u.getUnitKind() == ExerciseMeasure.UnitKind.WEIGHT) {
+        for (ExerciseMeasure.Unit u : ExerciseMeasure.Unit.values()) {
+            if (u.getUnitKind() == ExerciseMeasure.UnitKind.WEIGHT || u.getUnitKind() == ExerciseMeasure.UnitKind.RATE) {
                 myArray.add(u.getUnitName());
             }
         }
@@ -116,8 +102,8 @@ public class ExerciseContainer {
     private ArrayList<String> getMeasurementUnitsArray() {
         ArrayList<String> myArray = new ArrayList<>();
 
-        for (ExerciseMeasure.Units u : ExerciseMeasure.Units.values()) {
-            if (u.getUnitKind() != ExerciseMeasure.UnitKind.WEIGHT) {
+        for (ExerciseMeasure.Unit u : ExerciseMeasure.Unit.values()) {
+            if (!(u.getUnitKind() == ExerciseMeasure.UnitKind.WEIGHT || u.getUnitKind() == ExerciseMeasure.UnitKind.RATE)) {
                 myArray.add(u.getUnitName());
             }
         }
@@ -127,48 +113,41 @@ public class ExerciseContainer {
     private ArrayList<String> getUnitsArray() {
         ArrayList<String> myArray = new ArrayList<>();
 
-        for (ExerciseMeasure.Units u : ExerciseMeasure.Units.values()) {
+        for (ExerciseMeasure.Unit u : ExerciseMeasure.Unit.values()) {
             myArray.add(u.getUnitName());
         }
         return myArray;
     }
 
     public ArrayAdapter<String> getMuscleArrayAdapter(Context context) {
-
-        ArrayAdapter<String> aa = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, getMusclesArray());
-        return aa;
+        return new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, getMusclesArray());
     }
 
     public ArrayAdapter<String> getExerciseTypeArrayAdapter(Context context) {
-        ArrayAdapter<String> aa = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, getExerciseTypeArray());
-        return aa;
-
+        return new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, getExerciseTypeArray());
     }
 
     public ArrayAdapter<String> getResistanceUnitsArrayAdapter(Context context) {
-        ArrayAdapter<String> aa = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, getResistanceUnitsArray());
-        return aa;
-
+        return new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, getResistanceUnitsArray());
     }
 
     public ArrayAdapter<String> getMeasurementUnitsArrayAdapter(Context context) {
-        ArrayAdapter<String> aa = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, getMeasurementUnitsArray());
-        return aa;
-
+        return new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, getMeasurementUnitsArray());
     }
 
     public ArrayAdapter<String> getUnitsArrayAdapter(Context context) {
-        ArrayAdapter<String> aa = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, getUnitsArray());
-        return aa;
-
+        return new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, getUnitsArray());
     }
 
     public ExerciseAdapter getExerciseAdapter(Context context) {
-        ExerciseAdapter ea = new ExerciseAdapter(context, getExercises(context));
-        return ea;
+        return new ExerciseAdapter(context, getExercises(context));
     }
 
     public void delete(Context context, Exercise exercise) {
         mExerciseRepository.deleteExercise(context, exercise);
+    }
+
+    public Exercise getExerciseByName(Context context, String exerciseName) {
+        return mExerciseRepository.getExerciseByName(context, exerciseName);
     }
 }
