@@ -53,16 +53,6 @@ public class FitnessTestContainer {
         return fitnessTests;
     }
 
-//    public void save(Context context) {
-//        mFitnessTestRepository.saveFitnessTests(context, mFitnessTests);
-//        mFitnessTests = getFitnessTests(context);
-//    }
-//
-//    public void save(Context context, FitnessTest fitnessTest) {
-//        mFitnessTestRepository.saveFitnessTest(context, fitnessTest);
-//        mFitnessTests = getFitnessTests(context);
-//    }
-
     public FitnessTestAdapter getRecentFitnessTestAdapter(Context context) {
         FitnessTestAdapter ea = new FitnessTestAdapter(context, getRecentFitnessTests(context));
         return ea;

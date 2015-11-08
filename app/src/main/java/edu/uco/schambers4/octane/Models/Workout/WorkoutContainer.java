@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
 
-import edu.uco.schambers4.octane.DataAccessObjects.Exercise.ExerciseRepository;
 import edu.uco.schambers4.octane.DataAccessObjects.Workout.InternalStorageWorkoutRepository;
 import edu.uco.schambers4.octane.DataAccessObjects.Workout.WorkoutRepository;
 
@@ -16,12 +15,11 @@ public class WorkoutContainer {
     private static WorkoutContainer ourInstance;
     private ArrayList<Workout> mWorkouts;
     private WorkoutRepository mWorkoutRepository;
-    private ExerciseRepository mExerciseRepository;
 
-    public static WorkoutContainer getInstance(ExerciseRepository exerciseRepository) {
+    public static WorkoutContainer getInstance() {
         if (ourInstance == null) {
             WorkoutRepository repo = new InternalStorageWorkoutRepository();
-            ourInstance = new WorkoutContainer(repo, exerciseRepository);
+            ourInstance = new WorkoutContainer(repo);
         }
         return ourInstance;
     }
@@ -32,10 +30,8 @@ public class WorkoutContainer {
         }
     }
 
-    private WorkoutContainer(WorkoutRepository repo, ExerciseRepository exerciseRepository) {
+    private WorkoutContainer(WorkoutRepository repo) {
         mWorkoutRepository = repo;
-        mExerciseRepository = exerciseRepository;
-
     }
 
 
@@ -86,7 +82,8 @@ public class WorkoutContainer {
 
 
         for (Map.Entry<String, Integer> h : mWorkouts.get(index).getExerciseSets().entrySet()) {
-            Exercise exercise = mExerciseRepository.getExerciseByName(context, h.getKey());
+            ExerciseContainer exerciseContainer = ExerciseContainer.getInstance();
+            Exercise exercise = exerciseContainer.getExerciseByName(context, h.getKey());
             if (exercise != null) {
                 ae.add(exercise);
             }
@@ -124,8 +121,9 @@ public class WorkoutContainer {
 
     private ArrayList<Exercise> getExercisesByWorkout(Context context, Workout workout) {
         ArrayList<Exercise> exercises = new ArrayList<>();
+        ExerciseContainer exerciseContainer = ExerciseContainer.getInstance();
         for(Map.Entry<String, Integer> n:workout.getExerciseSets().entrySet()){
-            Exercise e = mExerciseRepository.getExerciseByName(context, n.getKey());
+            Exercise e = exerciseContainer.getExerciseByName(context, n.getKey());
             if (e != null){
                 exercises.add(e);
             }

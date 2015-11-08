@@ -34,8 +34,7 @@ import edu.uco.schambers4.octane.R;
  */
 public class WorkoutDetailFragment extends Fragment {
 
-    ExerciseContainer mExerciseContainer = ExerciseContainer.getInstance();
-    WorkoutContainer mWorkoutContainer = WorkoutContainer.getInstance(mExerciseContainer.getRepository());
+    WorkoutContainer mWorkoutContainer = WorkoutContainer.getInstance();
     Workout mWorkout;
 
     @Bind(R.id.workout_name_et)
@@ -129,7 +128,8 @@ public class WorkoutDetailFragment extends Fragment {
     }
 
     private void loadAddExerciseDialog() {
-        ExerciseAdapter exerciseAdapter = mExerciseContainer.getExerciseAdapter(getActivity());
+        ExerciseContainer exerciseContainer = ExerciseContainer.getInstance();
+        ExerciseAdapter exerciseAdapter = exerciseContainer.getExerciseAdapter(getActivity());
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Choose an exercise")
@@ -220,7 +220,6 @@ public class WorkoutDetailFragment extends Fragment {
                         .getPosition(mWorkout.getIntensityLevel().getLevel())
         );
 
-        //WorkoutExerciseAdapter workoutExerciseAdapter = new WorkoutExerciseAdapter(context, mWorkoutContainer.getExercises(context, getShownIndex()), mWorkout);
         WorkoutExerciseAdapter workoutExerciseAdapter = mWorkoutContainer.getWorkoutExerciseAdapter(context, mWorkout);
         mExerciseList.setAdapter(workoutExerciseAdapter);
 

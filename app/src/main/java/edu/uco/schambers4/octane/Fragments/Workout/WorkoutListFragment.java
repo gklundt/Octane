@@ -16,8 +16,7 @@ public class WorkoutListFragment extends ListFragment implements AddFragment.OnA
 
     private int mCurCheckPosition = 0;
 
-    private ExerciseContainer mExerciseContainer = ExerciseContainer.getInstance();
-    private WorkoutContainer mWorkoutContainer =  WorkoutContainer.getInstance(mExerciseContainer.getRepository());
+    private WorkoutContainer mWorkoutContainer =  WorkoutContainer.getInstance();
 
     private final String FABTAG = "add_workout_fab";
 
