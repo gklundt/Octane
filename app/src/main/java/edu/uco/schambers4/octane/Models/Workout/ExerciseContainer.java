@@ -171,4 +171,8 @@ public class ExerciseContainer {
     public void delete(Context context, Exercise exercise) {
         mExerciseRepository.deleteExercise(context, exercise);
     }
+
+    public Exercise getExerciseByName(Context context, String exerciseName) {
+        return mExerciseRepository.getExerciseByName(context, exerciseName);
+    }
 }

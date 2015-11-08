@@ -1,5 +1,7 @@
 package edu.uco.schambers4.octane.DataAccessObjects.FitnessTest;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -10,15 +12,19 @@ import edu.uco.schambers4.octane.Models.Workout.FitnessTest;
  */
 public interface FitnessTestRepository {
     /* read functions */
-    FitnessTest getFitnessTest(String exerciseName, Date date);
-    ArrayList<FitnessTest> getFitnessTestsForExercise(String exerciseName);
+    FitnessTest getFitnessTest(Context context, String exerciseName, Date date);
+    ArrayList<FitnessTest> getFitnessTestsForExercise(Context context, String exerciseName);
+    FitnessTest getLastFitnessTestsForExercise(Context context, String exerciseName);
 
     /* insert and update functions */
-    void saveFitnessTest(FitnessTest fitnessTest);
-    void saveFitnessTests(ArrayList<FitnessTest> fitnessTests);
+    void saveFitnessTests(Context context, ArrayList<FitnessTest> fitnessTests);
+    void saveFitnessTest(Context context, FitnessTest fitnessTest);
 
     /* delete functions */
-    void deleteTest(String exerciseName, Date date);
-    void deleteFitnessTestHistory(String exerciseName);
-    void deleteAllHistory();
+    void deleteFitnessTest(Context context, FitnessTest fitnessTest);
+    void deleteFitnessTestHistory(Context context, String exerciseName);
+    void deleteAllHistory(Context context);
+
+
+
 }
