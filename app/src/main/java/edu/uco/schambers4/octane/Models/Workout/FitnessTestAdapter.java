@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import edu.uco.schambers4.octane.R;
 
@@ -32,8 +33,10 @@ public class FitnessTestAdapter extends ArrayAdapter<FitnessTest> {
         tvName.setText(String.format("%s", fitnessTest.getExerciseName()));
 
         TextView tvDate = (TextView) convertView.findViewById(R.id.tvDate);
+        Date d = fitnessTest.getDate();
         if (fitnessTest.getDate() != null) {
-            tvDate.setText(String.format("%tm/%td/%tY", fitnessTest.getDate()));
+            tvDate.setText(String.format("%tm/%td/%tY", d, d, d)
+            );
         } else {
             tvDate.setText("");
         }

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import edu.uco.schambers4.octane.Models.Workout.ExerciseContainer;
 import edu.uco.schambers4.octane.Models.Workout.ExerciseMeasure;
 import edu.uco.schambers4.octane.Models.Workout.FitnessTest;
 import edu.uco.schambers4.octane.Models.Workout.FitnessTestContainer;
+import edu.uco.schambers4.octane.Models.Workout.FitnessTestHistoryAdapter;
 import edu.uco.schambers4.octane.R;
 
 /**
@@ -42,6 +44,8 @@ public class FitnessTestDetailFragment extends Fragment {
     EditText mMeasureValEt;
     @Bind(R.id.fitness_test_measure_unit_tv)
     TextView mMeasureUnitTv;
+    @Bind(R.id.fragment_fitness_test_history_lv)
+    ListView mFitnessTestList;
 
     @Bind(R.id.add_fitness_test_fab)
     FloatingActionButton mUpdateFitnessTest;
@@ -108,7 +112,7 @@ public class FitnessTestDetailFragment extends Fragment {
         }
         ExerciseMeasure.Unit fResistanceUnit;
         ExerciseMeasure.Unit fMeasureUnit;
-        if(mFitnessTest.getExerciseMeasure() != null ){
+        if (mFitnessTest.getExerciseMeasure() != null) {
             fResistanceUnit = mFitnessTest.getExerciseMeasure().getForceUnits();
             fMeasureUnit = mFitnessTest.getExerciseMeasure().getMeasureUnits();
         } else {
@@ -163,12 +167,18 @@ public class FitnessTestDetailFragment extends Fragment {
             mMeasureUnitTv.setText(String.format("%s", mFitnessTest.getExerciseMeasure().getMeasureUnits().getUnitName()));
 
             mForceValEt.setText(mFitnessTest.getExerciseMeasure().getForce().toString());
-            mMeasureValEt.setText(mFitnessTest.getExerciseMeasure().getForce().toString());
+            mMeasureValEt.setText(mFitnessTest.getExerciseMeasure().getMeasure().toString());
         } else {
             Exercise exercise = ExerciseContainer.getInstance().getExerciseByName(context, mFitnessTest.getExerciseName());
             mForceMsrTv.setText(exercise.getMaxIntensityExerciseMeasure().getForceUnits().getUnitName());
             mMeasureUnitTv.setText(exercise.getMaxIntensityExerciseMeasure().getMeasureUnits().getUnitName());
         }
+
+        FitnessTestHistoryAdapter fitnessTestHistoryAdapter = new FitnessTestHistoryAdapter(context
+                , mFitnessTestContainer.getFitnessTests(context, mFitnessTest.getExerciseName()));
+
+        mFitnessTestList.setAdapter(fitnessTestHistoryAdapter);
+
     }
 
 

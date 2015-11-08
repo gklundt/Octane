@@ -220,8 +220,8 @@ public class WorkoutDetailFragment extends Fragment {
                         .getPosition(mWorkout.getIntensityLevel().getLevel())
         );
 
-        WorkoutExerciseAdapter workoutExerciseAdapter = new WorkoutExerciseAdapter(context, mWorkoutContainer.getExercises(context, getShownIndex()), mWorkout);
-
+        //WorkoutExerciseAdapter workoutExerciseAdapter = new WorkoutExerciseAdapter(context, mWorkoutContainer.getExercises(context, getShownIndex()), mWorkout);
+        WorkoutExerciseAdapter workoutExerciseAdapter = mWorkoutContainer.getWorkoutExerciseAdapter(context, mWorkout);
         mExerciseList.setAdapter(workoutExerciseAdapter);
 
     }

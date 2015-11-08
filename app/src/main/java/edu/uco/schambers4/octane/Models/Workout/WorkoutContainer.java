@@ -54,7 +54,7 @@ public class WorkoutContainer {
 
     private Workout getDefaultWorkout() {
         Map<String, Integer> map = new Hashtable<>();
-        Workout workout = new Workout("NewWorkout", map, Workout.IntensityLevel.LOW, 3);
+        Workout workout = new Workout("", map, Workout.IntensityLevel.LOW, 3);
         return workout;
     }
 
@@ -114,7 +114,23 @@ public class WorkoutContainer {
     }
 
     public void updateExercise(Context context, Workout workout, Exercise exercise, int i) {
-        workout.updateExerciseSet(exercise.getName(),i);
-        mWorkoutRepository.saveWorkout(context,workout);
+        workout.updateExerciseSet(exercise.getName(), i);
+        mWorkoutRepository.saveWorkout(context, workout);
+    }
+
+    public WorkoutExerciseAdapter getWorkoutExerciseAdapter(Context context, Workout workout) {
+        return new WorkoutExerciseAdapter(context, getExercisesByWorkout(context, workout), workout);
+    }
+
+    private ArrayList<Exercise> getExercisesByWorkout(Context context, Workout workout) {
+        ArrayList<Exercise> exercises = new ArrayList<>();
+        for(Map.Entry<String, Integer> n:workout.getExerciseSets().entrySet()){
+            Exercise e = mExerciseRepository.getExerciseByName(context, n.getKey());
+            if (e != null){
+                exercises.add(e);
+            }
+
+        }
+        return exercises;
     }
 }

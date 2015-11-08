@@ -115,7 +115,7 @@ public class ExerciseDetailFragment extends Fragment {
 
         String fExerciseName;
         fExerciseName = mExerciseNameEt.getText().toString();
-        if (fExerciseName == null) {
+        if (fExerciseName == null || fExerciseName.trim().length() == 0) {
             Toast.makeText(context, "Exercise Name", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -124,7 +124,7 @@ public class ExerciseDetailFragment extends Fragment {
 
         String fExerciseDescription;
         fExerciseDescription = mExerciseDescriptionEt.getText().toString();
-        if (fExerciseDescription == null) {
+        if (fExerciseDescription == null || fExerciseDescription.trim().length() == 0) {
             Toast.makeText(context, "Exercise Description", Toast.LENGTH_SHORT).show();
             return;
         }

@@ -28,7 +28,7 @@
                         android:layout_span="3"
                         android:layout_weight="1"
                         android:inputType="textCapWords"
-                        android:text="Exercise Name"/>
+                        android:hint="Exercise Name"/>
 
                 </TableRow>
 
@@ -40,7 +40,7 @@
                         android:layout_height="wrap_content"
                         android:layout_span="3"
                         android:layout_weight="1"
-                        android:text="Exercise Description"/>
+                        android:hint="Exercise Description"/>
 
                 </TableRow>
 
@@ -143,6 +143,9 @@
                         android:layout_height="wrap_content"
                         android:layout_span="1"
                         android:layout_weight="1"
+                        android:paddingTop="@dimen/activity_horizontal_margin"
+                        android:textSize="@dimen/abc_text_size_medium_material"
+                        android:textStyle="bold"
                         android:text="Intensity"/>
 
 
@@ -151,14 +154,20 @@
                         android:layout_height="wrap_content"
                         android:layout_span="1"
                         android:layout_weight="1"
-                        android:text="Qty %"/>
+                        android:paddingTop="@dimen/activity_horizontal_margin"
+                        android:textSize="@dimen/abc_text_size_medium_material"
+                        android:textStyle="bold"
+                        android:text="Resistance %"/>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_span="1"
                         android:layout_weight="1"
-                        android:text="Msr %"/>
+                        android:paddingTop="@dimen/activity_horizontal_margin"
+                        android:textSize="@dimen/abc_text_size_medium_material"
+                        android:textStyle="bold"
+                        android:text="Measure %"/>
 
 
                 </TableRow>

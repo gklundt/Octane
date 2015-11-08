@@ -52,4 +52,9 @@ public class MockFitnessTestRepository implements FitnessTestRepository{
 
     }
 
+    @Override
+    public ArrayList<FitnessTest> getAllFitnessTests(Context context) {
+        return null;
+    }
+
 }

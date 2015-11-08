@@ -15,6 +15,7 @@ public interface FitnessTestRepository {
     FitnessTest getFitnessTest(Context context, String exerciseName, Date date);
     ArrayList<FitnessTest> getFitnessTestsForExercise(Context context, String exerciseName);
     FitnessTest getLastFitnessTestsForExercise(Context context, String exerciseName);
+    ArrayList<FitnessTest> getAllFitnessTests(Context context);
 
     /* insert and update functions */
     void saveFitnessTests(Context context, ArrayList<FitnessTest> fitnessTests);
@@ -24,7 +25,6 @@ public interface FitnessTestRepository {
     void deleteFitnessTest(Context context, FitnessTest fitnessTest);
     void deleteFitnessTestHistory(Context context, String exerciseName);
     void deleteAllHistory(Context context);
-
 
 
 }

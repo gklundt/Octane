@@ -54,7 +54,7 @@ public class ExerciseContainer {
     public Exercise getDefaultExercise() {
         Exercise exercise = new Exercise();
 
-        exercise.setName("New Exercise");
+        exercise.setName("");
 
         exercise.setExerciseType(Exercise.ExerciseType.STRENGTH);
 
@@ -69,7 +69,7 @@ public class ExerciseContainer {
         exercise.setMedIntensity(new Intensity(100, 100));
         exercise.setLowIntensity(new Intensity(100, 100));
 
-        exercise.setDescription("Exercise Description");
+        exercise.setDescription("");
 
         exercise.setMuscleGroup(Exercise.MuscleGroup.ABS);
 
