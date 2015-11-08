@@ -13,7 +13,6 @@ import edu.uco.schambers4.octane.DataAccessObjects.Workout.WorkoutRepository;
 public class WorkoutContainer {
 
     private static WorkoutContainer ourInstance;
-    private ArrayList<Workout> mWorkouts;
     private WorkoutRepository mWorkoutRepository;
 
     public static WorkoutContainer getInstance() {
@@ -24,24 +23,12 @@ public class WorkoutContainer {
         return ourInstance;
     }
 
-    public static void DestroyWorkoutContainer() {
-        if (ourInstance != null) {
-            ourInstance = null;
-        }
-    }
-
     private WorkoutContainer(WorkoutRepository repo) {
         mWorkoutRepository = repo;
     }
 
-
     public ArrayList<Workout> getWorkouts(Context context) {
-        mWorkouts = mWorkoutRepository.getAllWorkouts(context);
-        return mWorkouts;
-    }
-
-    public void save(Context context) {
-        mWorkoutRepository.saveWorkouts(context, mWorkouts);
+        return mWorkoutRepository.getAllWorkouts(context);
     }
 
     public void save(Context context, Workout workout) {
@@ -50,17 +37,14 @@ public class WorkoutContainer {
 
     private Workout getDefaultWorkout() {
         Map<String, Integer> map = new Hashtable<>();
-        Workout workout = new Workout("", map, Workout.IntensityLevel.LOW, 3);
-        return workout;
+        return new Workout("", map, Workout.IntensityLevel.LOW, 3);
     }
 
-    public int createDefaultWorkout(Context context) {
+    public Workout createDefaultWorkout(Context context) {
         Workout workout = getDefaultWorkout();
         save(context, workout);
-        int i = mWorkouts.indexOf(workout);
-        return i;
+        return workout;
     }
-
 
     private ArrayList<String> getIntensityLevelArray() {
         ArrayList<String> myArray = new ArrayList<>();
@@ -72,24 +56,7 @@ public class WorkoutContainer {
     }
 
     public ArrayAdapter<String> getWorkoutIntensityArrayAdapter(Context context) {
-        ArrayAdapter<String> aa = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, getIntensityLevelArray());
-        return aa;
-
-    }
-
-    public ArrayList<Exercise> getExercises(Context context, int index) {
-        ArrayList<Exercise> ae = new ArrayList<>();
-
-
-        for (Map.Entry<String, Integer> h : mWorkouts.get(index).getExerciseSets().entrySet()) {
-            ExerciseContainer exerciseContainer = ExerciseContainer.getInstance();
-            Exercise exercise = exerciseContainer.getExerciseByName(context, h.getKey());
-            if (exercise != null) {
-                ae.add(exercise);
-            }
-        }
-
-        return ae;
+        return new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, getIntensityLevelArray());
     }
 
     public WorkoutAdapter getWorkoutAdapter(Context context) {
@@ -131,4 +98,15 @@ public class WorkoutContainer {
         }
         return exercises;
     }
+
+    public Workout getWorkoutByName(Context context, String workoutName){
+        return mWorkoutRepository.getWorkout(context, workoutName);
+    }
+
+    public static void DestroyWorkoutContainer() {
+        if (ourInstance != null) {
+            ourInstance = null;
+        }
+    }
+
 }

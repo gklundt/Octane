@@ -29,14 +29,8 @@ public class FitnessTestContainer {
         mFitnessTestRepository = repo;
     }
 
-    public FitnessTestRepository getRepository() {
-        return mFitnessTestRepository;
-    }
-
-
     public ArrayList<FitnessTest> getFitnessTests(Context context, String exerciseName) {
-        ArrayList<FitnessTest> fitnessTests = mFitnessTestRepository.getFitnessTestsForExercise(context, exerciseName);
-        return fitnessTests;
+        return mFitnessTestRepository.getFitnessTestsForExercise(context, exerciseName);
     }
 
     public ArrayList<FitnessTest> getRecentFitnessTests(Context context) {
@@ -54,8 +48,7 @@ public class FitnessTestContainer {
     }
 
     public FitnessTestAdapter getRecentFitnessTestAdapter(Context context) {
-        FitnessTestAdapter ea = new FitnessTestAdapter(context, getRecentFitnessTests(context));
-        return ea;
+        return new FitnessTestAdapter(context, getRecentFitnessTests(context));
     }
 
     public void delete(Context context, FitnessTest fitnessTest) {

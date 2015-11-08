@@ -10,7 +10,7 @@ import edu.uco.schambers4.octane.DataAccessObjects.Exercise.InternalStorageExerc
 
 public class ExerciseContainer {
     private static ExerciseContainer ourInstance;
-    private ArrayList<Exercise> mExercises;
+    //private ArrayList<Exercise> mExercises;
     private ExerciseRepository mExerciseRepository;
 
     public static ExerciseContainer getInstance() {
@@ -31,24 +31,12 @@ public class ExerciseContainer {
         mExerciseRepository = repo;
     }
 
-    public ExerciseRepository getRepository() {
-        return mExerciseRepository;
-    }
-
-
     public ArrayList<Exercise> getExercises(Context context) {
-        mExercises = mExerciseRepository.getAllExercises(context);
-        return mExercises;
-    }
-
-    public void save(Context context) {
-        mExerciseRepository.saveExercises(context, mExercises);
-        mExercises = getExercises(context);
+        return mExerciseRepository.getAllExercises(context);
     }
 
     public void save(Context context, Exercise exercise) {
         mExerciseRepository.saveExercise(context, exercise);
-        mExercises = getExercises(context);
     }
 
     public Exercise getDefaultExercise() {
@@ -76,12 +64,10 @@ public class ExerciseContainer {
         return exercise;
     }
 
-    public int createDefaultExercise(Context context) {
+    public Exercise createDefaultExercise(Context context) {
         Exercise exercise = getDefaultExercise();
         save(context, exercise);
-        int i = mExercises.indexOf(exercise);
-        return i;
-
+        return exercise;
     }
 
     private ArrayList<String> getMusclesArray() {
@@ -134,38 +120,27 @@ public class ExerciseContainer {
     }
 
     public ArrayAdapter<String> getMuscleArrayAdapter(Context context) {
-
-        ArrayAdapter<String> aa = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, getMusclesArray());
-        return aa;
+        return new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, getMusclesArray());
     }
 
     public ArrayAdapter<String> getExerciseTypeArrayAdapter(Context context) {
-        ArrayAdapter<String> aa = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, getExerciseTypeArray());
-        return aa;
-
+        return new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, getExerciseTypeArray());
     }
 
     public ArrayAdapter<String> getResistanceUnitsArrayAdapter(Context context) {
-        ArrayAdapter<String> aa = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, getResistanceUnitsArray());
-        return aa;
-
+        return new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, getResistanceUnitsArray());
     }
 
     public ArrayAdapter<String> getMeasurementUnitsArrayAdapter(Context context) {
-        ArrayAdapter<String> aa = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, getMeasurementUnitsArray());
-        return aa;
-
+        return new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, getMeasurementUnitsArray());
     }
 
     public ArrayAdapter<String> getUnitsArrayAdapter(Context context) {
-        ArrayAdapter<String> aa = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, getUnitsArray());
-        return aa;
-
+        return new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, getUnitsArray());
     }
 
     public ExerciseAdapter getExerciseAdapter(Context context) {
-        ExerciseAdapter ea = new ExerciseAdapter(context, getExercises(context));
-        return ea;
+        return new ExerciseAdapter(context, getExercises(context));
     }
 
     public void delete(Context context, Exercise exercise) {

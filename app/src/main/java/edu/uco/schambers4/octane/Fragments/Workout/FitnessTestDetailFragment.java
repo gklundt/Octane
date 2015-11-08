@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ import edu.uco.schambers4.octane.Models.Workout.Exercise;
 import edu.uco.schambers4.octane.Models.Workout.ExerciseContainer;
 import edu.uco.schambers4.octane.Models.Workout.ExerciseMeasure;
 import edu.uco.schambers4.octane.Models.Workout.FitnessTest;
+import edu.uco.schambers4.octane.Models.Workout.FitnessTestAdapter;
 import edu.uco.schambers4.octane.Models.Workout.FitnessTestContainer;
 import edu.uco.schambers4.octane.Models.Workout.FitnessTestHistoryAdapter;
 import edu.uco.schambers4.octane.R;
@@ -88,8 +90,18 @@ public class FitnessTestDetailFragment extends Fragment {
         }
 
         mUpdateFitnessTest.setOnClickListener(v -> doUpdate());
+        mFitnessTestList.setOnItemLongClickListener((parent, view1, position, id) -> deleteFitnessTest(parent, position));
 
         return view;
+    }
+
+    private boolean deleteFitnessTest(AdapterView<?> parent, int position) {
+        FitnessTest fitnessTest= (FitnessTest) parent.getAdapter().getItem(position);
+        mFitnessTestContainer.delete(getActivity().getApplicationContext(), fitnessTest);
+        FitnessTestHistoryAdapter fitnessTestHistoryAdapter= (FitnessTestHistoryAdapter) mFitnessTestList.getAdapter();
+        fitnessTestHistoryAdapter.remove(fitnessTest);
+        fitnessTestHistoryAdapter.notifyDataSetChanged();
+        return false;
     }
 
     private void doUpdate() {
@@ -141,7 +153,7 @@ public class FitnessTestDetailFragment extends Fragment {
         exercise.setMaxIntensityExerciseMeasure(fFitnessTestMeasure);
         exerciseContainer.save(context, exercise);
 
-        mFitnessTestContainer.delete(context, mFitnessTest);
+        //mFitnessTestContainer.delete(context, mFitnessTest);
         mFitnessTestContainer.save(context, replacement);
         getActivity().onBackPressed();
     }
@@ -170,8 +182,11 @@ public class FitnessTestDetailFragment extends Fragment {
             mMeasureValEt.setText(mFitnessTest.getExerciseMeasure().getMeasure().toString());
         } else {
             Exercise exercise = ExerciseContainer.getInstance().getExerciseByName(context, mFitnessTest.getExerciseName());
-            mForceMsrTv.setText(exercise.getMaxIntensityExerciseMeasure().getForceUnits().getUnitName());
-            mMeasureUnitTv.setText(exercise.getMaxIntensityExerciseMeasure().getMeasureUnits().getUnitName());
+            ExerciseMeasure exerciseMeasure = exercise.getMaxIntensityExerciseMeasure();
+            mForceValEt.setText(exerciseMeasure.getForce().toString());
+            mMeasureValEt.setText(exerciseMeasure.getMeasure().toString());
+            mForceMsrTv.setText(exerciseMeasure.getForceUnits().getUnitName());
+            mMeasureUnitTv.setText(exerciseMeasure.getMeasureUnits().getUnitName());
         }
 
         FitnessTestHistoryAdapter fitnessTestHistoryAdapter = new FitnessTestHistoryAdapter(context

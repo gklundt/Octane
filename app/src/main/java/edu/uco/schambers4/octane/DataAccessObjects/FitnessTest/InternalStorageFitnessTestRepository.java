@@ -15,11 +15,16 @@ public class InternalStorageFitnessTestRepository implements FitnessTestReposito
 
     ArrayList<FitnessTest> mFitnessTests;
 
+    private boolean DateTest(Date lhs, Date rhs) {
+        return String.format("%tm/%td/%tY", lhs, lhs, lhs)
+                .equals(String.format("%tm/%td/%tY", rhs, rhs, rhs));
+    }
+
     @Override
     public FitnessTest getFitnessTest(Context context, String exerciseName, Date date) {
         loadCheck(context);
         for (FitnessTest f : mFitnessTests) {
-            if (f.getExerciseName().equals(exerciseName) && f.getDate().equals(date)) {
+            if (f.getExerciseName().equals(exerciseName) && DateTest(f.getDate(), date)) {
                 return f;
             }
         }
@@ -59,7 +64,7 @@ public class InternalStorageFitnessTestRepository implements FitnessTestReposito
 
     @Override
     public void saveFitnessTests(Context context, ArrayList<FitnessTest> fitnessTests) {
-        for(FitnessTest f:fitnessTests){
+        for (FitnessTest f : fitnessTests) {
             saveFitnessTest(context, f);
         }
     }
@@ -70,7 +75,8 @@ public class InternalStorageFitnessTestRepository implements FitnessTestReposito
         boolean found = false;
         int pos = 0;
         for (FitnessTest f : mFitnessTests) {
-            if (f.getExerciseName().equals(fitnessTest.getExerciseName())) {
+            if (f.getExerciseName().equals(fitnessTest.getExerciseName())
+                    && DateTest(f.getDate(), fitnessTest.getDate())) {
                 found = true;
                 break;
             }
@@ -93,8 +99,9 @@ public class InternalStorageFitnessTestRepository implements FitnessTestReposito
         loadCheck(context);
         boolean found = false;
         int pos = 0;
-        for (FitnessTest w : mFitnessTests) {
-            if (w.getExerciseName().equals(fitnessTest.getExerciseName())) {
+        for (FitnessTest f : mFitnessTests) {
+            if (f.getExerciseName().equals(fitnessTest.getExerciseName())
+                    && DateTest(f.getDate(), fitnessTest.getDate())) {
                 found = true;
                 break;
             }
@@ -115,7 +122,7 @@ public class InternalStorageFitnessTestRepository implements FitnessTestReposito
     public void deleteFitnessTestHistory(Context context, String exerciseName) {
         loadCheck(context);
         ArrayList<FitnessTest> fitnessTests = getFitnessTestsForExercise(context, exerciseName);
-        for(FitnessTest f : fitnessTests){
+        for (FitnessTest f : fitnessTests) {
             deleteFitnessTest(context, f);
         }
     }
@@ -123,7 +130,7 @@ public class InternalStorageFitnessTestRepository implements FitnessTestReposito
     @Override
     public void deleteAllHistory(Context context) {
         ArrayList<FitnessTest> fitnessTests = getAllFitnessTests(context);
-        for(FitnessTest f : fitnessTests){
+        for (FitnessTest f : fitnessTests) {
             deleteFitnessTest(context, f);
         }
     }
@@ -140,26 +147,20 @@ public class InternalStorageFitnessTestRepository implements FitnessTestReposito
     }
 
     private ArrayList<FitnessTest> load(Context context) throws IOException, ClassNotFoundException {
-        ArrayList<FitnessTest> ae = (ArrayList<FitnessTest>)
+        return (ArrayList<FitnessTest>)
                 InternalStorage.readObject(context, InternalStorage.STORAGE_KEY_FITNESSTESTS);
-        return ae;
     }
 
 
     private void loadCheck(Context context) {
-        if (mFitnessTests == null) {
-            try {
-                mFitnessTests = load(context);
-                if (mFitnessTests == null) {
-                    mFitnessTests = new ArrayList<>();
-                }
-            } catch (IOException e) {
+        if (mFitnessTests == null) try {
+            mFitnessTests = load(context);
+            if (mFitnessTests == null) {
                 mFitnessTests = new ArrayList<>();
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                mFitnessTests = new ArrayList<>();
-                e.printStackTrace();
             }
+        } catch (IOException | ClassNotFoundException e) {
+            mFitnessTests = new ArrayList<>();
+            e.printStackTrace();
         }
     }
 }

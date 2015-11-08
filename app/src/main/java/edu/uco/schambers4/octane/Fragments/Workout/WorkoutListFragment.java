@@ -8,6 +8,7 @@ import android.widget.ListView;
 
 import edu.uco.schambers4.octane.Activities.MainActivity;
 import edu.uco.schambers4.octane.Models.Workout.ExerciseContainer;
+import edu.uco.schambers4.octane.Models.Workout.Workout;
 import edu.uco.schambers4.octane.Models.Workout.WorkoutAdapter;
 import edu.uco.schambers4.octane.Models.Workout.WorkoutContainer;
 import edu.uco.schambers4.octane.R;
@@ -75,8 +76,10 @@ public class WorkoutListFragment extends ListFragment implements AddFragment.OnA
 
     public void add() {
 
-        int val = mWorkoutContainer.createDefaultWorkout(getActivity().getApplicationContext());
-        showDetails(val);
+        Workout workout = mWorkoutContainer.createDefaultWorkout(getActivity().getApplicationContext());
+        WorkoutAdapter workoutAdapter = (WorkoutAdapter)getListAdapter();
+        workoutAdapter.notifyDataSetChanged();
+        showDetails(workoutAdapter.getPosition(workout));
     }
 
 }
