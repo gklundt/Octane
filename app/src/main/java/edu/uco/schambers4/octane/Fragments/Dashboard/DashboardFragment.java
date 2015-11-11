@@ -18,6 +18,7 @@ import android.widget.Spinner;
 import com.telerik.widget.calendar.CalendarSelectionMode;
 import com.telerik.widget.calendar.RadCalendarView;
 import com.telerik.widget.calendar.events.Event;
+import com.telerik.widget.calendar.events.EventsDisplayMode;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -108,6 +109,7 @@ public class DashboardFragment extends Fragment {
     private void initializeCalendar()
     {
         calendar.setSelectionMode(CalendarSelectionMode.Single);
+        calendar.setEventsDisplayMode(EventsDisplayMode.Popup);
 
         calendar.setOnSelectedDatesChangedListener((context) -> {
             Date date = new Date(context.newSelection().get(0));
@@ -126,7 +128,7 @@ public class DashboardFragment extends Fragment {
         ArrayList<Schedule<Workout>> workouts = WorkoutScheduleDatabase.getAllSchedules();
 
         for(Schedule<Workout> workout : workouts) {
-            Event event = new Event(workout.getItem().getName(), workout.getDate().getTime(), workout.getDate().getTime());
+            Event event = new Event(workout.getItem().getName(), workout.getDate().getTime(), workout.getDate().getTime() + 1000);
             event.setEventColor(colorWorkout);
 
             events.add(event);
@@ -136,7 +138,7 @@ public class DashboardFragment extends Fragment {
         ArrayList<Schedule<Recipe>> mealPlans = MealScheduleDatabase.getAllSchedules();
 
         for(Schedule<Recipe> mealPlan : mealPlans) {
-            Event event = new Event(mealPlan.getItem().getName(), mealPlan.getDate().getTime(), mealPlan.getDate().getTime());
+            Event event = new Event(mealPlan.getItem().getName(), mealPlan.getDate().getTime(), mealPlan.getDate().getTime() + 1000);
             event.setEventColor(colorMealPlan);
 
             events.add(event);
