@@ -81,6 +81,25 @@ public class DashboardFragment extends Fragment {
         RecipeDatabase = new InternalStorageRecipeRepository(getActivity());
         WorkoutDatabase = WorkoutContainer.getInstance();
 
+        //TEMP CODE FOR PURPOSES OF DEMO
+
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
+
+        for(Workout workout : WorkoutDatabase.getWorkouts(getActivity())) {
+            Schedule<Workout> schedule = new Schedule<>(workout, c.getTime());
+            WorkoutScheduleDatabase.saveSchedule(schedule);
+        }
+
+        for(IIngredient mealPlan : RecipeDatabase.getCollectionAsList()) {
+            Recipe meal = (Recipe)mealPlan;
+            Schedule<Recipe> schedule = new Schedule<>(meal, c.getTime());
+            MealScheduleDatabase.saveSchedule(schedule);
+        }
+
         initializeCalendar();
 
         return view;
