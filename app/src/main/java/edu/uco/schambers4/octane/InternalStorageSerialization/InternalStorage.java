@@ -2,7 +2,11 @@ package edu.uco.schambers4.octane.InternalStorageSerialization;
 
 import android.content.Context;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 /**
  * A class to house static helper methods for writing and retrieving objects directly to or from memory
@@ -19,6 +23,10 @@ public final class InternalStorage
     public static final String STORAGE_KEY_EXERCISES = "edu.uco.schambers4.octane.InternalStorageSerialization.InternalStorage.Exercises";
     public static final String STORAGE_KEY_WORKOUTS = "edu.uco.schambers4.octane.InternalStorageSerialization.InternalStorage.Workouts";
     public static final String STORAGE_KEY_FITNESSTESTS = "edu.uco.schambers4.octane.InternalStorageSerialization.InternalStorage.FitnessTests";
+    public static final String STORAGE_KEY_SCHEDULES = "edu.uco.schambers4.octane.InternalStorageSerialization.InternalStorage.Schedules.%s";
+
+    public static final String STORAGE_SUBKEY_RECIPES = "Recipes";
+    public static final String STORAGE_SUBKEY_WORKOUTS = "Workouts";
 
     private InternalStorage()
     {
