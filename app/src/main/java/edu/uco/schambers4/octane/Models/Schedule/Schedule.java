@@ -1,5 +1,6 @@
 package edu.uco.schambers4.octane.Models.Schedule;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
@@ -7,7 +8,8 @@ import edu.uco.schambers4.octane.DataAccessObjects.Schedules.ScheduleRepository;
 import edu.uco.schambers4.octane.Models.GeneralInterfaces.INameable;
 import edu.uco.schambers4.octane.Models.MealPlanner.Recipe;
 
-public class Schedule<T extends INameable> {
+public class Schedule<T extends INameable> implements Serializable
+{
 
     private UUID id;
     private Date date;
