@@ -95,7 +95,8 @@ public class InternalStorageScheduleRepository<T> implements ScheduleRepository<
 
     private void flush() throws IOException {
         loadCheck();
-        InternalStorage.writeObject(context, InternalStorage.STORAGE_KEY_WORKOUTS, mSchedules);
+        String compoundKey = String.format(InternalStorage.STORAGE_KEY_SCHEDULES, schemaName);
+        InternalStorage.writeObject(context, compoundKey, mSchedules);
     }
 
     private ArrayList<Schedule<T>> load() throws IOException, ClassNotFoundException {
