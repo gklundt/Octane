@@ -3,7 +3,10 @@ package edu.uco.schambers4.octane.Models.Workout;
 import java.io.Serializable;
 import java.util.Map;
 
-public class Workout implements Serializable {
+import edu.uco.schambers4.octane.Models.GeneralInterfaces.INameable;
+
+public class Workout implements Serializable, INameable
+{
     private String mName;
     private Map<String, Integer> mExerciseSets;
     private Integer mCalories;
