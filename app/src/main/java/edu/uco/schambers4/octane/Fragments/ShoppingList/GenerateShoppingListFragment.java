@@ -2,6 +2,7 @@ package edu.uco.schambers4.octane.Fragments.ShoppingList;
 
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -104,7 +105,9 @@ public class GenerateShoppingListFragment extends Fragment
 
     private void launchShoppingListFragment(MealPlanByWeek plan)
     {
-
+        Fragment frag = ShoppingListFragment.newInstance(plan);
+        FragmentTransaction trans = getActivity().getFragmentManager().beginTransaction();
+        trans.replace(R.id.fragment_container, frag).addToBackStack(null).commit();
     }
 
     @Override

@@ -1,5 +1,6 @@
 package edu.uco.schambers4.octane.Models.MealPlanner;
 
+import java.io.Serializable;
 import java.util.List;
 
 import edu.uco.schambers4.octane.Models.Schedule.Schedule;
@@ -7,7 +8,7 @@ import edu.uco.schambers4.octane.Models.Schedule.Schedule;
 /**
  * Created by Steven Chambers on 11/13/2015.
  */
-public class MealPlanByWeek
+public class MealPlanByWeek implements Serializable
 {
     private int weekOfYear;
     private List<Schedule<Recipe>> plan;
