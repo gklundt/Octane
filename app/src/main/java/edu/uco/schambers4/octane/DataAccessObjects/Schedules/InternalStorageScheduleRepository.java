@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import edu.uco.schambers4.octane.InternalStorageSerialization.InternalStorage;
+import edu.uco.schambers4.octane.Models.GeneralInterfaces.INameable;
+import edu.uco.schambers4.octane.Models.MealPlanner.Recipe;
 import edu.uco.schambers4.octane.Models.Schedule.Schedule;
 
-public class InternalStorageScheduleRepository<T> implements ScheduleRepository<T>{
+public class InternalStorageScheduleRepository<T extends INameable> implements ScheduleRepository<T>{
 
     private Context context;
     private String schemaName;
@@ -95,14 +97,15 @@ public class InternalStorageScheduleRepository<T> implements ScheduleRepository<
 
     private void flush() throws IOException {
         loadCheck();
-        InternalStorage.writeObject(context, InternalStorage.STORAGE_KEY_WORKOUTS, mSchedules);
+        String compoundKey = String.format(InternalStorage.STORAGE_KEY_SCHEDULES, schemaName);
+        InternalStorage.writeObject(context, compoundKey, mSchedules);
     }
 
     private ArrayList<Schedule<T>> load() throws IOException, ClassNotFoundException {
-        String lol = String.format(InternalStorage.STORAGE_KEY_SCHEDULES, schemaName);
+        String compoundKey = String.format(InternalStorage.STORAGE_KEY_SCHEDULES, schemaName);
 
         ArrayList<Schedule<T>> items = (ArrayList<Schedule<T>>)
-                InternalStorage.readObject(context, lol);
+                InternalStorage.readObject(context, compoundKey);
 
         return items;
     }

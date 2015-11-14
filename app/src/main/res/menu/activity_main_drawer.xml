@@ -18,6 +18,12 @@
                     android:checkable="true"
                     android:icon="@drawable/ic_restaurant_menu"
                     android:title="Recipe List"/>
+                <item
+                    android:id="@+id/nav_shopping_list"
+                    android:checkable="true"
+                    android:icon="@drawable/ic_shopping_cart"
+                    android:title="Shopping List"/>
+
             </menu>
         </item>
         <item android:title="@string/workout_config">

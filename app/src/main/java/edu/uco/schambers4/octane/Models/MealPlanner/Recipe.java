@@ -64,6 +64,27 @@ public class Recipe implements IIngredient
                .map(ingredient -> ingredient.getName() ).distinct().collect(Collectors.toList());
     }
 
+    public Map<IIngredient, Double> getAllIngredientsAndQuantity(Double quantityModifier)
+    {
+        if(quantityModifier == null)
+            quantityModifier = 1.0;
+
+        Map<IIngredient,Double> toReturn = new HashMap<>();
+        for(Map.Entry<IIngredient,Double> entry : ingredientAndAmountMap.entrySet())
+        {
+            if(entry.getKey() instanceof Ingredient)
+            {
+                toReturn.put(entry.getKey(), entry.getValue() * quantityModifier);
+            }
+            else
+            {
+                Recipe recipe = (Recipe) entry.getKey();
+                toReturn.putAll(recipe.getAllIngredientsAndQuantity(entry.getValue()));
+            }
+        }
+        return toReturn;
+    }
+
     @Override
     public String getUnitOfMeasure()
     {
