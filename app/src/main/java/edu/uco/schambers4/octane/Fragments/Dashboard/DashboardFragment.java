@@ -167,7 +167,12 @@ public class DashboardFragment extends Fragment {
 
         ArrayAdapter userAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, schedulableItems);
 
-        Date selectedCalendarDate = new Date(calendar.getSelectedDates().get(0));
+        //set default date to now
+        Date selectedCalendarDate = new Date(System.currentTimeMillis());
+        if(!calendar.getSelectedDates().isEmpty())
+        {
+            selectedCalendarDate = new Date(calendar.getSelectedDates().get(0));
+        }
 
         scheduleDialog.itemSpinner.setAdapter(userAdapter);
         scheduleDialog.itemLabel.setText(itemName);
