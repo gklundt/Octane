@@ -81,4 +81,9 @@ public class Workout implements Serializable, INameable
         }
     }
 
+    @Override
+    public String toString()
+    {
+        return getName();
+    }
 }

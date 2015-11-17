@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.graphics.Color;
+import android.net.ParseException;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
@@ -12,14 +13,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.telerik.widget.calendar.CalendarSelectionMode;
 import com.telerik.widget.calendar.RadCalendarView;
 import com.telerik.widget.calendar.events.Event;
 import com.telerik.widget.calendar.events.EventsDisplayMode;
 
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -27,10 +32,11 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import edu.uco.schambers4.octane.Activities.MainActivity;
 import edu.uco.schambers4.octane.DataAccessObjects.Recipes.InternalStorageRecipeRepository;
 import edu.uco.schambers4.octane.DataAccessObjects.Schedules.InternalStorageScheduleRepository;
+import edu.uco.schambers4.octane.DataAccessObjects.Schedules.ScheduleRepository;
 import edu.uco.schambers4.octane.InternalStorageSerialization.InternalStorage;
+import edu.uco.schambers4.octane.Models.GeneralInterfaces.INameable;
 import edu.uco.schambers4.octane.Models.MealPlanner.IIngredient;
 import edu.uco.schambers4.octane.Models.MealPlanner.Recipe;
 import edu.uco.schambers4.octane.Models.Schedule.Schedule;
@@ -45,6 +51,7 @@ public class DashboardFragment extends Fragment {
     private static InternalStorageRecipeRepository RecipeDatabase;
     private static InternalStorageScheduleRepository<Workout> WorkoutScheduleDatabase;
     private static InternalStorageScheduleRepository<Recipe> MealScheduleDatabase;
+    private static SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 
     @Bind(R.id.fragment_container_dashboard)
     FrameLayout fragmentContainer;
@@ -54,6 +61,8 @@ public class DashboardFragment extends Fragment {
     FloatingActionButton mealFab;
     @Bind(R.id.add_workout_fab)
     FloatingActionButton workoutFab;
+
+    ViewContainer scheduleDialog;
 
     final int colorWorkout = Color.MAGENTA;
     final int colorMealPlan = Color.GREEN;
@@ -82,25 +91,6 @@ public class DashboardFragment extends Fragment {
         RecipeDatabase = new InternalStorageRecipeRepository(getActivity());
         WorkoutDatabase = WorkoutContainer.getInstance();
 
-        //TEMP CODE FOR PURPOSES OF DEMO
-
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.HOUR_OF_DAY, 0);
-        c.set(Calendar.MINUTE, 0);
-        c.set(Calendar.SECOND, 0);
-        c.set(Calendar.MILLISECOND, 0);
-
-        for(Workout workout : WorkoutDatabase.getWorkouts(getActivity())) {
-            Schedule<Workout> schedule = new Schedule<>(workout, c.getTime());
-            WorkoutScheduleDatabase.saveSchedule(schedule);
-        }
-
-        for(IIngredient mealPlan : RecipeDatabase.getCollectionAsList()) {
-            Recipe meal = (Recipe)mealPlan;
-            Schedule<Recipe> schedule = new Schedule<>(meal, c.getTime());
-            MealScheduleDatabase.saveSchedule(schedule);
-        }
-
         initializeCalendar();
 
         return view;
@@ -128,7 +118,7 @@ public class DashboardFragment extends Fragment {
         ArrayList<Schedule<Workout>> workouts = WorkoutScheduleDatabase.getAllSchedules();
 
         for(Schedule<Workout> workout : workouts) {
-            Event event = new Event(workout.getItem().getName(), workout.getDate().getTime(), workout.getDate().getTime() + 1000);
+            Event event = new Event(workout.getItem().getName(), workout.getDate().getTime(), workout.getDate().getTime() + 300);
             event.setEventColor(colorWorkout);
 
             events.add(event);
@@ -138,7 +128,7 @@ public class DashboardFragment extends Fragment {
         ArrayList<Schedule<Recipe>> mealPlans = MealScheduleDatabase.getAllSchedules();
 
         for(Schedule<Recipe> mealPlan : mealPlans) {
-            Event event = new Event(mealPlan.getItem().getName(), mealPlan.getDate().getTime(), mealPlan.getDate().getTime() + 1000);
+            Event event = new Event(mealPlan.getItem().getName(), mealPlan.getDate().getTime(), mealPlan.getDate().getTime() + 300);
             event.setEventColor(colorMealPlan);
 
             events.add(event);
@@ -156,35 +146,73 @@ public class DashboardFragment extends Fragment {
 
     private void launchScheduleMealPlanFragment(){
         List<IIngredient> recipes = RecipeDatabase.getCollectionAsList();
+        List<INameable> items = new ArrayList<>(recipes);
+
+        launchScheduleFragment(items, MealScheduleDatabase, "Meal");
+    }
+
+    private void launchScheduleWorkoutFragment(){
+        List<Workout> workouts = WorkoutDatabase.getWorkouts(getActivity());
+        List<INameable> items = new ArrayList<>(workouts);
+
+        launchScheduleFragment(items, WorkoutScheduleDatabase, "Workout");
+    }
+
+    private <T extends INameable> void launchScheduleFragment(List<INameable> schedulableItems, ScheduleRepository<T> repository, String itemName) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View layout = inflater.inflate(R.layout.schedule_dialog, null);
-        ViewContainer holder = new ViewContainer(layout);
+        scheduleDialog = new ViewContainer(layout);
 
-        ArrayAdapter userAdapter = new ArrayAdapter(getActivity(), R.layout.schedule_dialog, recipes);
-        holder.itemSpinner.setAdapter(userAdapter);
+        ArrayAdapter userAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, schedulableItems);
+
+        Date selectedCalendarDate = new Date(calendar.getSelectedDates().get(0));
+
+        scheduleDialog.itemSpinner.setAdapter(userAdapter);
+        scheduleDialog.itemLabel.setText(itemName);
+        scheduleDialog.itemDate.setText(dateFormat.format(selectedCalendarDate));
 
         builder.setView(layout);
 
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 
-        builder.setTitle("Choose Meal")
+        builder.setTitle("Choose " + itemName)
                 .setPositiveButton(
                         "Save",
                         (dialog, which) -> {
+                            if(scheduleDialog.itemDate.getText().toString() == "" ||
+                                    scheduleDialog.itemSpinner.getSelectedItem() == null )
+                            {
+                                dialog.dismiss();
+                            }
+
                             imm.toggleSoftInput(InputMethodManager.HIDE_NOT_ALWAYS, 0);
-                            Recipe recipe = (Recipe) holder.itemSpinner.getSelectedItem();
+                            T itemToSchedule = (T) scheduleDialog.itemSpinner.getSelectedItem();
 
-                            Calendar c = Calendar.getInstance();
-                            c.set(Calendar.HOUR_OF_DAY, 0);
-                            c.set(Calendar.MINUTE, 0);
-                            c.set(Calendar.SECOND, 0);
-                            c.set(Calendar.MILLISECOND, 0);
 
-                            Schedule<Recipe> schedule = new Schedule(recipe, c.getTime());
-                            MealScheduleDatabase.saveSchedule(schedule);
+                            Date date = null;
+
+                            try {
+                                date = dateFormat.parse(scheduleDialog.itemDate.getText().toString(), new ParsePosition(0));
+                            } catch (ParseException e) {
+                                dialog.dismiss();
+                            }
+
+                            if(date == null)
+                                dialog.dismiss();
+
+                            Calendar cal = Calendar.getInstance();
+                            cal.setTime(date);
+                            cal.set(Calendar.HOUR_OF_DAY, 0);
+                            cal.set(Calendar.MINUTE, 0);
+                            cal.set(Calendar.SECOND, 0);
+                            cal.set(Calendar.MILLISECOND, 0);
+                            date = cal.getTime();
+
+                            Schedule<T> schedule = new Schedule(itemToSchedule, date);
+                            repository.saveSchedule(schedule);
 
                             loadCalendarEvents();
                         }
@@ -196,20 +224,9 @@ public class DashboardFragment extends Fragment {
                             imm.toggleSoftInput(InputMethodManager.HIDE_NOT_ALWAYS, 0);
                         }
                 );
+
         AlertDialog dialog = builder.create();
-//        holder.itemSpinner.setOnEditorActionListener((v, actionId, event) -> {
-//            if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE))
-//            {
-//                dialog.getButton(DialogInterface.BUTTON_POSITIVE).performClick();
-//                return true;
-//            }
-//            return false;
-//        });
         dialog.show();
-    }
-
-    private void launchScheduleWorkoutFragment(){
-
     }
 
     public void launchSubFragment(Fragment fragment)
@@ -218,11 +235,11 @@ public class DashboardFragment extends Fragment {
         trans.replace(R.id.fragment_container_dashboard, fragment).addToBackStack(null).commit();
     }
 
-    private void launchFragment(Fragment fragment)
-    {
-        ((MainActivity) getActivity()).launchFragment(fragment);
+    public void showDatePickerDialog(View v) {
+        DatePickerFragment newFragment = new DatePickerFragment();
+        newFragment.target = scheduleDialog.itemDate;
+        newFragment.show(getFragmentManager(), "datePicker");
     }
-
 
     @Override
     public void onDestroyView()
@@ -232,14 +249,19 @@ public class DashboardFragment extends Fragment {
     }
 
 
-    static class ViewContainer
-    {
+    class ViewContainer {
         @Bind(R.id.itemSpinner)
         Spinner itemSpinner;
+        @Bind(R.id.txtScheduleDate)
+        EditText itemDate;
+        @Bind(R.id.txtItemLabel)
+        TextView itemLabel;
 
         ViewContainer(View view)
         {
             ButterKnife.bind(this, view);
+
+            itemDate.setOnClickListener((v) -> showDatePickerDialog(v));
         }
     }
 }
