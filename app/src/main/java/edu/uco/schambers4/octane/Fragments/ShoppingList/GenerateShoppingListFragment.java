@@ -39,7 +39,7 @@ public class GenerateShoppingListFragment extends Fragment
     @Bind(R.id.meal_plan_list_view)
     ListView mealPlanListView;
 
-    private MockScheduleRepository<Recipe> mealPlanRepository;
+    private InternalStorageScheduleRepository<Recipe> mealPlanRepository;
     private List<MealPlanByWeek> mealPlansByWeek;
 
     public GenerateShoppingListFragment()
@@ -66,8 +66,7 @@ public class GenerateShoppingListFragment extends Fragment
 
     private void initializeMealPlanRepo()
     {
-        //mealPlanRepository = new InternalStorageScheduleRepository<>(getActivity(), InternalStorage.STORAGE_SUBKEY_RECIPES);
-        mealPlanRepository = new MockScheduleRepository<>(getActivity());
+        mealPlanRepository = new InternalStorageScheduleRepository<>(getActivity(), InternalStorage.STORAGE_SUBKEY_RECIPES);
     }
 
     private void groupMealPlansByWeek()
