@@ -24,6 +24,7 @@ import edu.uco.schambers4.octane.Fragments.Recipes.RecipeListFragment;
 import edu.uco.schambers4.octane.Fragments.ShoppingList.GenerateShoppingListFragment;
 import edu.uco.schambers4.octane.Fragments.Workout.ExerciseListFragment;
 import edu.uco.schambers4.octane.Fragments.Workout.FitnessTestListFragment;
+import edu.uco.schambers4.octane.Fragments.Workout.WorkoutGeneratorFragment;
 import edu.uco.schambers4.octane.Fragments.Workout.WorkoutListFragment;
 import edu.uco.schambers4.octane.Models.Workout.ExerciseContainer;
 import edu.uco.schambers4.octane.R;
@@ -144,6 +145,9 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_workouts:
                 launchFragment(new WorkoutListFragment());
+                break;
+            case R.id.nav_workout_builder:
+                launchFragment(new WorkoutGeneratorFragment());
                 break;
             case R.id.nav_fit_test:
                 launchFragment(new FitnessTestListFragment());

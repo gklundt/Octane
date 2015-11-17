@@ -1,0 +1,204 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="edu.uco.schambers4.octane.Fragments.Workout.WorkoutGenerator">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        android:text="Thrive Modification System"
+        android:textSize="@dimen/abc_text_size_medium_material"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/fragment_workout_generator_workout_name_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Workout Name"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        android:text="Select Muscle Groups"
+        android:textSize="@dimen/abc_text_size_medium_material"
+        android:textStyle="bold"/>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow>
+
+            <CheckBox
+                android:id="@+id/fragment_workout_generator_muscle_group_abs_cb"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/muscle_group_abs"
+                />
+
+            <CheckBox
+                android:id="@+id/fragment_workout_generator_muscle_group_arms_cb"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/muscle_group_arms"
+                />
+
+            <CheckBox
+                android:id="@+id/fragment_workout_generator_muscle_group_back_cb"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/muscle_group_back"
+                />
+        </TableRow>
+
+        <TableRow>
+
+            <CheckBox
+                android:id="@+id/fragment_workout_generator_muscle_group_chest_cb"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/muscle_group_chest"
+                />
+
+            <CheckBox
+                android:id="@+id/fragment_workout_generator_muscle_group_core_cb"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/muscle_group_core"
+                />
+
+            <CheckBox
+                android:id="@+id/fragment_workout_generator_muscle_group_fullbody_cb"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/muscle_group_fullbody"
+                />
+        </TableRow>
+
+        <TableRow>
+
+            <CheckBox
+                android:id="@+id/fragment_workout_generator_muscle_group_glute_cb"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/muscle_group_glute"
+                />
+
+            <CheckBox
+                android:id="@+id/fragment_workout_generator_muscle_group_legs_cb"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/muscle_group_legs"
+                />
+
+            <CheckBox
+                android:id="@+id/fragment_workout_generator_muscle_group_shoulders_cb"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/muscle_group_shoulders"
+                />
+        </TableRow>
+
+    </TableLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        android:text="Select Exercise Type"
+        android:textSize="@dimen/abc_text_size_medium_material"
+        android:textStyle="bold"/>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow>
+
+            <CheckBox
+                android:id="@+id/fragment_workout_generator_exercise_type_balance_cb"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/exercise_type_balance"
+                />
+
+            <CheckBox
+                android:id="@+id/fragment_workout_generator_exercise_type_endurance_cb"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/exercise_type_endurance"
+                />
+
+        </TableRow>
+
+        <TableRow>
+
+            <CheckBox
+                android:id="@+id/fragment_workout_generator_exercise_type_flexibility_cb"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/exercise_type_flexibility"
+                />
+
+            <CheckBox
+                android:id="@+id/fragment_workout_generator_exercise_type_strength_cb"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/exercise_type_strength"
+                />
+
+        </TableRow>
+
+
+    </TableLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        android:text="Select Intensity"
+        android:textSize="@dimen/abc_text_size_medium_material"
+        android:textStyle="bold"/>
+
+    <Spinner
+        android:id="@+id/fragment_workout_generator_intensity_sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dropdown"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/generate_workout_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@drawable/ic_check"
+            />
+    </RelativeLayout>
+
+
+</LinearLayout>

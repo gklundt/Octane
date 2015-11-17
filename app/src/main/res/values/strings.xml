@@ -31,6 +31,23 @@
         <item>Slice</item>
     </string-array>
 
+    <!-- muscle groups -->
+    <string name="muscle_group_abs">Abdominals</string>
+    <string name="muscle_group_arms">Arms</string>
+    <string name="muscle_group_legs">Legs</string>
+    <string name="muscle_group_chest">Chest</string>
+    <string name="muscle_group_glute">Glutes</string>
+    <string name="muscle_group_back">Back</string>
+    <string name="muscle_group_shoulders">Shoulders</string>
+    <string name="muscle_group_fullbody">Full Body</string>
+    <string name="muscle_group_core">Core</string>
+
+    <!-- muscle groups -->
+    <string name="exercise_type_strength">Strength</string>
+    <string name="exercise_type_endurance">Endurance</string>
+    <string name="exercise_type_flexibility">Flexibility</string>
+    <string name="exercise_type_balance">Balance</string>
+
 
     <!--forceUnits of measurement -->
     <string-array name="set_counts">
