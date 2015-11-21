@@ -3,6 +3,7 @@ package edu.uco.schambers4.octane.Fragments.ShoppingList;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,7 @@ import butterknife.ButterKnife;
 import edu.uco.schambers4.octane.Models.MealPlanner.IIngredient;
 import edu.uco.schambers4.octane.Models.MealPlanner.MealPlanByWeek;
 import edu.uco.schambers4.octane.Models.MealPlanner.Recipe;
-import edu.uco.schambers4.octane.Models.MealPlanner.RecipeIngredientListAdapter;
+import edu.uco.schambers4.octane.Models.MealPlanner.ShoppingListAdapter;
 import edu.uco.schambers4.octane.Models.Schedule.Schedule;
 import edu.uco.schambers4.octane.R;
 
@@ -36,8 +37,10 @@ public class ShoppingListFragment extends Fragment
     ListView shoppingListView;
 
     private static final String ARG_MEALPLAN_WEEK = "arg_mealplan_week";
+    @Bind(R.id.refresh_list_fab)
+    FloatingActionButton refreshListFab;
     private MealPlanByWeek weekMealPlan;
-    private RecipeIngredientListAdapter ingredientAdapter;
+    private ShoppingListAdapter ingredientAdapter;
 
 
     public static ShoppingListFragment newInstance(MealPlanByWeek param1)
@@ -73,6 +76,9 @@ public class ShoppingListFragment extends Fragment
         ButterKnife.bind(this, view);
 
         setUpListView();
+        refreshListFab.setOnClickListener(v -> {
+           ingredientAdapter.removeCheckedItems();
+        });
 
         return view;
     }
@@ -80,20 +86,20 @@ public class ShoppingListFragment extends Fragment
     private void setUpListView()
     {
         Map<IIngredient, Double> ingredientQuantityMap = new HashMap<>();
-        for(Schedule<Recipe> schedule : weekMealPlan.getPlan())
+        for (Schedule<Recipe> schedule : weekMealPlan.getPlan())
         {
             Recipe r = schedule.getItem();
             Map<IIngredient, Double> recipeIngredientAndQuantityMap = r.getAllIngredientsAndQuantity(null);
-            for(Map.Entry<IIngredient, Double> entry : recipeIngredientAndQuantityMap.entrySet())
+            for (Map.Entry<IIngredient, Double> entry : recipeIngredientAndQuantityMap.entrySet())
             {
                 List<IIngredient> keyList = new ArrayList<>(ingredientQuantityMap.keySet());
                 //this list should only contain 1 element or be empty because this shadow of a library doesn't really
                 //allow for returning a single element in the way that the real Java Streams API does (or I'm completely wrong and blind)
                 //Either way, this is the approach I came out with.
-                keyList = Stream.of(keyList).filter( k -> k.getName().equals(entry.getKey().getName())).collect(Collectors.toList());
+                keyList = Stream.of(keyList).filter(k -> k.getName().equals(entry.getKey().getName())).collect(Collectors.toList());
 
                 //we haven't seen this ingredient yet when constructing this list, so we're going to add it and its quantity.
-                if(keyList.isEmpty())
+                if (keyList.isEmpty())
                 {
                     ingredientQuantityMap.put(entry.getKey(), entry.getValue());
                 }
@@ -105,7 +111,7 @@ public class ShoppingListFragment extends Fragment
                 }
             }
         }
-        ingredientAdapter = new RecipeIngredientListAdapter(getActivity(),ingredientQuantityMap);
+        ingredientAdapter = new ShoppingListAdapter(getActivity(), ingredientQuantityMap);
         shoppingListView.setAdapter(ingredientAdapter);
 
     }
