@@ -88,7 +88,13 @@ public class ShoppingListAdapter extends ArrayAdapter<IIngredient>
         this.addAll(items);
         notifyDataSetChanged();
     }
-
+    public void refreshIngredientChanges(Map<IIngredient,Double> map)
+    {
+        this.clear();
+        this.ingredientQuantityMap = map;
+        this.addAll(ingredientQuantityMap.keySet());
+        notifyDataSetChanged();
+    }
     /**
      * This class contains all butterknife-injected Views & Layouts from layout file 'shopping_list_item_layout.xml'
      * for easy to all layout elements.

@@ -1,13 +1,22 @@
 package edu.uco.schambers4.octane.Fragments.ShoppingList;
 
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
@@ -41,6 +50,7 @@ public class ShoppingListFragment extends Fragment
     FloatingActionButton refreshListFab;
     private MealPlanByWeek weekMealPlan;
     private ShoppingListAdapter ingredientAdapter;
+    Map<IIngredient, Double> ingredientQuantityMap;
 
 
     public static ShoppingListFragment newInstance(MealPlanByWeek param1)
@@ -77,7 +87,7 @@ public class ShoppingListFragment extends Fragment
 
         setUpListView();
         refreshListFab.setOnClickListener(v -> {
-           ingredientAdapter.removeCheckedItems();
+            ingredientAdapter.removeCheckedItems();
         });
 
         return view;
@@ -85,7 +95,7 @@ public class ShoppingListFragment extends Fragment
 
     private void setUpListView()
     {
-        Map<IIngredient, Double> ingredientQuantityMap = new HashMap<>();
+        ingredientQuantityMap = new HashMap<>();
         for (Schedule<Recipe> schedule : weekMealPlan.getPlan())
         {
             Recipe r = schedule.getItem();
@@ -114,13 +124,97 @@ public class ShoppingListFragment extends Fragment
         ingredientAdapter = new ShoppingListAdapter(getActivity(), ingredientQuantityMap);
         shoppingListView.setAdapter(ingredientAdapter);
 
+        shoppingListView.setOnItemClickListener((parent, view, position, id) -> {
+            IIngredient ingredient = (IIngredient) parent.getItemAtPosition(position);
+            launchIngredientAmountDialog(ingredient);
+        });
+
     }
 
 
+
+    private void launchIngredientAmountDialog(IIngredient ingredient)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        View layout = inflater.inflate(R.layout.ingredient_quantity_dialog, null);
+        ViewHolder holder = new ViewHolder(layout);
+        holder.quantityLblDialog.setText(ingredient.getUnitOfMeasure());
+        builder.setView(layout);
+
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+
+
+        builder.setTitle(String.format("On hand quantity for %s", ingredient.getName()))
+                .setPositiveButton(
+                        "Save",
+                        (dialog, which) -> {
+                            imm.toggleSoftInput(InputMethodManager.HIDE_NOT_ALWAYS, 0);
+                            double currentQuantity = ingredientQuantityMap.get(ingredient);
+                            double quantityOnHand = parseQuantity(holder.quantityEtDialog.getText().toString());
+                            if (quantityOnHand >= currentQuantity)
+                            {
+                                ingredientQuantityMap.remove(ingredient);
+                            } else
+                            {
+                                ingredientQuantityMap.put(ingredient, currentQuantity - quantityOnHand);
+                            }
+                            ingredientAdapter.refreshIngredientChanges(ingredientQuantityMap);
+                        }
+                )
+                .setNegativeButton(
+                        "Cancel",
+                        (dialog, which) -> {
+                            dialog.dismiss();
+                            imm.toggleSoftInput(InputMethodManager.HIDE_NOT_ALWAYS, 0);
+                        }
+                );
+        AlertDialog dialog = builder.create();
+        holder.quantityEtDialog.setOnEditorActionListener((v, actionId, event) -> {
+            if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE))
+            {
+                dialog.getButton(DialogInterface.BUTTON_POSITIVE).performClick();
+                return true;
+            }
+            return false;
+        });
+        dialog.show();
+    }
+    private Double parseQuantity(String s)
+    {
+        try
+        {
+            double d =Double.parseDouble(s);
+            return d;
+        }catch (Exception e)
+        {
+            return 1.0;
+        }
+    }
     @Override
     public void onDestroyView()
     {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    /**
+     * This class contains all butterknife-injected Views & Layouts from layout file 'ingredient_quantity_dialog.xml'
+     * for easy to all layout elements.
+     *
+     * @author ButterKnifeZelezny, plugin for Android Studio by Avast Developers (http://github.com/avast)
+     */
+    static class ViewHolder
+    {
+        @Bind(R.id.quantity_et_dialog)
+        EditText quantityEtDialog;
+        @Bind(R.id.quantity_lbl_dialog)
+        TextView quantityLblDialog;
+
+        ViewHolder(View view)
+        {
+            ButterKnife.bind(this, view);
+        }
     }
 }
