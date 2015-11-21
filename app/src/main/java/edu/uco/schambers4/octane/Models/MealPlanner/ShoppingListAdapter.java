@@ -13,6 +13,7 @@ import com.annimon.stream.Stream;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +26,7 @@ import edu.uco.schambers4.octane.R;
  */
 public class ShoppingListAdapter extends ArrayAdapter<IIngredient>
 {
-    private boolean[] checked;
+    private Map<IIngredient, Boolean> checkedMap;
 
     Map<IIngredient, Double> ingredientQuantityMap;
 
@@ -33,7 +34,11 @@ public class ShoppingListAdapter extends ArrayAdapter<IIngredient>
     {
         super(context, 0, new ArrayList<>(ingredientQuantityMap.keySet()));
         this.ingredientQuantityMap = ingredientQuantityMap;
-        checked = new boolean[ingredientQuantityMap.keySet().size()];
+        checkedMap = new HashMap<>();
+        for(IIngredient ingredient : ingredientQuantityMap.keySet())
+        {
+            checkedMap.put(ingredient, false);
+        }
     }
 
     @Override
@@ -58,14 +63,15 @@ public class ShoppingListAdapter extends ArrayAdapter<IIngredient>
         {
             holder.shoppingListUnitOfMeasureTv.setText("preparation");
         }
-        holder.shoppingListCheckBox.setChecked(checked[position]);
-        holder.shoppingListCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked)
+        holder.shoppingListCheckBox.setChecked(checkedMap.get(ingredient));
+        holder.shoppingListCheckBox.setOnClickListener(v -> {
+            if(((CheckBox) v).isChecked())
             {
-                checked[position] = true;
-            } else
+                checkedMap.put(ingredient, true);
+            }
+            else
             {
-                checked[position] = false;
+                checkedMap.put(ingredient, false);
             }
         });
 
@@ -73,23 +79,39 @@ public class ShoppingListAdapter extends ArrayAdapter<IIngredient>
     }
     public void removeCheckedItems()
     {
-        List<IIngredient> items = new ArrayList<>(ingredientQuantityMap.keySet());
-        for(int i = checked.length - 1; i >= 0; i--)
+        List<IIngredient> itemsToRemoveFromCheckedMap = new ArrayList<>();
+        for(Map.Entry<IIngredient,Boolean> entry : checkedMap.entrySet())
         {
-            if(checked[i])
+            if(checkedMap.get(entry.getKey()))
             {
-                IIngredient keyToRemove = items.get(i);
-                ingredientQuantityMap.remove(keyToRemove);
-                items.remove(i);
+                ingredientQuantityMap.remove(entry.getKey());
+                itemsToRemoveFromCheckedMap.add(entry.getKey());
             }
         }
-        checked = new boolean[items.size()];
+        for(IIngredient ingredient : itemsToRemoveFromCheckedMap)
+        {
+            checkedMap.remove(ingredient);
+        }
+        List<IIngredient> items = new ArrayList<>(ingredientQuantityMap.keySet());
         this.clear();
         this.addAll(items);
         notifyDataSetChanged();
     }
     public void refreshIngredientChanges(Map<IIngredient,Double> map)
     {
+        //get items not common to both checkedMaps keyset and the passed in map's keyset
+        //so we can remove irrelevant items for checkedmap
+        List<IIngredient> list1 = new ArrayList<>(map.keySet());
+        List<IIngredient> list2 = new ArrayList<>(checkedMap.keySet());
+        list1.removeAll(checkedMap.keySet());
+        list2.removeAll(map.keySet());
+        list2.addAll(list1);
+
+        for (IIngredient ingredient : list2)
+        {
+            checkedMap.remove(ingredient);
+        }
+
         this.clear();
         this.ingredientQuantityMap = map;
         this.addAll(ingredientQuantityMap.keySet());
