@@ -8,7 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.annimon.stream.Collectors;
+import com.annimon.stream.Stream;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -73,11 +79,31 @@ public class ShoppingListFragment extends Fragment
 
     private void setUpListView()
     {
-        HashMap<IIngredient, Double> ingredientQuantityMap = new HashMap<>();
+        Map<IIngredient, Double> ingredientQuantityMap = new HashMap<>();
         for(Schedule<Recipe> schedule : weekMealPlan.getPlan())
         {
             Recipe r = schedule.getItem();
-            ingredientQuantityMap.putAll(r.getAllIngredientsAndQuantity(null));
+            Map<IIngredient, Double> recipeIngredientAndQuantityMap = r.getAllIngredientsAndQuantity(null);
+            for(Map.Entry<IIngredient, Double> entry : recipeIngredientAndQuantityMap.entrySet())
+            {
+                List<IIngredient> keyList = new ArrayList<>(ingredientQuantityMap.keySet());
+                //this list should only contain 1 element or be empty because this shadow of a library doesn't really
+                //allow for returning a single element in the way that the real Java Streams API does (or I'm completely wrong and blind)
+                //Either way, this is the approach I came out with.
+                keyList = Stream.of(keyList).filter( k -> k.getName().equals(entry.getKey().getName())).collect(Collectors.toList());
+
+                //we haven't seen this ingredient yet when constructing this list, so we're going to add it and its quantity.
+                if(keyList.isEmpty())
+                {
+                    ingredientQuantityMap.put(entry.getKey(), entry.getValue());
+                }
+                //we have seen it, so we are just going to add the quantity to the existing ingredient
+                else
+                {
+                    double newQuantity = ingredientQuantityMap.get(keyList.get(0)) + entry.getValue();
+                    ingredientQuantityMap.put(keyList.get(0), newQuantity);
+                }
+            }
         }
         ingredientAdapter = new RecipeIngredientListAdapter(getActivity(),ingredientQuantityMap);
         shoppingListView.setAdapter(ingredientAdapter);
