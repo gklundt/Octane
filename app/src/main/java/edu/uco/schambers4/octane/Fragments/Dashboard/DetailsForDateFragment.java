@@ -15,8 +15,10 @@ import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import edu.uco.schambers4.octane.Models.GeneralInterfaces.INameable;
 import edu.uco.schambers4.octane.Models.MealPlanner.Recipe;
 import edu.uco.schambers4.octane.Models.Schedule.Schedule;
+import edu.uco.schambers4.octane.Models.Schedule.ScheduleAdapter;
 import edu.uco.schambers4.octane.Models.Workout.Workout;
 import edu.uco.schambers4.octane.R;
 
@@ -27,8 +29,8 @@ public class DetailsForDateFragment extends Fragment {
     private static final String ARG_MEALPLANS = "MEALPLANS";
 
     private Date date;
-    private ArrayList<Schedule<Workout>> workouts;
-    private ArrayList<Schedule<Recipe>> mealPlans;
+    private ArrayList<Schedule<INameable>> workouts;
+    private ArrayList<Schedule<INameable>> mealPlans;
 
     @Bind(R.id.details_lbl)
     TextView detailsTitle;
@@ -62,8 +64,8 @@ public class DetailsForDateFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             date =  (Date)getArguments().getSerializable(ARG_DATE);
-            workouts =  (ArrayList<Schedule<Workout>>)getArguments().getSerializable(ARG_WORKOUTS);
-            mealPlans =  (ArrayList<Schedule<Recipe>>)getArguments().getSerializable(ARG_MEALPLANS);
+            workouts =  (ArrayList<Schedule<INameable>>)getArguments().getSerializable(ARG_WORKOUTS);
+            mealPlans =  (ArrayList<Schedule<INameable>>)getArguments().getSerializable(ARG_MEALPLANS);
         }
     }
 
@@ -82,14 +84,14 @@ public class DetailsForDateFragment extends Fragment {
         if(workouts.size() > 0) {
             workoutsTitle.setVisibility(View.VISIBLE);
 
-            ArrayAdapter workoutsAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, workouts);
+            ArrayAdapter workoutsAdapter = new ScheduleAdapter(getActivity(), R.layout.detail_listview, workouts);
             workoutsListView.setAdapter(workoutsAdapter);
         }
 
         if(mealPlans.size() > 0) {
             mealsTitle.setVisibility(View.VISIBLE);
 
-            ArrayAdapter mealsAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, mealPlans);
+            ArrayAdapter mealsAdapter = new ScheduleAdapter(getActivity(), R.layout.detail_listview, mealPlans);
             mealsListView.setAdapter(mealsAdapter);
         }
 

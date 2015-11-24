@@ -21,7 +21,6 @@ import android.widget.TextView;
 import com.telerik.widget.calendar.CalendarSelectionMode;
 import com.telerik.widget.calendar.RadCalendarView;
 import com.telerik.widget.calendar.events.Event;
-import com.telerik.widget.calendar.events.EventsDisplayMode;
 
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
@@ -99,17 +98,16 @@ public class DashboardFragment extends Fragment {
     private void initializeCalendar()
     {
         calendar.setSelectionMode(CalendarSelectionMode.Single);
-        calendar.setEventsDisplayMode(EventsDisplayMode.Popup);
+//        calendar.setEventsDisplayMode(EventsDisplayMode.Popup);
 
         calendar.setOnSelectedDatesChangedListener((context) -> {
-            Date date = new Date(context.newSelection().get(0));
-            launchDetailsForDateFragment(date);
+            refreshDetails();
         });
 
-        loadCalendarEvents();
+        refreshCalendar();
     }
 
-    private void loadCalendarEvents()
+    private void refreshCalendar()
     {
         List<Event> events = new ArrayList<>();
 
@@ -137,8 +135,13 @@ public class DashboardFragment extends Fragment {
         calendar.getEventAdapter().setEvents(events);
     }
 
-    private void launchDetailsForDateFragment(Date date)
+    private void refreshDetails()
     {
+        if(calendar.getSelectedDates().isEmpty())
+            return;
+
+        Date date = new Date(calendar.getSelectedDates().get(0));
+
         ArrayList<Schedule<Workout>> workouts = WorkoutScheduleDatabase.getSchedulesForDate(date);
         ArrayList<Schedule<Recipe>> mealPlans = MealScheduleDatabase.getSchedulesForDate(date);
 
@@ -146,6 +149,7 @@ public class DashboardFragment extends Fragment {
 
         launchSubFragment(fragment);
     }
+
 
     private void launchScheduleMealPlanFragment(){
         List<IIngredient> recipes = RecipeDatabase.getCollectionAsList();
@@ -222,7 +226,8 @@ public class DashboardFragment extends Fragment {
                             Schedule<T> schedule = new Schedule(itemToSchedule, date);
                             repository.saveSchedule(schedule);
 
-                            loadCalendarEvents();
+                            refreshCalendar();
+                            refreshDetails();
                         }
                 )
                 .setNegativeButton(
