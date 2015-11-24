@@ -6,12 +6,59 @@
     android:background="@drawable/layout_border"
     android:layout_marginTop="10dp">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal|top">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:id="@+id/details_lbl"
-        android:textSize="18dp"
+        android:textSize="12dp"
         android:textStyle="bold" />
+
+
+        <TextView
+            android:layout_below="@id/details_lbl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/workouts_lbl"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            android:text="@string/workout_config"
+            android:visibility="invisible"/>
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/workouts_listview"
+            android:layout_below="@id/workouts_lbl"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:layout_below="@id/workouts_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/meals_lbl"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            android:text="@string/mealplan_config"
+            android:visibility="invisible"/>
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/meals_listview"
+            android:layout_below="@id/meals_lbl"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp" />
+
+    </RelativeLayout>
+
 
 </FrameLayout>

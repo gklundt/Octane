@@ -139,7 +139,10 @@ public class DashboardFragment extends Fragment {
 
     private void launchDetailsForDateFragment(Date date)
     {
-        Fragment fragment = DetailsForDateFragment.newInstance(date);
+        ArrayList<Schedule<Workout>> workouts = WorkoutScheduleDatabase.getSchedulesForDate(date);
+        ArrayList<Schedule<Recipe>> mealPlans = MealScheduleDatabase.getSchedulesForDate(date);
+
+        Fragment fragment = DetailsForDateFragment.newInstance(date, workouts, mealPlans);
 
         launchSubFragment(fragment);
     }
