@@ -2,9 +2,10 @@ package edu.uco.schambers4.octane.Fragments.Workout;
 
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
@@ -17,6 +18,13 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
+import org.json.JSONException;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import butterknife.Bind;
@@ -51,6 +59,8 @@ public class WorkoutDetailFragment extends Fragment {
 
     @Bind(R.id.update_workout_fab)
     FloatingActionButton mUpdateWorkout;
+    @Bind(R.id.share_workout_fab)
+    FloatingActionButton mShareWorkout;
     @Bind(R.id.delete_workout_fab)
     FloatingActionButton mDeleteWorkout;
 
@@ -94,11 +104,45 @@ public class WorkoutDetailFragment extends Fragment {
 
         mUpdateWorkout.setOnClickListener(v -> doUpdate());
         mDeleteWorkout.setOnClickListener(v -> doDelete());
+        mShareWorkout.setOnClickListener(v -> {
+            try {
+                doShare();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
         mWorkoutAddExerciseIb.setOnClickListener(v -> loadAddExerciseDialog());
         mExerciseList.setOnItemClickListener((parent, view1, position, id) -> loadEditExerciseDialog(parent, position));
         mExerciseList.setOnItemLongClickListener((parent, view1, position, id) -> deleteExerciseFromWorkout(parent, position));
 
         return view;
+    }
+
+    private void doShare() throws JSONException, IOException {
+
+
+        File file = File.createTempFile("shared_workout", ".txt", getActivity().getApplicationContext().getExternalCacheDir());
+        file.setWritable(true);
+
+        FileWriter writer = new FileWriter(file);
+        Gson gson = new Gson();
+        String json = gson.toJson(mWorkout);
+        writer.write(json);
+        writer.flush();
+
+
+        Intent i = new Intent(Intent.ACTION_SEND);
+
+        i.setType("text/plain");
+        i.putExtra(Intent.EXTRA_SUBJECT, String.format("Octane Workout: %s", mWorkout.getName()));
+        i.putExtra(Intent.EXTRA_TEXT, "Someone has shared a workout with you!!");
+        i.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + file.getAbsolutePath()));
+        startActivity(Intent.createChooser(i, "Send Workout"));
+        file.deleteOnExit();
+
+
     }
 
     private boolean deleteExerciseFromWorkout(AdapterView<?> parent, int position) {
