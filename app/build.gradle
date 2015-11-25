@@ -39,6 +39,7 @@ dependencies {
     compile 'com.android.support:design:23.0.1'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.annimon:stream:1.0.3'
-    compile(name:'Common-2015.2.721-dev-release', ext:'aar')
-    compile(name:'Input-2015.2.721-dev-release', ext:'aar')
+    compile(name: 'Common-2015.2.721-dev-release', ext: 'aar')
+    compile(name: 'Input-2015.2.721-dev-release', ext: 'aar')
+    compile files('libs/gson-2.5.jar')
 }

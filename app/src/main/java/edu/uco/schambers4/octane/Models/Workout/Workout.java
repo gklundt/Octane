@@ -1,12 +1,12 @@
 package edu.uco.schambers4.octane.Models.Workout;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Map;
 
 import edu.uco.schambers4.octane.Models.GeneralInterfaces.INameable;
 
-public class Workout implements Serializable, INameable
-{
+public class Workout implements Serializable, INameable {
     private String mName;
     private Map<String, Integer> mExerciseSets;
     private Integer mCalories;
@@ -28,18 +28,18 @@ public class Workout implements Serializable, INameable
         mCalories = calories;
     }
 
-    public enum IntensityLevel{
+    public enum IntensityLevel {
         HIGH("High"),
         MEDIUM("Medium"),
         LOW("Low");
 
         private final String mLevel;
 
-        IntensityLevel(String level){
+        IntensityLevel(String level) {
             mLevel = level;
         }
 
-        public String getLevel(){
+        public String getLevel() {
             return mLevel;
         }
 
@@ -82,8 +82,10 @@ public class Workout implements Serializable, INameable
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return getName();
     }
+
+
+
 }
