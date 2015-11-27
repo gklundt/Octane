@@ -1,17 +1,67 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     tools:context="edu.uco.schambers4.octane.Fragments.Dashboard.DetailsForDateFragment"
     android:background="@drawable/layout_border"
     android:layout_marginTop="10dp">
 
-    <TextView
+
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:id="@+id/details_lbl"
-        android:textSize="18dp"
-        android:textStyle="bold" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:id="@+id/details_lbl"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/workouts_lbl"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            android:text="@string/workout_config"
+            android:visibility="invisible"/>
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/workouts_listview"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:divider="#00000000"
+            android:layout_marginBottom="15dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/meals_lbl"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            android:text="@string/mealplan_config"
+            android:visibility="invisible"/>
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/meals_listview"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:divider="#00000000" />
+
+        </LinearLayout>
+
+
 
 </FrameLayout>
