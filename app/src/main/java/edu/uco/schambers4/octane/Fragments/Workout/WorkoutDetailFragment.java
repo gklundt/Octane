@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -107,9 +108,7 @@ public class WorkoutDetailFragment extends Fragment {
         mShareWorkout.setOnClickListener(v -> {
             try {
                 doShare();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (JSONException | IOException e) {
                 e.printStackTrace();
             }
         });
@@ -122,26 +121,27 @@ public class WorkoutDetailFragment extends Fragment {
 
     private void doShare() throws JSONException, IOException {
 
-
-        File file = File.createTempFile("shared_workout", ".txt", getActivity().getApplicationContext().getExternalCacheDir());
-        file.setWritable(true);
-
-        FileWriter writer = new FileWriter(file);
-        Gson gson = new Gson();
-        String json = gson.toJson(mWorkout);
-        writer.write(json);
-        writer.flush();
-
-
         Intent i = new Intent(Intent.ACTION_SEND);
-
-        i.setType("text/plain");
+        //i.setType("message/rfc822");
+        //i.setType("text/plain");
+        i.setType("application/json");
         i.putExtra(Intent.EXTRA_SUBJECT, String.format("Octane Workout: %s", mWorkout.getName()));
         i.putExtra(Intent.EXTRA_TEXT, "Someone has shared a workout with you!!");
-        i.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + file.getAbsolutePath()));
+
+        Gson gson = new Gson();
+        String json = gson.toJson(mWorkout);
+
+        String filename = String.format("%s.wko",mWorkout.getName().replace(" ","_"));
+        File file = new File(getActivity().getExternalCacheDir(), filename);
+        FileOutputStream fileOutputStream = new FileOutputStream(file);
+        fileOutputStream.write(json.getBytes());
+        fileOutputStream.close();
+
+        Uri uri = Uri.parse("file://" + file.getAbsolutePath());
+        i.putExtra(Intent.EXTRA_STREAM, uri);
+
         startActivity(Intent.createChooser(i, "Send Workout"));
         file.deleteOnExit();
-
 
     }
 
@@ -178,9 +178,7 @@ public class WorkoutDetailFragment extends Fragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Choose an exercise")
                 .setAdapter(exerciseAdapter
-                        , (dialog, which) -> {
-                    addExerciseToWorkout(exerciseAdapter.getItem(which));
-                }).show();
+                        , (dialog, which) -> addExerciseToWorkout(exerciseAdapter.getItem(which))).show();
 
     }
 
@@ -200,14 +198,14 @@ public class WorkoutDetailFragment extends Fragment {
         Workout reference = new Workout(mWorkout.getName(), mWorkout.getExerciseSets(), mWorkout.getIntensityLevel(), mWorkout.getCalories());
 
         String fWorkoutName = mWorkoutNameEt.getText().toString();
-        if (fWorkoutName == null || fWorkoutName.trim().length() == 0) {
+        if (fWorkoutName.trim().length() == 0) {
             Toast.makeText(context, "Workout Name", Toast.LENGTH_SHORT).show();
             return;
         }
         mWorkout.setName(fWorkoutName);
 
         String scals = mWorkoutCaloriesEt.getText().toString();
-        Integer cals = 0;
+        Integer cals;
         try {
             cals = Integer.parseInt(scals);
         } catch (NumberFormatException e) {
@@ -253,8 +251,7 @@ public class WorkoutDetailFragment extends Fragment {
 
         mWorkoutNameEt.setText(mWorkout.getName());
         if (mWorkout.getCalories() != null) {
-            mWorkoutCaloriesEt.setText(mWorkout.getCalories().toString());
-
+            mWorkoutCaloriesEt.setText(String.format("%s", mWorkout.getCalories().toString()));
         }
 
         mWorkoutIntensitySp.setAdapter(mWorkoutContainer.getWorkoutIntensityArrayAdapter(context));

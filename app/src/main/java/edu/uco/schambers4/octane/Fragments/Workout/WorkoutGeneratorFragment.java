@@ -84,7 +84,7 @@ public class WorkoutGeneratorFragment extends Fragment {
 
         Context context = getActivity().getApplicationContext();
 
-        String workoutName = null;
+        String workoutName;
         HashMap<String, Integer> exerciseList = new HashMap<>();
         Workout.IntensityLevel intensityLevel = null;
         Integer calories = 100;
@@ -133,8 +133,8 @@ public class WorkoutGeneratorFragment extends Fragment {
                 continue;
             if (checkExerciseMuscleGroup(ex, Exercise.MuscleGroup.LEGS, mMuscleGroupLegsCb.isChecked(), exerciseList))
                 continue;
-            if (checkExerciseMuscleGroup(ex, Exercise.MuscleGroup.SHOULDERS, mMuscleGroupShouldersCb.isChecked(), exerciseList)) {
-            }
+            checkExerciseMuscleGroup(ex, Exercise.MuscleGroup.SHOULDERS, mMuscleGroupShouldersCb.isChecked(), exerciseList);
+
 
         }
 

@@ -20,8 +20,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:inputType="text"
-                android:hint="Workout Name"/>
+                android:hint="@string/workout_name"
+                android:inputType="text"/>
         </TableRow>
 
         <TableRow>
@@ -30,7 +30,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Intensity:"/>
+                android:text="@string/intensity_colon"/>
 
             <Spinner
                 android:id="@+id/workout_intensity_sp"
@@ -46,18 +46,19 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Calories:"/>
+                android:text="@string/calories_colon"/>
 
             <EditText
                 android:id="@+id/workout_calories_et"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:inputType="text"
-                android:hint="100"/>
+                android:hint="@string/one_hundred"
+                android:inputType="text"/>
         </TableRow>
 
     </TableLayout>
+
 
 
     <include
@@ -65,53 +66,52 @@
         layout="@layout/item_workout_exercise_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/workout_exercise_tablelayout"/>
+        android:layout_below="@id/workout_exercise_tablelayout"
+        />
 
 
     <ListView
         android:id="@+id/workout_exercise_list_lv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/exercise_workout_list_header"
         android:clickable="true"
-        android:longClickable="true"/>
+        android:longClickable="true"
+        android:layout_below="@id/exercise_workout_list_header"/>
 
-
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/workout_exercise_list_lv"
-        >
+        android:orientation="vertical"
+        android:gravity="bottom|end"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
 
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/delete_workout_fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:layout_margin="@dimen/fab_margin"
             android:src="@drawable/ic_delete_white_24dp"
             />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/share_workout_fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/delete_workout_fab"
-            android:layout_toLeftOf="@id/add_workout_fab"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:layout_margin="@dimen/fab_margin"
             android:src="@drawable/ic_share_white_24dp"
             />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/update_workout_fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:layout_margin="@dimen/fab_margin"
             android:src="@drawable/ic_check"
             />
 
-    </RelativeLayout>
+    </LinearLayout>
+
 
 </RelativeLayout>

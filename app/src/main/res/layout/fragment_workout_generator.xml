@@ -10,23 +10,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/activity_horizontal_margin"
-        android:text="Thrive Modification System"
-        android:textSize="@dimen/abc_text_size_medium_material"
+        android:text="@string/thrive_modification_system"
+        android:textSize="@dimen/medium_text_height"
         android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/fragment_workout_generator_workout_name_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Workout Name"/>
+        android:hint="@string/enter_workout_name"/>
 
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/activity_horizontal_margin"
-        android:text="Select Muscle Groups"
-        android:textSize="@dimen/abc_text_size_medium_material"
+        android:text="@string/select_muscle_group"
+        android:textSize="@dimen/medium_text_height"
         android:textStyle="bold"/>
 
     <TableLayout
@@ -120,8 +120,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/activity_horizontal_margin"
-        android:text="Select Exercise Type"
-        android:textSize="@dimen/abc_text_size_medium_material"
+        android:text="@string/select_exercise_type"
+        android:textSize="@dimen/medium_text_height"
         android:textStyle="bold"/>
 
     <TableLayout
@@ -176,8 +176,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/activity_horizontal_margin"
-        android:text="Select Intensity"
-        android:textSize="@dimen/abc_text_size_medium_material"
+        android:text="@string/select_intensity"
+        android:textSize="@dimen/medium_text_height"
         android:textStyle="bold"/>
 
     <Spinner

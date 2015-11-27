@@ -8,7 +8,6 @@
         android:id="@+id/workout_exercise_name_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Exercise"
         android:textStyle="bold"/>
 
     <LinearLayout
@@ -21,15 +20,13 @@
             android:id="@+id/workout_exercise_resistance_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="1 Body"/>
+            android:layout_weight="1"/>
 
         <TextView
             android:id="@+id/workout_exercise_measure_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="LastName"/>
+            android:layout_weight="1"/>
 
         <TextView
             android:id="@+id/workout_exercise_sets_tv"

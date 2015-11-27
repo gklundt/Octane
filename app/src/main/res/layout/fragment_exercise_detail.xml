@@ -11,7 +11,7 @@
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TableLayout
@@ -28,7 +28,7 @@
                         android:layout_span="3"
                         android:layout_weight="1"
                         android:inputType="textCapWords"
-                        android:hint="Exercise Name"/>
+                        android:hint="@string/exercise_name"/>
 
                 </TableRow>
 
@@ -40,7 +40,7 @@
                         android:layout_height="wrap_content"
                         android:layout_span="3"
                         android:layout_weight="1"
-                        android:hint="Exercise Description"/>
+                        android:hint="@string/exercise_description"/>
 
                 </TableRow>
 
@@ -52,7 +52,7 @@
                         android:layout_height="wrap_content"
                         android:layout_span="1"
                         android:layout_weight="1"
-                        android:text="Muscle Group:"/>
+                        android:text="@string/muscle_group_colon"/>
 
 
                     <Spinner
@@ -70,7 +70,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Exercise Type:"/>
+                        android:text="@string/exercise_type_colon"/>
 
 
                     <Spinner
@@ -89,7 +89,7 @@
                         android:layout_height="wrap_content"
                         android:layout_span="1"
                         android:layout_weight="1"
-                        android:text="Resistance:"/>
+                        android:text="@string/resistance_colon"/>
 
 
                     <EditText
@@ -98,7 +98,7 @@
                         android:layout_span="1"
                         android:layout_weight="1"
                         android:inputType="number"
-                        android:text="0"/>
+                        android:hint="@string/zero"/>
 
                     <Spinner
                         android:id="@+id/exercise_force_unit_spinner"
@@ -116,7 +116,7 @@
                         android:layout_height="wrap_content"
                         android:layout_span="1"
                         android:layout_weight="1"
-                        android:text="Measure:"/>
+                        android:text="@string/measure_colon"/>
 
                     <EditText
                         android:id="@+id/exercise_measure_value_et"
@@ -124,7 +124,7 @@
                         android:layout_span="1"
                         android:layout_weight="1"
                         android:inputType="number"
-                        android:text="0"/>
+                        android:hint="@string/zero"/>
 
                     <Spinner
                         android:id="@+id/exercise_measure_unit_spinner"
@@ -144,9 +144,9 @@
                         android:layout_span="1"
                         android:layout_weight="1"
                         android:paddingTop="@dimen/activity_horizontal_margin"
-                        android:textSize="@dimen/abc_text_size_medium_material"
+                        android:textSize="@dimen/medium_text_height"
                         android:textStyle="bold"
-                        android:text="Intensity"/>
+                        android:text="@string/intensity"/>
 
 
                     <TextView
@@ -155,9 +155,9 @@
                         android:layout_span="1"
                         android:layout_weight="1"
                         android:paddingTop="@dimen/activity_horizontal_margin"
-                        android:textSize="@dimen/abc_text_size_medium_material"
+                        android:textSize="@dimen/medium_text_height"
                         android:textStyle="bold"
-                        android:text="Resistance %"/>
+                        android:text="@string/resistance_percent"/>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -165,9 +165,9 @@
                         android:layout_span="1"
                         android:layout_weight="1"
                         android:paddingTop="@dimen/activity_horizontal_margin"
-                        android:textSize="@dimen/abc_text_size_medium_material"
+                        android:textSize="@dimen/medium_text_height"
                         android:textStyle="bold"
-                        android:text="Measure %"/>
+                        android:text="@string/measure_percent"/>
 
 
                 </TableRow>
@@ -179,7 +179,7 @@
                         android:layout_height="wrap_content"
                         android:layout_span="1"
                         android:layout_weight="1"
-                        android:text="High"/>
+                        android:text="@string/high"/>
 
                     <EditText
                         android:id="@+id/exercise_high_qty_et"
@@ -187,7 +187,7 @@
                         android:layout_span="1"
                         android:layout_weight="1"
                         android:inputType="number"
-                        android:text="100"/>
+                        android:hint="@string/one_hundred"/>
 
                     <EditText
                         android:id="@+id/exercise_high_msr_et"
@@ -195,7 +195,7 @@
                         android:layout_span="1"
                         android:layout_weight="1"
                         android:inputType="number"
-                        android:text="100"/>
+                        android:hint="@string/one_hundred"/>
 
 
                 </TableRow>
@@ -207,7 +207,7 @@
                         android:layout_height="wrap_content"
                         android:layout_span="1"
                         android:layout_weight="1"
-                        android:text="Medium"/>
+                        android:text="@string/med"/>
 
                     <EditText
                         android:id="@+id/exercise_med_qty_et"
@@ -215,7 +215,7 @@
                         android:layout_span="1"
                         android:layout_weight="1"
                         android:inputType="number"
-                        android:text="100"/>
+                        android:hint="@string/one_hundred"/>
 
                     <EditText
                         android:id="@+id/exercise_med_msr_et"
@@ -223,7 +223,7 @@
                         android:layout_span="1"
                         android:layout_weight="1"
                         android:inputType="number"
-                        android:text="100"/>
+                        android:hint="@string/one_hundred"/>
 
 
                 </TableRow>
@@ -235,7 +235,7 @@
                         android:layout_height="wrap_content"
                         android:layout_span="1"
                         android:layout_weight="1"
-                        android:text="Low"/>
+                        android:text="@string/low"/>
 
                     <EditText
                         android:id="@+id/exercise_low_qty_et"
@@ -243,7 +243,7 @@
                         android:layout_span="1"
                         android:layout_weight="1"
                         android:inputType="number"
-                        android:text="100"/>
+                        android:hint="@string/one_hundred"/>
 
                     <EditText
                         android:id="@+id/exercise_low_msr_et"
@@ -251,7 +251,7 @@
                         android:layout_span="1"
                         android:layout_weight="1"
                         android:inputType="number"
-                        android:text="100"/>
+                        android:hint="@string/one_hundred"/>
 
 
                 </TableRow>

@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.ListView;
 
 import edu.uco.schambers4.octane.Activities.MainActivity;
-import edu.uco.schambers4.octane.Models.Workout.ExerciseContainer;
 import edu.uco.schambers4.octane.Models.Workout.Workout;
 import edu.uco.schambers4.octane.Models.Workout.WorkoutAdapter;
 import edu.uco.schambers4.octane.Models.Workout.WorkoutContainer;

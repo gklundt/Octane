@@ -12,8 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_gravity="center_vertical"
-        android:text="Resistance"
-        android:textSize="@dimen/abc_text_size_medium_material"
+        android:text="@string/workout_exercise_header_resistance"
+        android:textSize="@dimen/medium_text_height"
         android:textStyle="bold"/>
 
     <TextView
@@ -21,8 +21,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_gravity="center_vertical"
-        android:text="Measure"
-        android:textSize="@dimen/abc_text_size_medium_material"
+        android:text="@string/workout_exercise_header_measure"
+        android:textSize="@dimen/medium_text_height"
         android:textStyle="bold"/>
 
     <TextView
@@ -30,8 +30,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_gravity="center_vertical"
-        android:text="Sets"
-        android:textSize="@dimen/abc_text_size_medium_material"
+        android:text="@string/workout_exercise_header_sets"
+        android:textSize="@dimen/medium_text_height"
         android:textStyle="bold"/>
 
     <ImageButton
@@ -40,7 +40,7 @@
         android:layout_height="@dimen/editables_height"
         android:layout_gravity="center_vertical"
         android:src="@drawable/ic_action_add"
-
+        android:contentDescription="@string/add_exercise"
         />
 
 </LinearLayout>
