@@ -7,11 +7,8 @@ import android.view.View;
 import android.widget.ListView;
 
 import edu.uco.schambers4.octane.Activities.MainActivity;
-import edu.uco.schambers4.octane.Models.Workout.Exercise;
-import edu.uco.schambers4.octane.Models.Workout.ExerciseContainer;
 import edu.uco.schambers4.octane.Models.Workout.FitnessTestAdapter;
 import edu.uco.schambers4.octane.Models.Workout.FitnessTestContainer;
-import edu.uco.schambers4.octane.R;
 
 public class FitnessTestListFragment extends ListFragment {
 

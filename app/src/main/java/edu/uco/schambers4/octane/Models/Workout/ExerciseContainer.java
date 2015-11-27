@@ -44,13 +44,13 @@ public class ExerciseContainer {
 
         exercise.setName("");
 
-        exercise.setExerciseType(Exercise.ExerciseType.STRENGTH);
+        exercise.setExerciseType(Exercise.ExerciseType.ENDURANCE);
 
         ExerciseMeasure measure = new ExerciseMeasure();
         measure.setMeasure(0);
         measure.setForce(0);
-        measure.setForceUnits(ExerciseMeasure.Unit.LBS);
-        measure.setMeasureUnits(ExerciseMeasure.Unit.MILES);
+        measure.setForceUnits(ExerciseMeasure.Unit.BODYWEIGHT);
+        measure.setMeasureUnits(ExerciseMeasure.Unit.COUNT);
         exercise.setMaxIntensityExerciseMeasure(measure);
 
         exercise.setHighIntensity(new Intensity(100, 100));
@@ -59,7 +59,7 @@ public class ExerciseContainer {
 
         exercise.setDescription("");
 
-        exercise.setMuscleGroup(Exercise.MuscleGroup.ABS);
+        exercise.setMuscleGroup(Exercise.MuscleGroup.FULLBODY);
 
         return exercise;
     }

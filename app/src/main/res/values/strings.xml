@@ -104,7 +104,6 @@
     </string-array>
 
 
-
     <!-- TO DO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_exercise_detail">ExerciseDetailActivity</string>
@@ -113,4 +112,43 @@
     <string name="per">per</string>
     <string name="recipes">Recipes</string>
     <string name="add_ingredient">Add an Ingredient</string>
+    <string name="title_activity_import_data">ImportDataActivity</string>
+
+    <string name="one_hundred">100</string>
+    <string name="zero">0</string>
+    <string name="high">High</string>
+    <string name="med">Medium</string>
+    <string name="low">Low</string>
+    <string name="measure_percent">Measure %</string>
+    <string name="resistance_percent">Resistance %</string>
+    <string name="intensity">Intensity</string>
+    <string name="measure_colon">Measure:</string>
+    <string name="resistance_colon">Resistance:</string>
+    <string name="calories_colon">Calories:</string>
+    <string name="intensity_colon">Intensity:</string>
+    <string name="exercise_type_colon">Exercise Type:</string>
+    <string name="muscle_group_colon">Muscle Group:</string>
+    <string name="exercise_description">Exercise Description</string>
+    <string name="exercise_name">Exercise Name</string>
+    <string name="workout_name">Workout Name</string>
+    <string name="enter_workout_name">Enter Workout Name</string>
+    <string name="select_muscle_group">Select Muscle Groups</string>
+    <string name="select_exercise_type">Select Exercise Type</string>
+    <string name="select_intensity">Select Intensity</string>
+
+
+    <string name="fitness_test_measure">Measure</string>
+    <string name="fitness_test_resistance">Resistance</string>
+    <string name="fitness_test_date">Date</string>
+    <string name="fitness_test_history">History</string>
+    <string name="fitness_test_units">Units</string>
+    <string name="fitness_test_title">Fitness Test Name</string>
+
+    <string name="thrive_modification_system">Thrive Modification System</string>
+    <string name="name_intensity_calories">Name (Intensity : Calories)</string>
+    <string name="add_exercise">Add an Exercise</string>
+    <string name="workout_exercise_header_resistance">Resistance</string>
+    <string name="workout_exercise_header_measure">Measure</string>
+    <string name="workout_exercise_header_sets">Sets</string>
+
 </resources>

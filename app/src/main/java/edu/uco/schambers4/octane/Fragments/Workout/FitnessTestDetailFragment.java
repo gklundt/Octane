@@ -23,7 +23,6 @@ import edu.uco.schambers4.octane.Models.Workout.Exercise;
 import edu.uco.schambers4.octane.Models.Workout.ExerciseContainer;
 import edu.uco.schambers4.octane.Models.Workout.ExerciseMeasure;
 import edu.uco.schambers4.octane.Models.Workout.FitnessTest;
-import edu.uco.schambers4.octane.Models.Workout.FitnessTestAdapter;
 import edu.uco.schambers4.octane.Models.Workout.FitnessTestContainer;
 import edu.uco.schambers4.octane.Models.Workout.FitnessTestHistoryAdapter;
 import edu.uco.schambers4.octane.R;
@@ -112,16 +111,8 @@ public class FitnessTestDetailFragment extends Fragment {
 
         String fResistance;
         fResistance = mForceValEt.getText().toString();
-        if (fResistance == null) {
-            Toast.makeText(context, "Resistance Value", Toast.LENGTH_SHORT).show();
-            return;
-        }
         String fMeasure;
         fMeasure = mMeasureValEt.getText().toString();
-        if (fMeasure == null) {
-            Toast.makeText(context, "Measure Value", Toast.LENGTH_SHORT).show();
-            return;
-        }
         ExerciseMeasure.Unit fResistanceUnit;
         ExerciseMeasure.Unit fMeasureUnit;
         if (mFitnessTest.getExerciseMeasure() != null) {
@@ -158,11 +149,6 @@ public class FitnessTestDetailFragment extends Fragment {
         getActivity().onBackPressed();
     }
 
-    private void doDelete() {
-        mFitnessTestContainer.delete(getActivity().getApplicationContext(), mFitnessTest);
-        getActivity().onBackPressed();
-    }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -178,8 +164,8 @@ public class FitnessTestDetailFragment extends Fragment {
             mForceMsrTv.setText(String.format("%s", mFitnessTest.getExerciseMeasure().getForceUnits().getUnitName()));
             mMeasureUnitTv.setText(String.format("%s", mFitnessTest.getExerciseMeasure().getMeasureUnits().getUnitName()));
 
-            mForceValEt.setText(mFitnessTest.getExerciseMeasure().getForce().toString());
-            mMeasureValEt.setText(mFitnessTest.getExerciseMeasure().getMeasure().toString());
+            mForceValEt.setText(String.format("%s", mFitnessTest.getExerciseMeasure().getForce().toString()));
+            mMeasureValEt.setText(String.format("%s", mFitnessTest.getExerciseMeasure().getMeasure().toString()));
         } else {
             Exercise exercise = ExerciseContainer.getInstance().getExerciseByName(context, mFitnessTest.getExerciseName());
             ExerciseMeasure exerciseMeasure = exercise.getMaxIntensityExerciseMeasure();

@@ -14,22 +14,19 @@
             android:id="@+id/fitness_test_history_date_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="11/11/2000"/>
+            android:layout_weight="1"/>
 
         <TextView
             android:id="@+id/fitness_test_history_resistance_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="1 Lbs"/>
+            android:layout_weight="1"/>
 
         <TextView
             android:id="@+id/fitness_test_history_measure_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="30 Count"/>
+            android:layout_weight="1"/>
 
 
     </LinearLayout>

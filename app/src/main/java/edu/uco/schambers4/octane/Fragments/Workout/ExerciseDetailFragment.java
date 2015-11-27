@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -115,7 +116,7 @@ public class ExerciseDetailFragment extends Fragment {
 
         String fExerciseName;
         fExerciseName = mExerciseNameEt.getText().toString();
-        if (fExerciseName == null || fExerciseName.trim().length() == 0) {
+        if (fExerciseName.trim().length() == 0) {
             Toast.makeText(context, "Exercise Name", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -124,7 +125,7 @@ public class ExerciseDetailFragment extends Fragment {
 
         String fExerciseDescription;
         fExerciseDescription = mExerciseDescriptionEt.getText().toString();
-        if (fExerciseDescription == null || fExerciseDescription.trim().length() == 0) {
+        if (fExerciseDescription.trim().length() == 0) {
             Toast.makeText(context, "Exercise Description", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -134,7 +135,7 @@ public class ExerciseDetailFragment extends Fragment {
         Exercise.MuscleGroup fMusleGroup = null;
         String muscleGroupItem = mMuscleGroupSp.getSelectedItem().toString();
         for (Exercise.MuscleGroup m : Exercise.MuscleGroup.values()) {
-            if (m.getGroupName() == muscleGroupItem) {
+            if (Objects.equals(m.getGroupName(), muscleGroupItem)) {
                 fMusleGroup = m;
             }
         }
@@ -148,7 +149,7 @@ public class ExerciseDetailFragment extends Fragment {
         Exercise.ExerciseType fExerciseType = null;
         String exerciseTypeItem = mExerciseTypeSp.getSelectedItem().toString();
         for (Exercise.ExerciseType t : Exercise.ExerciseType.values()) {
-            if (t.getExerciseTypeName() == exerciseTypeItem) {
+            if (Objects.equals(t.getExerciseTypeName(), exerciseTypeItem)) {
                 fExerciseType = t;
             }
         }
@@ -161,21 +162,13 @@ public class ExerciseDetailFragment extends Fragment {
 
         String fResistance;
         fResistance = mForceValEt.getText().toString();
-        if (fResistance == null) {
-            Toast.makeText(context, "Resistance Value", Toast.LENGTH_SHORT).show();
-            return;
-        }
         String fMeasure;
         fMeasure = mMeasureValEt.getText().toString();
-        if (fMeasure == null) {
-            Toast.makeText(context, "Measure Value", Toast.LENGTH_SHORT).show();
-            return;
-        }
 
         ExerciseMeasure.Unit fResistanceUnit = null;
         String rUnitItem = mForceMsrSp.getSelectedItem().toString();
         for (ExerciseMeasure.Unit u : ExerciseMeasure.Unit.values()) {
-            if (u.getUnitName() == rUnitItem) {
+            if (Objects.equals(u.getUnitName(), rUnitItem)) {
                 fResistanceUnit = u;
             }
         }
@@ -187,7 +180,7 @@ public class ExerciseDetailFragment extends Fragment {
         ExerciseMeasure.Unit fMeasureUnit = null;
         String mUnitItem = mMeasureUnitSp.getSelectedItem().toString();
         for (ExerciseMeasure.Unit u : ExerciseMeasure.Unit.values()) {
-            if (u.getUnitName() == mUnitItem) {
+            if (Objects.equals(u.getUnitName(), mUnitItem)) {
                 fMeasureUnit = u;
             }
         }
@@ -210,8 +203,8 @@ public class ExerciseDetailFragment extends Fragment {
         }
         mExercise.setMaxIntensityExerciseMeasure(fExerciseMeasure);
 
-        String fHighResPct = null;
-        String fHighMesPct = null;
+        String fHighResPct;
+        String fHighMesPct;
         Intensity fHighIntensity;
         fHighResPct = mHighQtyEt.getText().toString();
         fHighMesPct = mHighMeasureEt.getText().toString();
@@ -225,9 +218,9 @@ public class ExerciseDetailFragment extends Fragment {
         }
         mExercise.setHighIntensity(fHighIntensity);
 
-        String fMedResPct = null;
-        String fMedMesPct = null;
-        Intensity fMedIntensity = null;
+        String fMedResPct;
+        String fMedMesPct;
+        Intensity fMedIntensity;
         fMedResPct = mMedQtyEt.getText().toString();
         fMedMesPct = mMedMeasureEt.getText().toString();
         try {
@@ -240,9 +233,9 @@ public class ExerciseDetailFragment extends Fragment {
         }
         mExercise.setMedIntensity(fMedIntensity);
 
-        String fLowResPct = null;
-        String fLowMesPct = null;
-        Intensity fLowIntensity = null;
+        String fLowResPct;
+        String fLowMesPct;
+        Intensity fLowIntensity;
         fLowResPct = mLowQtyEt.getText().toString();
         fLowMesPct = mLowMeasureEt.getText().toString();
         try {
@@ -276,7 +269,7 @@ public class ExerciseDetailFragment extends Fragment {
 
     private void fillForm(Context context) {
 
-        mExerciseNameEt.setText(String.format("%s", mExercise.getName(), getShownIndex()));
+        mExerciseNameEt.setText(String.format("%s", mExercise.getName()));
 
         mExerciseDescriptionEt.setText(String.format("%s", mExercise.getDescription()));
 
@@ -301,7 +294,7 @@ public class ExerciseDetailFragment extends Fragment {
                         .getResistanceUnitsArrayAdapter(context)
                         .getPosition(mExercise.getMaxIntensityExerciseMeasure().getForceUnits().getUnitName())
         );
-        mForceValEt.setText(mExercise.getMaxIntensityExerciseMeasure().getForce().toString());
+        mForceValEt.setText(String.format("%s", mExercise.getMaxIntensityExerciseMeasure().getForce().toString()));
 
         mMeasureUnitSp.setAdapter(mExerciseContainer.getMeasurementUnitsArrayAdapter(context));
         mMeasureUnitSp.setSelection(
